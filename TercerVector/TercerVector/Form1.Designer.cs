@@ -28,12 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ListNegro = new System.Windows.Forms.ListBox();
             this.ListRojo = new System.Windows.Forms.ListBox();
             this.txtResultado = new System.Windows.Forms.TextBox();
             this.AddNumber = new System.Windows.Forms.Button();
             this.checkNegro = new System.Windows.Forms.CheckBox();
             this.checkRojo = new System.Windows.Forms.CheckBox();
+            this.NuevoCiclo = new System.Windows.Forms.Button();
+            this.EliminarResultado = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pronostico = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ListNegro
@@ -45,8 +55,8 @@
             this.ListNegro.ItemHeight = 16;
             this.ListNegro.Location = new System.Drawing.Point(1, -1);
             this.ListNegro.Name = "ListNegro";
-            this.ListNegro.Size = new System.Drawing.Size(71, 484);
-            this.ListNegro.TabIndex = 0;
+            this.ListNegro.Size = new System.Drawing.Size(71, 468);
+            this.ListNegro.TabIndex = 7;
             // 
             // ListRojo
             // 
@@ -57,16 +67,18 @@
             this.ListRojo.ItemHeight = 16;
             this.ListRojo.Location = new System.Drawing.Point(72, -1);
             this.ListRojo.Name = "ListRojo";
-            this.ListRojo.Size = new System.Drawing.Size(71, 484);
-            this.ListRojo.TabIndex = 1;
+            this.ListRojo.Size = new System.Drawing.Size(71, 468);
+            this.ListRojo.TabIndex = 8;
             // 
             // txtResultado
             // 
-            this.txtResultado.Location = new System.Drawing.Point(149, 12);
+            this.txtResultado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtResultado.Location = new System.Drawing.Point(149, 43);
             this.txtResultado.MaxLength = 2;
             this.txtResultado.Name = "txtResultado";
-            this.txtResultado.Size = new System.Drawing.Size(62, 20);
-            this.txtResultado.TabIndex = 2;
+            this.txtResultado.Size = new System.Drawing.Size(180, 20);
+            this.txtResultado.TabIndex = 0;
+            this.txtResultado.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtResultado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResultado_KeyPress);
             this.txtResultado.Leave += new System.EventHandler(this.txtResultado_Leave);
             // 
@@ -79,11 +91,11 @@
             this.AddNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.AddNumber.Location = new System.Drawing.Point(149, 61);
+            this.AddNumber.Location = new System.Drawing.Point(149, 69);
             this.AddNumber.Name = "AddNumber";
-            this.AddNumber.Size = new System.Drawing.Size(160, 31);
-            this.AddNumber.TabIndex = 3;
-            this.AddNumber.Text = "Agregar";
+            this.AddNumber.Size = new System.Drawing.Size(173, 31);
+            this.AddNumber.TabIndex = 1;
+            this.AddNumber.Text = "Agregar Resultado";
             this.AddNumber.UseVisualStyleBackColor = false;
             this.AddNumber.Click += new System.EventHandler(this.AddNumber_Click);
             // 
@@ -92,10 +104,10 @@
             this.checkNegro.AutoSize = true;
             this.checkNegro.BackColor = System.Drawing.Color.Black;
             this.checkNegro.ForeColor = System.Drawing.Color.White;
-            this.checkNegro.Location = new System.Drawing.Point(149, 38);
+            this.checkNegro.Location = new System.Drawing.Point(7, 3);
             this.checkNegro.Name = "checkNegro";
             this.checkNegro.Size = new System.Drawing.Size(80, 17);
-            this.checkNegro.TabIndex = 4;
+            this.checkNegro.TabIndex = 0;
             this.checkNegro.Text = "Cero Negro";
             this.checkNegro.UseVisualStyleBackColor = false;
             this.checkNegro.CheckedChanged += new System.EventHandler(this.checkNegro_CheckedChanged);
@@ -105,22 +117,100 @@
             this.checkRojo.AutoSize = true;
             this.checkRojo.BackColor = System.Drawing.Color.Red;
             this.checkRojo.ForeColor = System.Drawing.Color.White;
-            this.checkRojo.Location = new System.Drawing.Point(235, 38);
+            this.checkRojo.Location = new System.Drawing.Point(6, 3);
             this.checkRojo.Name = "checkRojo";
             this.checkRojo.Size = new System.Drawing.Size(73, 17);
-            this.checkRojo.TabIndex = 5;
+            this.checkRojo.TabIndex = 0;
             this.checkRojo.Text = "Cero Rojo";
             this.checkRojo.UseVisualStyleBackColor = false;
             this.checkRojo.CheckedChanged += new System.EventHandler(this.checkRojo_CheckedChanged);
+            // 
+            // NuevoCiclo
+            // 
+            this.NuevoCiclo.BackColor = System.Drawing.Color.GreenYellow;
+            this.NuevoCiclo.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
+            this.NuevoCiclo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.NuevoCiclo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.NuevoCiclo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NuevoCiclo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NuevoCiclo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.NuevoCiclo.Location = new System.Drawing.Point(4, 478);
+            this.NuevoCiclo.Name = "NuevoCiclo";
+            this.NuevoCiclo.Size = new System.Drawing.Size(139, 31);
+            this.NuevoCiclo.TabIndex = 5;
+            this.NuevoCiclo.Text = "Nuevo Ciclo";
+            this.NuevoCiclo.UseVisualStyleBackColor = false;
+            this.NuevoCiclo.Click += new System.EventHandler(this.NuevoCiclo_Click);
+            // 
+            // EliminarResultado
+            // 
+            this.EliminarResultado.BackColor = System.Drawing.Color.GreenYellow;
+            this.EliminarResultado.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
+            this.EliminarResultado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.EliminarResultado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.EliminarResultado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EliminarResultado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EliminarResultado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.EliminarResultado.Location = new System.Drawing.Point(149, 106);
+            this.EliminarResultado.Name = "EliminarResultado";
+            this.EliminarResultado.Size = new System.Drawing.Size(173, 31);
+            this.EliminarResultado.TabIndex = 4;
+            this.EliminarResultado.Text = "Eliminar Resultado";
+            this.EliminarResultado.UseVisualStyleBackColor = false;
+            this.EliminarResultado.Click += new System.EventHandler(this.EliminarResultado_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.checkNegro);
+            this.panel1.Location = new System.Drawing.Point(149, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(90, 25);
+            this.panel1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Red;
+            this.panel2.Controls.Add(this.checkRojo);
+            this.panel2.Location = new System.Drawing.Point(239, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(90, 25);
+            this.panel2.TabIndex = 3;
+            // 
+            // pronostico
+            // 
+            this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
+            this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pronostico.ForeColor = System.Drawing.Color.GreenYellow;
+            this.pronostico.Location = new System.Drawing.Point(156, 478);
+            this.pronostico.Name = "pronostico";
+            this.pronostico.Size = new System.Drawing.Size(166, 31);
+            this.pronostico.TabIndex = 6;
+            this.pronostico.TabStop = false;
+            this.pronostico.Text = "groupBox1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(153, 143);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(169, 324);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.OliveDrab;
-            this.ClientSize = new System.Drawing.Size(315, 482);
-            this.Controls.Add(this.checkRojo);
-            this.Controls.Add(this.checkNegro);
+            this.BackColor = System.Drawing.Color.SeaGreen;
+            this.ClientSize = new System.Drawing.Size(334, 521);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pronostico);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.EliminarResultado);
+            this.Controls.Add(this.NuevoCiclo);
             this.Controls.Add(this.AddNumber);
             this.Controls.Add(this.txtResultado);
             this.Controls.Add(this.ListRojo);
@@ -129,6 +219,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "3er Vector";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,6 +237,12 @@
         private System.Windows.Forms.Button AddNumber;
         private System.Windows.Forms.CheckBox checkNegro;
         private System.Windows.Forms.CheckBox checkRojo;
+        private System.Windows.Forms.Button NuevoCiclo;
+        private System.Windows.Forms.Button EliminarResultado;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox pronostico;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

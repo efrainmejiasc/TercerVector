@@ -20,7 +20,7 @@ namespace TercerVector
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            pronostico.Text = "Esperando Pronostico";
         }
 
         private void AddNumber_Click(object sender, EventArgs e)
@@ -53,10 +53,50 @@ namespace TercerVector
                     }
                 }
             }
+            //*******************************************
+            if (ListNegro.Items.Count + ListRojo.Items.Count >= 5)
+            {
+                if (resultado % 2 == 1)
+                {
+                    pronostico.BackColor = Color.Black;
+                    pronostico.Text = "Juega al Negro";
+                }
+                else
+                {
+                    pronostico.BackColor = Color.Red;
+                    pronostico.Text = "Juega al Rojo";
+                }
+            }
+            else
+            {
+                pronostico.BackColor = Color.SeaGreen;
+            }
+            //******************************************
+
             txtResultado.Text =string.Empty;
             txtResultado.Focus();
         }
+      
+        private void EliminarResultado_Click(object sender, EventArgs e)
+        {
+            if (ListNegro.SelectedIndex >= 0)
+                ListNegro.Items.RemoveAt(ListNegro.SelectedIndex);
 
+            else if (ListRojo.SelectedIndex >= 0)
+                ListRojo.Items.RemoveAt(ListRojo.SelectedIndex);
+            //****************************************************
+            pronostico.BackColor = Color.SeaGreen;
+        }
+
+        private void NuevoCiclo_Click(object sender, EventArgs e)
+        {
+            ListNegro.Items.Clear();
+            ListRojo.Items.Clear();
+            //****************************************************
+            pronostico.BackColor = Color.SeaGreen;
+        }
+
+        //*********** Eventos ************************************************************
         private void txtResultado_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar))
@@ -98,5 +138,7 @@ namespace TercerVector
             else
                 txtResultado.Text = string.Empty;
         }
+
+   
     }
 }
