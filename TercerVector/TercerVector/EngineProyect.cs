@@ -10,7 +10,7 @@ namespace TercerVector
     public class EngineProyect
     {
 
-        public Ruta ConstruirModeloRuta(string [] v)
+        public Ruta ConstruirModeloRuta(List<string> v)
         {
             Ruta m = new Ruta();
             m.Campo1 = v[0];

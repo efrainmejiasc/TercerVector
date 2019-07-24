@@ -14,7 +14,7 @@ namespace TercerVector
     {
         private EngineProyect Funcion = new EngineProyect();
         private EngineDb Metodo = new EngineDb();
-        private string [] tercerVector = new string[7];
+       
         public Form1()
         {
             InitializeComponent();
@@ -46,11 +46,13 @@ namespace TercerVector
                     if (checkNegro.Checked)
                     {
                         ListNegro.Items.Add(0);
+                        ListRojo.Items.Add(string.Empty);
                         checkNegro.Checked = false;
                     }
                     else if (checkRojo.Checked)
                     {
                         ListRojo.Items.Add(0);
+                        ListNegro.Items.Add(string.Empty);
                         checkRojo.Checked = false;
                     }
                 }
@@ -150,21 +152,28 @@ namespace TercerVector
         {
             if (txtPronostico.Text == string.Empty || txtPronostico.Text == null)
                 return;
-            for(int i = 0; i <= 5; i++)
+            List<string> tercerVector = new List<string>();
+            for (int i = 0; i <= 5 ; i++)
             {
-                if (ListNegro.Items[i]!= null)
-                    tercerVector[i] = ListNegro.Items[i].ToString();
-                else if (ListRojo.Items[i] != null)
-                    tercerVector[i] = ListRojo.Items[i].ToString();
+                if (ListNegro.Items[i].ToString() != string.Empty)
+                    tercerVector.Add (ListNegro.Items[i].ToString());
+                else if (ListRojo.Items[i].ToString() != string.Empty)
+                    tercerVector.Add(ListRojo.Items[i].ToString());
             }
-            tercerVector[6] = txtPronostico.Text;
-            NuevoLoop();
+            tercerVector.Add(txtPronostico.Text);
+            //NuevoLoop();
             txtPronostico.Text = string.Empty;
             Ruta R = Funcion.ConstruirModeloRuta(tercerVector);
             if (Metodo.InsertarRuta(R))
                 MessageBox.Show("Registro Exitoso");
             else
                 MessageBox.Show("Registro Fallido");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 F = new Form2();
+            F.Show();
         }
     }
 }

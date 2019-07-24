@@ -43,6 +43,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.GuardarRuta = new System.Windows.Forms.Button();
             this.txtPronostico = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -215,7 +216,7 @@
             this.GuardarRuta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.GuardarRuta.Location = new System.Drawing.Point(0, 579);
             this.GuardarRuta.Name = "GuardarRuta";
-            this.GuardarRuta.Size = new System.Drawing.Size(334, 31);
+            this.GuardarRuta.Size = new System.Drawing.Size(484, 31);
             this.GuardarRuta.TabIndex = 10;
             this.GuardarRuta.Text = "Guardar Ruta";
             this.GuardarRuta.UseVisualStyleBackColor = false;
@@ -225,18 +226,36 @@
             // 
             this.txtPronostico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtPronostico.Location = new System.Drawing.Point(0, 562);
-            this.txtPronostico.MaxLength = 2;
+            this.txtPronostico.MaxLength = 50;
             this.txtPronostico.Name = "txtPronostico";
-            this.txtPronostico.Size = new System.Drawing.Size(334, 20);
+            this.txtPronostico.Size = new System.Drawing.Size(543, 20);
             this.txtPronostico.TabIndex = 11;
             this.txtPronostico.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GreenYellow;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.button1.Location = new System.Drawing.Point(344, -1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 31);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Nuevo Ciclo";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaGreen;
-            this.ClientSize = new System.Drawing.Size(334, 610);
+            this.ClientSize = new System.Drawing.Size(484, 610);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPronostico);
             this.Controls.Add(this.GuardarRuta);
             this.Controls.Add(this.pictureBox1);
@@ -280,6 +299,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button GuardarRuta;
         private System.Windows.Forms.TextBox txtPronostico;
+        private System.Windows.Forms.Button button1;
     }
 }
 

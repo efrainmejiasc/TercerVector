@@ -95,17 +95,16 @@ namespace TercerVector
             return resultado;
         }
 
-        public DataTable SeleccionarClienteExpirado(string SQL, DateTime FechaExpiracion)
+        public DataTable GetRutas()
         {
             DataTable dataTabla = new DataTable();
             OleDbConnection Conexion = new OleDbConnection(cadenaConexion);
             using (Conexion)
             {
                 Conexion.Open();
-                OleDbCommand command = new OleDbCommand(SQL, Conexion);
+                OleDbCommand command = new OleDbCommand(EngineData.SQLRutas, Conexion);
                 command.CommandType = CommandType.Text;
                 command.Parameters.Clear();
-                command.Parameters.AddWithValue("@FechaExpiracion", FechaExpiracion);
                 OleDbDataAdapter dataAdaptador = new OleDbDataAdapter(command);
                 dataAdaptador.Fill(dataTabla);
                 Conexion.Close();
