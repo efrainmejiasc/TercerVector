@@ -28,53 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.ListNegro = new System.Windows.Forms.ListBox();
+            this.ListRojo = new System.Windows.Forms.ListBox();
+            this.txtResultado = new System.Windows.Forms.TextBox();
+            this.AddNumber = new System.Windows.Forms.Button();
+            this.checkNegro = new System.Windows.Forms.CheckBox();
+            this.checkRojo = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // listBox1
+            // ListNegro
             // 
-            this.listBox1.BackColor = System.Drawing.Color.Black;
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.ForeColor = System.Drawing.Color.White;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(1, -1);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(71, 484);
-            this.listBox1.TabIndex = 0;
+            this.ListNegro.BackColor = System.Drawing.Color.Black;
+            this.ListNegro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListNegro.ForeColor = System.Drawing.Color.White;
+            this.ListNegro.FormattingEnabled = true;
+            this.ListNegro.ItemHeight = 16;
+            this.ListNegro.Location = new System.Drawing.Point(1, -1);
+            this.ListNegro.Name = "ListNegro";
+            this.ListNegro.Size = new System.Drawing.Size(71, 484);
+            this.ListNegro.TabIndex = 0;
             // 
-            // listBox2
+            // ListRojo
             // 
-            this.listBox2.BackColor = System.Drawing.Color.Red;
-            this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox2.ForeColor = System.Drawing.Color.White;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(72, -1);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(71, 484);
-            this.listBox2.TabIndex = 1;
+            this.ListRojo.BackColor = System.Drawing.Color.Red;
+            this.ListRojo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListRojo.ForeColor = System.Drawing.Color.White;
+            this.ListRojo.FormattingEnabled = true;
+            this.ListRojo.ItemHeight = 16;
+            this.ListRojo.Location = new System.Drawing.Point(72, -1);
+            this.ListRojo.Name = "ListRojo";
+            this.ListRojo.Size = new System.Drawing.Size(71, 484);
+            this.ListRojo.TabIndex = 1;
+            // 
+            // txtResultado
+            // 
+            this.txtResultado.Location = new System.Drawing.Point(149, 12);
+            this.txtResultado.MaxLength = 2;
+            this.txtResultado.Name = "txtResultado";
+            this.txtResultado.Size = new System.Drawing.Size(62, 20);
+            this.txtResultado.TabIndex = 2;
+            this.txtResultado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResultado_KeyPress);
+            this.txtResultado.Leave += new System.EventHandler(this.txtResultado_Leave);
+            // 
+            // AddNumber
+            // 
+            this.AddNumber.BackColor = System.Drawing.Color.GreenYellow;
+            this.AddNumber.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
+            this.AddNumber.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.AddNumber.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.AddNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.AddNumber.Location = new System.Drawing.Point(149, 61);
+            this.AddNumber.Name = "AddNumber";
+            this.AddNumber.Size = new System.Drawing.Size(160, 31);
+            this.AddNumber.TabIndex = 3;
+            this.AddNumber.Text = "Agregar";
+            this.AddNumber.UseVisualStyleBackColor = false;
+            this.AddNumber.Click += new System.EventHandler(this.AddNumber_Click);
+            // 
+            // checkNegro
+            // 
+            this.checkNegro.AutoSize = true;
+            this.checkNegro.BackColor = System.Drawing.Color.Black;
+            this.checkNegro.ForeColor = System.Drawing.Color.White;
+            this.checkNegro.Location = new System.Drawing.Point(149, 38);
+            this.checkNegro.Name = "checkNegro";
+            this.checkNegro.Size = new System.Drawing.Size(80, 17);
+            this.checkNegro.TabIndex = 4;
+            this.checkNegro.Text = "Cero Negro";
+            this.checkNegro.UseVisualStyleBackColor = false;
+            this.checkNegro.CheckedChanged += new System.EventHandler(this.checkNegro_CheckedChanged);
+            // 
+            // checkRojo
+            // 
+            this.checkRojo.AutoSize = true;
+            this.checkRojo.BackColor = System.Drawing.Color.Red;
+            this.checkRojo.ForeColor = System.Drawing.Color.White;
+            this.checkRojo.Location = new System.Drawing.Point(235, 38);
+            this.checkRojo.Name = "checkRojo";
+            this.checkRojo.Size = new System.Drawing.Size(73, 17);
+            this.checkRojo.TabIndex = 5;
+            this.checkRojo.Text = "Cero Rojo";
+            this.checkRojo.UseVisualStyleBackColor = false;
+            this.checkRojo.CheckedChanged += new System.EventHandler(this.checkRojo_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 482);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.BackColor = System.Drawing.Color.OliveDrab;
+            this.ClientSize = new System.Drawing.Size(315, 482);
+            this.Controls.Add(this.checkRojo);
+            this.Controls.Add(this.checkNegro);
+            this.Controls.Add(this.AddNumber);
+            this.Controls.Add(this.txtResultado);
+            this.Controls.Add(this.ListRojo);
+            this.Controls.Add(this.ListNegro);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "3er Vector";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox ListNegro;
+        private System.Windows.Forms.ListBox ListRojo;
+        private System.Windows.Forms.TextBox txtResultado;
+        private System.Windows.Forms.Button AddNumber;
+        private System.Windows.Forms.CheckBox checkNegro;
+        private System.Windows.Forms.CheckBox checkRojo;
     }
 }
 
