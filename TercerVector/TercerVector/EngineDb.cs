@@ -14,25 +14,30 @@ namespace TercerVector
         //private readonly string cadenaConexion = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\TercerVector.mdb;Persist Security Info=True;Jet OLEDB:Database Password=1234";
         private static string cadenaConexion = ConfigurationManager.ConnectionStrings["TercerVector.Properties.Settings.TercerVectorConnectionString"].ToString();
 
-        public int InsertarRuta(Ruta m)
+        public bool InsertarRuta(Ruta m)
         {
-            int resultado = new int();
+            bool resultado = false;
             OleDbConnection Conexion = new OleDbConnection(cadenaConexion);
             using (Conexion)
             {
-                OleDbCommand command = new OleDbCommand(EngineData.SQLRuta, Conexion);
-                command.CommandType = CommandType.Text;
-                Conexion.Open();
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("@Campo1", m.Campo1);
-                command.Parameters.AddWithValue("@Campo2", m.Campo2);
-                command.Parameters.AddWithValue("@Campo3", m.Campo3);
-                command.Parameters.AddWithValue("@Campo4", m.Campo4);
-                command.Parameters.AddWithValue("@Campo5", m.Campo5);
-                command.Parameters.AddWithValue("@Campo6", m.Campo6);
-                command.Parameters.AddWithValue("@Resultado", m.Resultado);
-                resultado = command.ExecuteNonQuery();
-                Conexion.Close();
+                try
+                {
+                    OleDbCommand command = new OleDbCommand(EngineData.SQLRuta, Conexion);
+                    command.CommandType = CommandType.Text;
+                    Conexion.Open();
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@Campo1", m.Campo1);
+                    command.Parameters.AddWithValue("@Campo2", m.Campo2);
+                    command.Parameters.AddWithValue("@Campo3", m.Campo3);
+                    command.Parameters.AddWithValue("@Campo4", m.Campo4);
+                    command.Parameters.AddWithValue("@Campo5", m.Campo5);
+                    command.Parameters.AddWithValue("@Campo6", m.Campo6);
+                    command.Parameters.AddWithValue("@Resultado", m.Resultado);
+                    command.ExecuteNonQuery();
+                    Conexion.Close();
+                    resultado = true;
+                }
+                catch { }
             }
             return resultado;
         }

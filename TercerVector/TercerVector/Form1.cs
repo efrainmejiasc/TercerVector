@@ -13,6 +13,7 @@ namespace TercerVector
     public partial class Form1 : Form
     {
         private EngineProyect Funcion = new EngineProyect();
+        private EngineDb Metodo = new EngineDb();
         private string [] tercerVector = new string[7];
         public Form1()
         {
@@ -159,6 +160,11 @@ namespace TercerVector
             tercerVector[6] = txtPronostico.Text;
             NuevoLoop();
             txtPronostico.Text = string.Empty;
+            Ruta R = Funcion.ConstruirModeloRuta(tercerVector);
+            if (Metodo.InsertarRuta(R))
+                MessageBox.Show("Registro Exitoso");
+            else
+                MessageBox.Show("Registro Fallido");
         }
     }
 }
