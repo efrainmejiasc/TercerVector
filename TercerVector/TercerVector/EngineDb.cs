@@ -30,6 +30,7 @@ namespace TercerVector
                 command.Parameters.AddWithValue("@Campo4", m.Campo4);
                 command.Parameters.AddWithValue("@Campo5", m.Campo5);
                 command.Parameters.AddWithValue("@Campo6", m.Campo6);
+                command.Parameters.AddWithValue("@Resultado", m.Resultado);
                 resultado = command.ExecuteNonQuery();
                 Conexion.Close();
             }
@@ -82,6 +83,7 @@ namespace TercerVector
                 command.Parameters.AddWithValue("@Treintaycuatro", m.Treintaycuatro);
                 command.Parameters.AddWithValue("@Treintaycinco", m.Treintaycinco);
                 command.Parameters.AddWithValue("@Treintayseis", m.Treintayseis);
+                command.Parameters.AddWithValue("@Resultado", m.Resultado);
                 resultado = command.ExecuteNonQuery();
                 Conexion.Close();
             }

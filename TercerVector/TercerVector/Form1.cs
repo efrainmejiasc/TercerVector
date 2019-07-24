@@ -13,6 +13,7 @@ namespace TercerVector
     public partial class Form1 : Form
     {
         private EngineProyect Funcion = new EngineProyect();
+        private string [] tercerVector = new string[7];
         public Form1()
         {
             InitializeComponent();
@@ -90,6 +91,11 @@ namespace TercerVector
 
         private void NuevoCiclo_Click(object sender, EventArgs e)
         {
+            NuevoLoop();
+        }
+
+        private void NuevoLoop()
+        {
             ListNegro.Items.Clear();
             ListRojo.Items.Clear();
             //****************************************************
@@ -139,6 +145,20 @@ namespace TercerVector
                 txtResultado.Text = string.Empty;
         }
 
-   
+        private void GuardarRuta_Click(object sender, EventArgs e)
+        {
+            if (txtPronostico.Text == string.Empty || txtPronostico.Text == null)
+                return;
+            for(int i = 0; i <= 5; i++)
+            {
+                if (ListNegro.Items[i]!= null)
+                    tercerVector[i] = ListNegro.Items[i].ToString();
+                else if (ListRojo.Items[i] != null)
+                    tercerVector[i] = ListRojo.Items[i].ToString();
+            }
+            tercerVector[6] = txtPronostico.Text;
+            NuevoLoop();
+            txtPronostico.Text = string.Empty;
+        }
     }
 }
