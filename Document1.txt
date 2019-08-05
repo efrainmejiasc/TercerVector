@@ -1,0 +1,52 @@
+ int resultado = -1;
+            if (txtResultado.Text != string.Empty)
+            {
+                resultado = Convert.ToInt32(txtResultado.Text);
+                if (EngineData.Negro.Contains(resultado))
+                {
+                    ListNegro.Items.Add(resultado);
+                    ListRojo.Items.Add(string.Empty);
+                }
+                else if (EngineData.Rojo.Contains(resultado))
+                {
+                    ListRojo.Items.Add(resultado);
+                    ListNegro.Items.Add(string.Empty);
+                }
+                else
+                {
+                    if (checkNegro.Checked)
+                    {
+                        ListNegro.Items.Add(0);
+                        ListRojo.Items.Add(string.Empty);
+                        checkNegro.Checked = false;
+                    }
+                    else if (checkRojo.Checked)
+                    {
+                        ListRojo.Items.Add(0);
+                        ListNegro.Items.Add(string.Empty);
+                        checkRojo.Checked = false;
+                    }
+                }
+            }
+            //*******************************************
+            if (ListNegro.Items.Count + ListRojo.Items.Count >= 5)
+            {
+                if (resultado % 2 == 1)
+                {
+                    pronostico.BackColor = Color.Black;
+                    pronostico.Text = "Juega al Negro";
+                }
+                else
+                {
+                    pronostico.BackColor = Color.Red;
+                    pronostico.Text = "Juega al Rojo";
+                }
+            }
+            else
+            {
+                pronostico.BackColor = Color.SeaGreen;
+            }
+            //******************************************
+
+            txtResultado.Text =string.Empty;
+            txtResultado.Focus();

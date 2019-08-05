@@ -115,6 +115,7 @@
             this.checkNegro.TabIndex = 0;
             this.checkNegro.Text = "Cero Negro";
             this.checkNegro.UseVisualStyleBackColor = false;
+            this.checkNegro.Visible = false;
             this.checkNegro.CheckedChanged += new System.EventHandler(this.checkNegro_CheckedChanged);
             // 
             // checkRojo
@@ -145,6 +146,7 @@
             this.NuevoCiclo.TabIndex = 5;
             this.NuevoCiclo.Text = "Nuevo Ciclo";
             this.NuevoCiclo.UseVisualStyleBackColor = false;
+            this.NuevoCiclo.Visible = false;
             this.NuevoCiclo.Click += new System.EventHandler(this.NuevoCiclo_Click);
             // 
             // EliminarResultado
@@ -162,6 +164,7 @@
             this.EliminarResultado.TabIndex = 4;
             this.EliminarResultado.Text = "Eliminar Resultado";
             this.EliminarResultado.UseVisualStyleBackColor = false;
+            this.EliminarResultado.Visible = false;
             this.EliminarResultado.Click += new System.EventHandler(this.EliminarResultado_Click);
             // 
             // panel1
@@ -172,6 +175,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(90, 25);
             this.panel1.TabIndex = 2;
+            this.panel1.Visible = false;
             // 
             // panel2
             // 
@@ -181,15 +185,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(90, 25);
             this.panel2.TabIndex = 3;
+            this.panel2.Visible = false;
             // 
             // pronostico
             // 
             this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
             this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pronostico.ForeColor = System.Drawing.Color.GreenYellow;
-            this.pronostico.Location = new System.Drawing.Point(149, 500);
+            this.pronostico.Location = new System.Drawing.Point(4, 500);
             this.pronostico.Name = "pronostico";
-            this.pronostico.Size = new System.Drawing.Size(180, 36);
+            this.pronostico.Size = new System.Drawing.Size(325, 98);
             this.pronostico.TabIndex = 6;
             this.pronostico.TabStop = false;
             this.pronostico.Text = "groupBox1";
@@ -216,10 +221,11 @@
             this.GuardarRuta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.GuardarRuta.Location = new System.Drawing.Point(0, 579);
             this.GuardarRuta.Name = "GuardarRuta";
-            this.GuardarRuta.Size = new System.Drawing.Size(484, 31);
+            this.GuardarRuta.Size = new System.Drawing.Size(337, 31);
             this.GuardarRuta.TabIndex = 10;
             this.GuardarRuta.Text = "Guardar Ruta";
             this.GuardarRuta.UseVisualStyleBackColor = false;
+            this.GuardarRuta.Visible = false;
             this.GuardarRuta.Click += new System.EventHandler(this.GuardarRuta_Click);
             // 
             // txtPronostico
@@ -228,9 +234,10 @@
             this.txtPronostico.Location = new System.Drawing.Point(0, 562);
             this.txtPronostico.MaxLength = 50;
             this.txtPronostico.Name = "txtPronostico";
-            this.txtPronostico.Size = new System.Drawing.Size(543, 20);
+            this.txtPronostico.Size = new System.Drawing.Size(337, 20);
             this.txtPronostico.TabIndex = 11;
             this.txtPronostico.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPronostico.Visible = false;
             // 
             // button1
             // 
@@ -254,7 +261,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaGreen;
-            this.ClientSize = new System.Drawing.Size(484, 610);
+            this.ClientSize = new System.Drawing.Size(337, 610);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPronostico);
             this.Controls.Add(this.GuardarRuta);

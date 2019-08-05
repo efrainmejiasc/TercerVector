@@ -14,6 +14,8 @@ namespace TercerVector
     {
         private EngineProyect Funcion = new EngineProyect();
         private EngineDb Metodo = new EngineDb();
+        private int contador = 0;
+
        
         public Form1()
         {
@@ -27,57 +29,68 @@ namespace TercerVector
 
         private void AddNumber_Click(object sender, EventArgs e)
         {
-            int resultado = -1;
-            if (txtResultado.Text != string.Empty)
+            if (txtResultado.Text == string.Empty)
+                return;
+            EngineData Valor = EngineData.Instance();
+            string n = txtResultado.Text;
+            int resultado = Convert.ToInt32(n);
+            List<string> listresultado = new List<string>();
+            if (EngineData.Negro.Contains(resultado))
             {
-                resultado = Convert.ToInt32(txtResultado.Text);
-                if (EngineData.Negro.Contains(resultado))
-                {
-                    ListNegro.Items.Add(resultado);
-                    ListRojo.Items.Add(string.Empty);
-                }
-                else if (EngineData.Rojo.Contains(resultado))
-                {
-                    ListRojo.Items.Add(resultado);
-                    ListNegro.Items.Add(string.Empty);
-                }
-                else
-                {
-                    if (checkNegro.Checked)
-                    {
-                        ListNegro.Items.Add(0);
-                        ListRojo.Items.Add(string.Empty);
-                        checkNegro.Checked = false;
-                    }
-                    else if (checkRojo.Checked)
-                    {
-                        ListRojo.Items.Add(0);
-                        ListNegro.Items.Add(string.Empty);
-                        checkRojo.Checked = false;
-                    }
-                }
+                ListNegro.Items.Add(resultado);
+                ListRojo.Items.Add(string.Empty);
+                listresultado.Add("Negro");
             }
-            //*******************************************
-            if (ListNegro.Items.Count + ListRojo.Items.Count >= 5)
+            else if (EngineData.Rojo.Contains(resultado))
             {
-                if (resultado % 2 == 1)
+                ListRojo.Items.Add(resultado);
+                ListNegro.Items.Add(string.Empty);
+                listresultado.Add("Rojo");
+            }
+            
+            if (contador >= 2)
+            {
+                int contNegro = 0;
+                int contRojo = 0;
+
+                foreach (string item in listresultado)
                 {
-                    pronostico.BackColor = Color.Black;
-                    pronostico.Text = "Juega al Negro";
+                    if (item == "Negro")
+                        contNegro++;
+                    else
+                        contRojo++;
                 }
-                else
+
+                if (contNegro > contRojo)
                 {
                     pronostico.BackColor = Color.Red;
                     pronostico.Text = "Juega al Rojo";
                 }
-            }
-            else
-            {
-                pronostico.BackColor = Color.SeaGreen;
-            }
-            //******************************************
+                else if (contNegro < contRojo)
+                {
+                    pronostico.BackColor = Color.Black;
+                    pronostico.Text = "Juega al Negro";
+                }
+                else if(contNegro == contRojo)
+                {
+                    int t = listresultado.Count;
+                    string ultimo = listresultado[t - 1];
+                    if (ultimo == "Negro")
+                    {
+                        pronostico.BackColor = Color.Red;
+                        pronostico.Text = "Juega al Rojo";
 
-            txtResultado.Text =string.Empty;
+                    }
+                    else
+                    {
+                        pronostico.BackColor = Color.Black;
+                        pronostico.Text = "Juega al Negro";
+                    }
+                }
+            }
+
+            contador++;
+            txtResultado.Text = string.Empty;
             txtResultado.Focus();
         }
       
@@ -116,6 +129,7 @@ namespace TercerVector
             {
                 e.Handled = false;
             }
+            pronostico.BackColor = Color.SeaGreen;
         }
 
         private void txtResultado_Leave(object sender, EventArgs e)
@@ -123,7 +137,7 @@ namespace TercerVector
             if (txtResultado.Text != string.Empty)
             {
                 int resultado = Convert.ToInt32(txtResultado.Text);
-                if (resultado < 0  || resultado > 36)
+                if (resultado <= 0  || resultado > 36)
                 {
                     txtResultado.Text = string.Empty;
                 }
