@@ -15,16 +15,11 @@ namespace TercerVector
         //private EngineProyect Funcion = new EngineProyect();
         //private EngineDb Metodo = new EngineDb();
         private int contador = 0;
+        private List<string> listresultado = new List<string>();
 
-       
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            pronostico.Text = "Esperando Pronostico";
         }
 
         private void AddNumber_Click(object sender, EventArgs e)
@@ -34,7 +29,7 @@ namespace TercerVector
             EngineData Valor = EngineData.Instance();
             string n = txtResultado.Text;
             int resultado = Convert.ToInt32(n);
-            List<string> listresultado = new List<string>();
+         
             if (EngineData.Negro.Contains(resultado))
             {
                 ListNegro.Items.Add(resultado);
@@ -47,7 +42,7 @@ namespace TercerVector
                 ListNegro.Items.Add(string.Empty);
                 listresultado.Add("Rojo");
             }
-            
+
             if (contador >= 2)
             {
                 int contNegro = 0;
@@ -57,9 +52,11 @@ namespace TercerVector
                 {
                     if (item == "Negro")
                         contNegro++;
-                    else
+                    else if (item == "Rojo")
                         contRojo++;
                 }
+
+                //MessageBox.Show("Negros: " + contNegro.ToString() + " " + "Rojos: " + contRojo);
 
                 if (contNegro > contRojo)
                 {
@@ -71,7 +68,7 @@ namespace TercerVector
                     pronostico.BackColor = Color.Black;
                     pronostico.Text = "Juega al Negro";
                 }
-                else if(contNegro == contRojo)
+                else if (contNegro == contRojo)
                 {
                     int t = listresultado.Count;
                     string ultimo = listresultado[t - 1];
@@ -93,7 +90,30 @@ namespace TercerVector
             txtResultado.Text = string.Empty;
             txtResultado.Focus();
         }
-      
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkNegro_CheckedChanged(object sender, EventArgs e)
+        {
+            checkRojo.Checked = false;
+            if (checkNegro.Checked)
+                txtResultado.Text = "0";
+            else
+                txtResultado.Text = string.Empty;
+        }
+
+        private void checkRojo_CheckedChanged(object sender, EventArgs e)
+        {
+            checkNegro.Checked = false;
+            if (checkRojo.Checked)
+                txtResultado.Text = "0";
+            else
+                txtResultado.Text = string.Empty;
+        }
+
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
             if (ListNegro.SelectedIndex >= 0)
@@ -103,6 +123,13 @@ namespace TercerVector
                 ListRojo.Items.RemoveAt(ListRojo.SelectedIndex);
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
+        }
+
+        private void Form1_Load(object sender, EventArgs e) => pronostico.Text = "Esperando Pronostico";
+
+        private void GuardarRuta_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void NuevoCiclo_Click(object sender, EventArgs e)
@@ -137,39 +164,11 @@ namespace TercerVector
             if (txtResultado.Text != string.Empty)
             {
                 int resultado = Convert.ToInt32(txtResultado.Text);
-                if (resultado <= 0  || resultado > 36)
+                if (resultado <= 0 || resultado > 36)
                 {
                     txtResultado.Text = string.Empty;
                 }
             }
-        }
-
-        private void checkNegro_CheckedChanged(object sender, EventArgs e)
-        {
-            checkRojo.Checked = false;
-            if(checkNegro.Checked)
-                txtResultado.Text = "0";
-            else
-                txtResultado.Text = string.Empty;
-        }
-
-        private void checkRojo_CheckedChanged(object sender, EventArgs e)
-        {
-            checkNegro.Checked = false;
-            if (checkRojo.Checked)
-                txtResultado.Text = "0";
-            else
-                txtResultado.Text = string.Empty;
-        }
-
-        private void GuardarRuta_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-          
         }
     }
 }
