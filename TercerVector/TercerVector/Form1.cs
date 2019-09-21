@@ -15,8 +15,14 @@ namespace TercerVector
         private EngineProyect Funcion = new EngineProyect();
         private EngineDb Metodo = new EngineDb();
         private int contador = 0;
+        private bool iniciado = false;
+        private int contConsecutivoNegro = 0;
+        private int contConsecutivoRojo = 0;
+        private bool anteriorNegro = false ;
+        private bool anteriorRojo = false;
+        private ListBox listBox1 = new ListBox();
+        private ListBox listBox2 = new ListBox();
 
-       
         public Form1()
         {
             InitializeComponent();
@@ -31,76 +37,132 @@ namespace TercerVector
         {
             if (txtResultado.Text == string.Empty)
                 return;
-            EngineData Valor = EngineData.Instance();
-            string n = txtResultado.Text;
-            int resultado = Convert.ToInt32(n);
-            List<string> listresultado = new List<string>();
-            if (EngineData.Negro.Contains(resultado))
-            {
-                ListNegro.Items.Add(resultado);
-                ListRojo.Items.Add(string.Empty);
-                listresultado.Add("Negro");
-            }
-            else if (EngineData.Rojo.Contains(resultado))
-            {
-                ListRojo.Items.Add(resultado);
-                ListNegro.Items.Add(string.Empty);
-                listresultado.Add("Rojo");
-            }
-            
-            if (contador >= 2)
-            {
-                int contNegro = 0;
-                int contRojo = 0;
 
-                foreach (string item in listresultado)
-                {
-                    if (item == "Negro")
-                        contNegro++;
-                    else
-                        contRojo++;
-                }
-
-                if (contNegro > contRojo)
-                {
-                    pronostico.BackColor = Color.Red;
-                    pronostico.Text = "Juega al Rojo";
-                }
-                else if (contNegro < contRojo)
-                {
-                    pronostico.BackColor = Color.Black;
-                    pronostico.Text = "Juega al Negro";
-                }
-                else if(contNegro == contRojo)
-                {
-                    int t = listresultado.Count;
-                    string ultimo = listresultado[t - 1];
-                    if (ultimo == "Negro")
-                    {
-                        pronostico.BackColor = Color.Red;
-                        pronostico.Text = "Juega al Rojo";
-
-                    }
-                    else
-                    {
-                        pronostico.BackColor = Color.Black;
-                        pronostico.Text = "Juega al Negro";
-                    }
-                }
-            }
-
-            contador++;
+            AddResultadoLista();
             txtResultado.Text = string.Empty;
             txtResultado.Focus();
         }
+
+        private void AddResultadoLista()
+        {
+            string n = txtResultado.Text;
+            int resultado = Convert.ToInt32(n);
+            List<string> listresultado = new List<string>();
+            string color = string.Empty;
+            if (EngineData.Negro.Contains(resultado))
+            {
+                color = "Negro";
+                listBox1.Items.Add(resultado);
+                listBox2.Items.Add(string.Empty);
+                listresultado.Add(color);
+            }
+            else if (EngineData.Rojo.Contains(resultado))
+            {
+                color = "Rojo";
+                listBox2.Items.Add(resultado);
+                listBox1.Items.Add(string.Empty);
+                listresultado.Add(color);
+            }
+            SetListBoxView();
+
+            string setColor = EstablecerValoresSecuencia(color,contador);
+            if (setColor != string.Empty && !iniciado)
+                SetColor(setColor);
+
+            contador++;
+        } 
+
+        private string  EstablecerValoresSecuencia(string color , int iteracion)
+        {
+            string resultado = string.Empty;
+            if (iteracion == 0)
+            {
+                if (color == "Negro")
+                {
+                    contConsecutivoRojo = 0;
+                    contConsecutivoNegro = 1;
+                    anteriorNegro = true;
+                    anteriorRojo = false;
+                }
+                else if (color == "Rojo")
+                {
+                    contConsecutivoNegro = 0;
+                    contConsecutivoRojo = 1;
+                    anteriorNegro = false;
+                    anteriorRojo = true;
+                }
+                return resultado;
+            }
+
+            if (color == "Negro")
+            {
+                contConsecutivoRojo = 0;
+                anteriorRojo = false;
+                if (anteriorNegro)
+                {
+                    contConsecutivoNegro++;
+                }
+                else if (!anteriorNegro)
+                {
+                    contConsecutivoNegro = 0;
+                }
+            }
+            else if (color == "Rojo")
+            {
+                contConsecutivoNegro = 0;
+                anteriorNegro = false;
+                if (anteriorRojo)
+                {
+                    contConsecutivoRojo++;
+                }
+                else if (!anteriorRojo)
+                {
+                    contConsecutivoRojo = 0;
+                }
+            }
+
+            if (contConsecutivoNegro > 3)
+                resultado = "Negro";
+            else if (contConsecutivoRojo > 3)
+                resultado = "Rojo";
+
+            return resultado;
+        }
+
+        private void SetColor (string color)
+        {
+            if (color =="Negro")
+                pronostico.BackColor = Color.Black;
+            else if (color == "Rojo")
+                pronostico.BackColor = Color.Red;
+        }
+
+        private void SetListBoxView()
+        {
+            ListNegro.Items.Clear();
+            ListRojo.Items.Clear();
+
+            for (int i = listBox1.Items.Count - 1; i >= 0; i--)
+                ListNegro.Items.Add (listBox1.Items[i]);
+
+            for (int j = listBox2.Items.Count - 1; j >= 0; j--)
+                ListRojo.Items.Add(listBox2.Items[j]);
+        }
+
+        //********************************************************************************************
       
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
-            if (ListNegro.SelectedIndex >= 0)
-                ListNegro.Items.RemoveAt(ListNegro.SelectedIndex);
-
-            else if (ListRojo.SelectedIndex >= 0)
-                ListRojo.Items.RemoveAt(ListRojo.SelectedIndex);
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            ListNegro.Items.Clear();
+            ListRojo.Items.Clear();
+            contador = 0;
+            iniciado = false;
+            contConsecutivoNegro = 0;
+            contConsecutivoRojo = 0;
+            anteriorNegro = false;
+            anteriorRojo = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
         }
@@ -144,6 +206,7 @@ namespace TercerVector
             }
         }
 
+        //****************************************************************************
         private void checkNegro_CheckedChanged(object sender, EventArgs e)
         {
             checkRojo.Checked = false;

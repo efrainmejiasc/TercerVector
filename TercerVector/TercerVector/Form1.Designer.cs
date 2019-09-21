@@ -46,6 +46,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pronostico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +79,7 @@
             // txtResultado
             // 
             this.txtResultado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtResultado.Location = new System.Drawing.Point(149, 43);
+            this.txtResultado.Location = new System.Drawing.Point(149, 12);
             this.txtResultado.MaxLength = 2;
             this.txtResultado.Name = "txtResultado";
             this.txtResultado.Size = new System.Drawing.Size(180, 20);
@@ -96,7 +97,7 @@
             this.AddNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.AddNumber.Location = new System.Drawing.Point(149, 69);
+            this.AddNumber.Location = new System.Drawing.Point(149, 38);
             this.AddNumber.Name = "AddNumber";
             this.AddNumber.Size = new System.Drawing.Size(180, 31);
             this.AddNumber.TabIndex = 1;
@@ -111,7 +112,7 @@
             this.checkNegro.ForeColor = System.Drawing.Color.White;
             this.checkNegro.Location = new System.Drawing.Point(7, 3);
             this.checkNegro.Name = "checkNegro";
-            this.checkNegro.Size = new System.Drawing.Size(80, 17);
+            this.checkNegro.Size = new System.Drawing.Size(99, 19);
             this.checkNegro.TabIndex = 0;
             this.checkNegro.Text = "Cero Negro";
             this.checkNegro.UseVisualStyleBackColor = false;
@@ -125,7 +126,7 @@
             this.checkRojo.ForeColor = System.Drawing.Color.White;
             this.checkRojo.Location = new System.Drawing.Point(6, 3);
             this.checkRojo.Name = "checkRojo";
-            this.checkRojo.Size = new System.Drawing.Size(73, 17);
+            this.checkRojo.Size = new System.Drawing.Size(90, 19);
             this.checkRojo.TabIndex = 0;
             this.checkRojo.Text = "Cero Rojo";
             this.checkRojo.UseVisualStyleBackColor = false;
@@ -158,20 +159,19 @@
             this.EliminarResultado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EliminarResultado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EliminarResultado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.EliminarResultado.Location = new System.Drawing.Point(149, 106);
+            this.EliminarResultado.Location = new System.Drawing.Point(149, 75);
             this.EliminarResultado.Name = "EliminarResultado";
             this.EliminarResultado.Size = new System.Drawing.Size(180, 31);
             this.EliminarResultado.TabIndex = 4;
-            this.EliminarResultado.Text = "Eliminar Resultado";
+            this.EliminarResultado.Text = "Limpiar";
             this.EliminarResultado.UseVisualStyleBackColor = false;
-            this.EliminarResultado.Visible = false;
             this.EliminarResultado.Click += new System.EventHandler(this.EliminarResultado_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Controls.Add(this.checkNegro);
-            this.panel1.Location = new System.Drawing.Point(149, 12);
+            this.panel1.Location = new System.Drawing.Point(55, 79);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(90, 25);
             this.panel1.TabIndex = 2;
@@ -181,7 +181,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Red;
             this.panel2.Controls.Add(this.checkRojo);
-            this.panel2.Location = new System.Drawing.Point(239, 12);
+            this.panel2.Location = new System.Drawing.Point(145, 79);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(90, 25);
             this.panel2.TabIndex = 3;
@@ -190,6 +190,8 @@
             // pronostico
             // 
             this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
+            this.pronostico.Controls.Add(this.panel2);
+            this.pronostico.Controls.Add(this.panel1);
             this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pronostico.ForeColor = System.Drawing.Color.GreenYellow;
             this.pronostico.Location = new System.Drawing.Point(4, 500);
@@ -203,9 +205,9 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(149, 143);
+            this.pictureBox1.Location = new System.Drawing.Point(149, 112);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(180, 351);
+            this.pictureBox1.Size = new System.Drawing.Size(180, 382);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
@@ -267,8 +269,6 @@
             this.Controls.Add(this.GuardarRuta);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pronostico);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.EliminarResultado);
             this.Controls.Add(this.NuevoCiclo);
             this.Controls.Add(this.AddNumber);
@@ -284,6 +284,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pronostico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
