@@ -98,6 +98,7 @@ namespace TercerVector
             {
                 contConsecutivoRojo = 0;
                 anteriorRojo = false;
+                anteriorNegro = true;
                 if (anteriorNegro)
                 {
                     contConsecutivoNegro++;
@@ -111,6 +112,7 @@ namespace TercerVector
             {
                 contConsecutivoNegro = 0;
                 anteriorNegro = false;
+                anteriorRojo = true;
                 if (anteriorRojo)
                 {
                     contConsecutivoRojo++;
