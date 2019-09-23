@@ -23,7 +23,7 @@ namespace TercerVector
         private ListBox listBox1 = new ListBox();
         private ListBox listBox2 = new ListBox();
         List<string> listresultado = new List<string>();
-        private Dictionary<string, int> loop;
+        private Dictionary<string, int> loop = new Dictionary<string, int>();
 
         public Form1()
         {
@@ -44,6 +44,7 @@ namespace TercerVector
             int index = 1;
             if (contador > 1)
             {
+                int x = loop.Count;
                 if (loop.Count <= 3)
                 {
                     while (index <= listresultado.Count)
