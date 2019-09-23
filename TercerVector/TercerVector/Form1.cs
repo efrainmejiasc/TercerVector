@@ -23,7 +23,7 @@ namespace TercerVector
         private ListBox listBox1 = new ListBox();
         private ListBox listBox2 = new ListBox();
         List<string> listresultado = new List<string>();
-        private Dictionary<string, int> loop = new Dictionary<string, int>();
+        private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
 
         public Form1()
         {
@@ -41,15 +41,13 @@ namespace TercerVector
                 return;
 
             string color = AddResultadoLista();
-            int index = 1;
+            int startIndex = 0;
             if (contador > 1)
             {
-                int x = loop.Count;
-                if (loop.Count <= 3)
+                while ( startIndex < listresultado.Count - 2)
                 {
-                    while (index <= listresultado.Count)
-                        index = EstablecerPared(index) + 1;
-                }
+                    startIndex = EstablecerPared(startIndex + 1);
+                } 
             }
             //**********************************************************************************
             SetListBoxView();
@@ -61,6 +59,23 @@ namespace TercerVector
             contador++;
             txtResultado.Text = string.Empty;
             txtResultado.Focus();
+        }
+
+
+        private int EstablecerPared(int startIndex)
+        {
+            int posicion = startIndex;
+            int contador = 0;
+            string color = listresultado[posicion];
+
+            while (listresultado[posicion] == color)
+            {
+                posicion++;
+                contador++;
+            }
+            loop.Add(new KeyValuePair<string, int>(color,contador));
+
+            return posicion;
         }
 
         private string  AddResultadoLista()
@@ -84,20 +99,6 @@ namespace TercerVector
                 listresultado.Add(color);
             }
             return color;
-        }
-
-        private int EstablecerPared(int startIndex)
-        {
-            int contador = 0;
-            string color = listresultado[startIndex];
-            while(listresultado[startIndex] == color)
-            {
-                contador++;
-                startIndex++;
-            }
-
-            loop.Add(color, contador);
-            return startIndex;
         }
 
 
