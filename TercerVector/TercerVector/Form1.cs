@@ -22,6 +22,8 @@ namespace TercerVector
         private bool anteriorRojo = false;
         private ListBox listBox1 = new ListBox();
         private ListBox listBox2 = new ListBox();
+        List<string> listresultado = new List<string>();
+        private Dictionary<string, int> loop;
 
         public Form1()
         {
@@ -38,16 +40,33 @@ namespace TercerVector
             if (txtResultado.Text == string.Empty)
                 return;
 
-            AddResultadoLista();
+            string color = AddResultadoLista();
+            int index = 1;
+            if (contador > 1)
+            {
+                if (loop.Count <= 3)
+                {
+                    while (index <= listresultado.Count)
+                        index = EstablecerPared(index) + 1;
+                }
+            }
+            //**********************************************************************************
+            SetListBoxView();
+            //**********************************************************************************
+            string setColor = EstablecerValoresSecuencia(color, contador);
+            if (setColor != string.Empty && !iniciado)
+                SetColor(setColor);
+           //***********************************************************************************
+            contador++;
             txtResultado.Text = string.Empty;
             txtResultado.Focus();
         }
 
-        private void AddResultadoLista()
+        private string  AddResultadoLista()
         {
             string n = txtResultado.Text;
             int resultado = Convert.ToInt32(n);
-            List<string> listresultado = new List<string>();
+         
             string color = string.Empty;
             if (EngineData.Negro.Contains(resultado))
             {
@@ -63,14 +82,36 @@ namespace TercerVector
                 listBox1.Items.Add(string.Empty);
                 listresultado.Add(color);
             }
-            SetListBoxView();
+            return color;
+        }
 
-            string setColor = EstablecerValoresSecuencia(color,contador);
-            if (setColor != string.Empty && !iniciado)
-                SetColor(setColor);
+        private int EstablecerPared(int startIndex)
+        {
+            int contador = 0;
+            string color = listresultado[startIndex];
+            while(listresultado[startIndex] == color)
+            {
+                contador++;
+                startIndex++;
+            }
 
-            contador++;
-        } 
+            loop.Add(color, contador);
+            return startIndex;
+        }
+
+
+        private void SetListBoxView()
+        {
+            ListNegro.Items.Clear();
+            ListRojo.Items.Clear();
+
+            for (int i = listBox1.Items.Count - 1; i >= 0; i--)
+                ListNegro.Items.Add(listBox1.Items[i]);
+
+            for (int j = listBox2.Items.Count - 1; j >= 0; j--)
+                ListRojo.Items.Add(listBox2.Items[j]);
+        }
+
 
         private string  EstablecerValoresSecuencia(string color , int iteracion)
         {
@@ -131,6 +172,7 @@ namespace TercerVector
             return resultado;
         }
 
+
         private void SetColor (string color)
         {
             if (color =="Negro")
@@ -139,22 +181,13 @@ namespace TercerVector
                 pronostico.BackColor = Color.Red;
         }
 
-        private void SetListBoxView()
-        {
-            ListNegro.Items.Clear();
-            ListRojo.Items.Clear();
 
-            for (int i = listBox1.Items.Count - 1; i >= 0; i--)
-                ListNegro.Items.Add (listBox1.Items[i]);
-
-            for (int j = listBox2.Items.Count - 1; j >= 0; j--)
-                ListRojo.Items.Add(listBox2.Items[j]);
-        }
 
         //********************************************************************************************
       
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
+            listresultado.Clear();
             listBox1.Items.Clear();
             listBox2.Items.Clear();
             ListNegro.Items.Clear();
