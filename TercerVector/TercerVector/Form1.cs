@@ -47,7 +47,7 @@ namespace TercerVector
             //**********************************************************************************
             if (listresultado.Count > 2)
             {
-                int startIndex = 0;
+                int startIndex = 1;
                 int conteo = 0;
                 loop.Clear();
                 while (startIndex <= listresultado2.Count - 1) 
