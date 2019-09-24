@@ -63,26 +63,30 @@ namespace TercerVector
 
         private int EstablecerPared(int startIndex)
         {
-            int contador = 0;
+            int conteo = 0;
             int posicion = startIndex;
             string color = listresultado[posicion];
 
             try
             {
+                
                 while (listresultado[posicion] == color)
                 {
-                    contador++;
-                    posicion++;
+                    conteo++;
+                    if (posicion < listresultado.Count)
+                        posicion++;
+                    else
+                        break;
                 }
               
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show( posicion.ToString () + " " + ex.ToString());
             }
             finally
             {
-                loop.Add(new KeyValuePair<string, int>(color, contador));
+                loop.Add(new KeyValuePair<string, int>(color, conteo));
             }
 
             return startIndex + contador;
