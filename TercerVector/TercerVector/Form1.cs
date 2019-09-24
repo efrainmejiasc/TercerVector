@@ -15,6 +15,7 @@ namespace TercerVector
         private EngineProyect Funcion = new EngineProyect();
         private EngineDb Metodo = new EngineDb();
         private int contador = 0;
+        private int startIndex = 1;
         private bool iniciado = false;
         private int contConsecutivoNegro = 0;
         private int contConsecutivoRojo = 0;
@@ -41,17 +42,15 @@ namespace TercerVector
                 return;
 
             string color = AddResultadoLista();
-            int startIndex = 0;
-            if (contador > 1)
+            //**********************************************************************************
+             SetListBoxView();
+            //**********************************************************************************
+            if (listresultado.Count >= 3)
             {
-                while ( startIndex < listresultado.Count - 2)
-                {
-                    startIndex = EstablecerPared(startIndex + 1);
-                } 
+                while (startIndex < listresultado.Count)
+                    startIndex = EstablecerPared(startIndex);
             }
-            //**********************************************************************************
-            SetListBoxView();
-            //**********************************************************************************
+       
             string setColor = EstablecerValoresSecuencia(color, contador);
             if (setColor != string.Empty && !iniciado)
                 SetColor(setColor);
@@ -64,18 +63,29 @@ namespace TercerVector
 
         private int EstablecerPared(int startIndex)
         {
-            int posicion = startIndex;
             int contador = 0;
+            int posicion = startIndex;
             string color = listresultado[posicion];
 
-            while (listresultado[posicion] == color)
+            try
             {
-                posicion++;
-                contador++;
+                while (listresultado[posicion] == color)
+                {
+                    contador++;
+                    posicion++;
+                }
+              
             }
-            loop.Add(new KeyValuePair<string, int>(color,contador));
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                loop.Add(new KeyValuePair<string, int>(color, contador));
+            }
 
-            return posicion;
+            return startIndex + contador;
         }
 
         private string  AddResultadoLista()
@@ -89,14 +99,14 @@ namespace TercerVector
                 color = "Negro";
                 listBox1.Items.Add(resultado);
                 listBox2.Items.Add(string.Empty);
-                listresultado.Add(color);
+                listresultado.Insert(contador,color);
             }
             else if (EngineData.Rojo.Contains(resultado))
             {
                 color = "Rojo";
                 listBox2.Items.Add(resultado);
                 listBox1.Items.Add(string.Empty);
-                listresultado.Add(color);
+                listresultado.Insert(contador, color);
             }
             return color;
         }
