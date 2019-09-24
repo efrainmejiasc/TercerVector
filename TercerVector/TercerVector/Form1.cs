@@ -12,8 +12,6 @@ namespace TercerVector
 {
     public partial class Form1 : Form
     {
-        private EngineProyect Funcion = new EngineProyect();
-        private EngineDb Metodo = new EngineDb();
         private int contador = 0;
         private bool iniciado = false;
         private int contConsecutivoNegro = 0;
@@ -28,11 +26,13 @@ namespace TercerVector
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/09/29"))
+                Application.Exit();
             pronostico.Text = "Esperando Pronostico";
         }
 
@@ -235,7 +235,7 @@ namespace TercerVector
         {
             if (loop.Count < 4)
             {
-                MessageBox.Show( "Debe ingresar al menos 4 paredes" , "Informacion del Sistema");
+                MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 return;
             }
 
@@ -332,8 +332,6 @@ namespace TercerVector
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 F = new Form2();
-            F.Show();
         }
     }
 }
