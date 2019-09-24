@@ -214,20 +214,18 @@
             // GuardarRuta
             // 
             this.GuardarRuta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.GuardarRuta.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.GuardarRuta.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
             this.GuardarRuta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.GuardarRuta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.GuardarRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GuardarRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarRuta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.GuardarRuta.Location = new System.Drawing.Point(0, 579);
+            this.GuardarRuta.Location = new System.Drawing.Point(149, 112);
             this.GuardarRuta.Name = "GuardarRuta";
-            this.GuardarRuta.Size = new System.Drawing.Size(337, 31);
+            this.GuardarRuta.Size = new System.Drawing.Size(180, 31);
             this.GuardarRuta.TabIndex = 10;
             this.GuardarRuta.Text = "Guardar Ruta";
             this.GuardarRuta.UseVisualStyleBackColor = false;
-            this.GuardarRuta.Visible = false;
             this.GuardarRuta.Click += new System.EventHandler(this.GuardarRuta_Click);
             // 
             // txtPronostico

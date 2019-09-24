@@ -15,7 +15,6 @@ namespace TercerVector
         private EngineProyect Funcion = new EngineProyect();
         private EngineDb Metodo = new EngineDb();
         private int contador = 0;
-        private int startIndex = 1;
         private bool iniciado = false;
         private int contConsecutivoNegro = 0;
         private int contConsecutivoRojo = 0;
@@ -45,10 +44,20 @@ namespace TercerVector
             //**********************************************************************************
              SetListBoxView();
             //**********************************************************************************
-            if (listresultado.Count >= 3)
+            if (listresultado.Count > 2)
             {
-                while (startIndex < listresultado.Count)
-                    startIndex = EstablecerPared(startIndex);
+                int startIndex = 1;
+                int conteo = 0;
+                loop = new List<KeyValuePair<string, int>>();
+                while (startIndex <= listresultado.Count - 1) 
+                {
+                  startIndex = startIndex + conteo;
+                    if (startIndex >= listresultado.Count)
+                        break;
+
+                    conteo = EstablecerPared(startIndex);
+                }
+
             }
        
             string setColor = EstablecerValoresSecuencia(color, contador);
@@ -61,35 +70,20 @@ namespace TercerVector
         }
 
 
-        private int EstablecerPared(int startIndex)
+        private int EstablecerPared(int posicion)
         {
             int conteo = 0;
-            int posicion = startIndex;
             string color = listresultado[posicion];
-
-            try
+            for (int i = posicion; i <= listresultado.Count - 1; i++)
             {
-                
-                while (listresultado[posicion] == color)
-                {
+                if (listresultado[i] == color)
                     conteo++;
-                    if (posicion < listresultado.Count)
-                        posicion++;
-                    else
-                        break;
-                }
-              
+                else
+                    break;
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show( posicion.ToString () + " " + ex.ToString());
-            }
-            finally
-            {
-                loop.Add(new KeyValuePair<string, int>(color, conteo));
-            }
+            loop.Add(new KeyValuePair<string, int>(color, conteo));
 
-            return startIndex + contador;
+            return conteo;
         }
 
         private string  AddResultadoLista()
@@ -278,24 +272,18 @@ namespace TercerVector
 
         private void GuardarRuta_Click(object sender, EventArgs e)
         {
-            if (txtPronostico.Text == string.Empty || txtPronostico.Text == null)
-                return;
-            List<string> tercerVector = new List<string>();
-            for (int i = 0; i <= 5 ; i++)
+           /* foreach(string item in listresultado)
             {
-                if (ListNegro.Items[i].ToString() != string.Empty)
-                    tercerVector.Add (ListNegro.Items[i].ToString());
-                else if (ListRojo.Items[i].ToString() != string.Empty)
-                    tercerVector.Add(ListRojo.Items[i].ToString());
+                MessageBox.Show(item);
+            }*/
+
+
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                MessageBox.Show(item.Key + " " + item.Value);
             }
-            tercerVector.Add(txtPronostico.Text);
-            //NuevoLoop();
-            txtPronostico.Text = string.Empty;
-            Ruta R = Funcion.ConstruirModeloRuta(tercerVector);
-            if (Metodo.InsertarRuta(R))
-                MessageBox.Show("Registro Exitoso");
-            else
-                MessageBox.Show("Registro Fallido");
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
