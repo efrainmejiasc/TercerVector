@@ -79,7 +79,7 @@
             // txtResultado
             // 
             this.txtResultado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtResultado.Location = new System.Drawing.Point(149, 12);
+            this.txtResultado.Location = new System.Drawing.Point(149, 6);
             this.txtResultado.MaxLength = 2;
             this.txtResultado.Name = "txtResultado";
             this.txtResultado.Size = new System.Drawing.Size(180, 20);
@@ -97,7 +97,7 @@
             this.AddNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.AddNumber.Location = new System.Drawing.Point(149, 38);
+            this.AddNumber.Location = new System.Drawing.Point(149, 32);
             this.AddNumber.Name = "AddNumber";
             this.AddNumber.Size = new System.Drawing.Size(180, 31);
             this.AddNumber.TabIndex = 1;
@@ -152,14 +152,14 @@
             // 
             // EliminarResultado
             // 
-            this.EliminarResultado.BackColor = System.Drawing.Color.GreenYellow;
+            this.EliminarResultado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.EliminarResultado.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
             this.EliminarResultado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.EliminarResultado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.EliminarResultado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EliminarResultado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EliminarResultado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.EliminarResultado.Location = new System.Drawing.Point(149, 75);
+            this.EliminarResultado.Location = new System.Drawing.Point(149, 61);
             this.EliminarResultado.Name = "EliminarResultado";
             this.EliminarResultado.Size = new System.Drawing.Size(180, 31);
             this.EliminarResultado.TabIndex = 4;
@@ -205,26 +205,26 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(149, 112);
+            this.pictureBox1.Location = new System.Drawing.Point(149, 127);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(180, 382);
+            this.pictureBox1.Size = new System.Drawing.Size(180, 368);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
             // GuardarRuta
             // 
-            this.GuardarRuta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.GuardarRuta.BackColor = System.Drawing.Color.GreenYellow;
             this.GuardarRuta.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
             this.GuardarRuta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.GuardarRuta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.GuardarRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GuardarRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarRuta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.GuardarRuta.Location = new System.Drawing.Point(149, 112);
+            this.GuardarRuta.Location = new System.Drawing.Point(149, 90);
             this.GuardarRuta.Name = "GuardarRuta";
             this.GuardarRuta.Size = new System.Drawing.Size(180, 31);
             this.GuardarRuta.TabIndex = 10;
-            this.GuardarRuta.Text = "Guardar Ruta";
+            this.GuardarRuta.Text = "Ver Condiciones";
             this.GuardarRuta.UseVisualStyleBackColor = false;
             this.GuardarRuta.Click += new System.EventHandler(this.GuardarRuta_Click);
             // 

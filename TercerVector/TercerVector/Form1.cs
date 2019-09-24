@@ -49,7 +49,7 @@ namespace TercerVector
             {
                 int startIndex = 1;
                 int conteo = 0;
-                loop = new List<KeyValuePair<string, int>>();
+                loop.Clear();
                 while (startIndex <= listresultado2.Count - 1) 
                 {
                   startIndex = startIndex + conteo;
@@ -231,6 +231,60 @@ namespace TercerVector
             pronostico.BackColor = Color.SeaGreen;
         }
 
+        private void GuardarRuta_Click(object sender, EventArgs e)
+        {
+            if (loop.Count < 4)
+            {
+                MessageBox.Show( "Debe ingresar al menos 4 paredes" , "Informacion del Sistema");
+                return;
+            }
+
+            int n = 0;
+            string mensaje = string.Empty;
+            bool existe = false;
+            int magico = 0;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 0 && n <= 2)
+                {
+                    mensaje = mensaje + item.Key + ": " + item.Value + Environment.NewLine;
+                    if (item.Value == 1)
+                        existe = true;
+                }
+                n++;
+            }
+
+            n = 0;
+
+            if (existe)
+                mensaje = mensaje + "Existe unidad se tomara el ciclo" + Environment.NewLine;
+            else
+                mensaje = mensaje + "No existe unidad se tomara el semi-ciclo" + Environment.NewLine;
+
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (existe)
+                {
+                    if (n >= 0 && n <= 2)
+                    {
+                        magico = magico + item.Value ;
+                    }
+                }
+                else
+                {
+                    if (n >= 0 && n <= 1)
+                    {
+                        magico = magico + item.Value;
+                    }
+                }
+             
+                n++;
+            }
+            mensaje = mensaje + "El numero Magico es: " + magico.ToString();
+
+            MessageBox.Show(mensaje, "Informacion del Sistema");
+        }
+
         //*********** Eventos ************************************************************
         private void txtResultado_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -274,22 +328,6 @@ namespace TercerVector
                 txtResultado.Text = "0";
             else
                 txtResultado.Text = string.Empty;
-        }
-
-        private void GuardarRuta_Click(object sender, EventArgs e)
-        {
-           /* foreach(string item in listresultado)
-            {
-                MessageBox.Show(item);
-            }*/
-
-
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                MessageBox.Show(item.Key + " " + item.Value);
-            }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
