@@ -47,7 +47,7 @@ namespace TercerVector
             //**********************************************************************************
             if (listresultado.Count > 2)
             {
-                int startIndex = 1;
+                int startIndex = 0;
                 int conteo = 0;
                 loop.Clear();
                 while (startIndex <= listresultado2.Count - 1) 
@@ -237,6 +237,10 @@ namespace TercerVector
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 return;
+            }
+            else if (loop.Count == 4)
+            {
+
             }
 
             int n = 0;
