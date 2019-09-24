@@ -23,6 +23,7 @@ namespace TercerVector
         private ListBox listBox1 = new ListBox();
         private ListBox listBox2 = new ListBox();
         List<string> listresultado = new List<string>();
+        List<string> listresultado2 = new List<string>();
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
 
         public Form1()
@@ -49,10 +50,10 @@ namespace TercerVector
                 int startIndex = 1;
                 int conteo = 0;
                 loop = new List<KeyValuePair<string, int>>();
-                while (startIndex <= listresultado.Count - 1) 
+                while (startIndex <= listresultado2.Count - 1) 
                 {
                   startIndex = startIndex + conteo;
-                    if (startIndex >= listresultado.Count)
+                    if (startIndex >= listresultado2.Count)
                         break;
 
                     conteo = EstablecerPared(startIndex);
@@ -73,10 +74,10 @@ namespace TercerVector
         private int EstablecerPared(int posicion)
         {
             int conteo = 0;
-            string color = listresultado[posicion];
-            for (int i = posicion; i <= listresultado.Count - 1; i++)
+            string color = listresultado2[posicion];
+            for (int i = posicion; i <= listresultado2.Count - 1; i++)
             {
-                if (listresultado[i] == color)
+                if (listresultado2[i] == color)
                     conteo++;
                 else
                     break;
@@ -114,12 +115,16 @@ namespace TercerVector
         {
             ListNegro.Items.Clear();
             ListRojo.Items.Clear();
+            listresultado2.Clear();
 
             for (int i = listBox1.Items.Count - 1; i >= 0; i--)
                 ListNegro.Items.Add(listBox1.Items[i]);
 
             for (int j = listBox2.Items.Count - 1; j >= 0; j--)
                 ListRojo.Items.Add(listBox2.Items[j]);
+
+            for (int k = listresultado.Count - 1; k >= 0; k--)
+                listresultado2.Add(listresultado[k]);
         }
 
 
@@ -198,6 +203,7 @@ namespace TercerVector
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
             listresultado.Clear();
+            listresultado2.Clear();
             listBox1.Items.Clear();
             listBox2.Items.Clear();
             ListNegro.Items.Clear();
