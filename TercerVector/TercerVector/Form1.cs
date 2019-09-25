@@ -40,36 +40,43 @@ namespace TercerVector
         {
              if (txtResultado.Text == string.Empty)
                 return;
-
+             //*********************************************************************************
              string color = AddResultadoLista();
             //**********************************************************************************
              SetListBoxView();
             //**********************************************************************************
-            if (listresultado.Count > 3)
+            if (listresultado2.Count > 3)
             {
                 int startIndex = 1;
                 int conteo = 0;
                 loop.Clear();
                 while (startIndex <= listresultado2.Count - 1) 
                 {
-                  startIndex = startIndex + conteo;
+                    startIndex = startIndex + conteo;
                     if (startIndex >= listresultado2.Count)
                         break;
 
                     conteo = EstablecerPared(startIndex);
                 }
             }
-           //************************************************************************************
+            txtResultado.Text = string.Empty;
+            //************************************************************************************
             string setColor = EstablecerValoresSecuencia(color, contador);
-            if (setColor != string.Empty && !iniciado)
+            if (setColor != string.Empty)
+            {
                 SetColor(setColor);
+                txtResultado.Focus();
+                return;
+            }
            //************************************************************************************
             contador++;
-            txtResultado.Text = string.Empty;
+            iniciado = SetInicioPronostico();
+            if (iniciado)
+            {
+                DeterminarPronostico();
+            }
             txtResultado.Focus();
-            string xxx = "hola";
         }
-
 
         private int EstablecerPared(int posicion)
         {
@@ -196,7 +203,38 @@ namespace TercerVector
                 pronostico.BackColor = Color.Red;
         }
 
+        private bool SetInicioPronostico()
+        {
+            bool resultado = false;
+            int n = 0;
+            if (loop.Count < 3)
+            {
+                return resultado;
+            }
+            else if (loop.Count == 3)
+            {
+                foreach (KeyValuePair<string, int> item in loop)
+                {
+                    if (n > 0)
+                    {
+                        if (item.Value == 1)
+                            return resultado;
+                    }
+                    n++;
+                }
+            }
+            else if (loop.Count >= 4)
+            {
+                resultado = true;
+            }
+            return resultado;
+        }
 
+        private string DeterminarPronostico()
+        {
+            string colorPronostico = string.Empty;
+            return colorPronostico;
+        }
 
         //********************************************************************************************
       
@@ -270,7 +308,7 @@ namespace TercerVector
             {
                 if (n >= 1 && n <= 3)
                 {
-                    mensaje = mensaje + item.Key + ": " + item.Value + Environment.NewLine;
+                    mensaje = mensaje + "Color: " + item.Key + "  " + item.Value +  " Posicion: " + n.ToString() + Environment.NewLine;
                     if (item.Value == 1)
                         existe = true;
                 }
@@ -309,6 +347,7 @@ namespace TercerVector
         }
 
         //*********** Eventos ************************************************************
+
         private void txtResultado_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar))
