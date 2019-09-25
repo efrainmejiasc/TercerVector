@@ -41,7 +41,7 @@ namespace TercerVector
             if (txtResultado.Text == string.Empty)
                 return;
 
-            txtResultado.Text = string.Empty;
+            
             string color = AddResultadoLista();
             //**********************************************************************************
             SetListBoxView();
@@ -58,7 +58,8 @@ namespace TercerVector
                 }
 
             }
-
+            //**********************************************************************************
+            txtResultado.Text = string.Empty;
             string setColor = EstablecerValoresSecuencia(color, contador);
             if (setColor != string.Empty)
             {
