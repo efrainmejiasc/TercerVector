@@ -38,14 +38,14 @@ namespace TercerVector
 
         private void AddNumber_Click(object sender, EventArgs e)
         {
-            if (txtResultado.Text == string.Empty)
+             if (txtResultado.Text == string.Empty)
                 return;
 
-            string color = AddResultadoLista();
+             string color = AddResultadoLista();
             //**********************************************************************************
              SetListBoxView();
             //**********************************************************************************
-            if (listresultado.Count > 2)
+            if (listresultado.Count > 3)
             {
                 int startIndex = 1;
                 int conteo = 0;
@@ -58,16 +58,16 @@ namespace TercerVector
 
                     conteo = EstablecerPared(startIndex);
                 }
-
             }
-       
+           //************************************************************************************
             string setColor = EstablecerValoresSecuencia(color, contador);
             if (setColor != string.Empty && !iniciado)
                 SetColor(setColor);
-           //***********************************************************************************
+           //************************************************************************************
             contador++;
             txtResultado.Text = string.Empty;
             txtResultado.Focus();
+            string xxx = "hola";
         }
 
 
@@ -233,23 +233,42 @@ namespace TercerVector
 
         private void GuardarRuta_Click(object sender, EventArgs e)
         {
-            if (loop.Count < 4)
+            int n = 0;
+            bool existe = false;
+
+           //****************Verificar Numero de paredes****************************
+            if (loop.Count < 3 )
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 return;
             }
-            else if (loop.Count == 4)
+            else if (loop.Count == 3)
             {
-
+                foreach (KeyValuePair<string, int> item in loop)
+                {
+                    if( n > 0)
+                    {
+                        if (item.Value == 1)
+                            existe = true;
+                    }
+                    n++;
+                }
+                if (existe)
+                {
+                    MessageBox.Show("Agrega mas paredes", "Informacion del Sistema");
+                    return;
+                }
             }
+            //****************************************************
 
-            int n = 0;
+            n = 0;
+            existe = false;
             string mensaje = string.Empty;
-            bool existe = false;
             int magico = 0;
+
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n >= 0 && n <= 2)
+                if (n >= 1 && n <= 3)
                 {
                     mensaje = mensaje + item.Key + ": " + item.Value + Environment.NewLine;
                     if (item.Value == 1)
@@ -269,14 +288,14 @@ namespace TercerVector
             {
                 if (existe)
                 {
-                    if (n >= 0 && n <= 2)
+                    if (n >= 1 && n <= 3)
                     {
                         magico = magico + item.Value ;
                     }
                 }
                 else
                 {
-                    if (n >= 0 && n <= 1)
+                    if (n >= 1 && n <= 2)
                     {
                         magico = magico + item.Value;
                     }
