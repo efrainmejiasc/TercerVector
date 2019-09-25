@@ -38,45 +38,41 @@ namespace TercerVector
 
         private void AddNumber_Click(object sender, EventArgs e)
         {
-             if (txtResultado.Text == string.Empty)
+            if (txtResultado.Text == string.Empty)
                 return;
-             //*********************************************************************************
-             string color = AddResultadoLista();
+
+            txtResultado.Text = string.Empty;
+            string color = AddResultadoLista();
             //**********************************************************************************
-             SetListBoxView();
+            SetListBoxView();
             //**********************************************************************************
-            if (listresultado2.Count > 3)
+            if (listresultado2.Count > 2)
             {
-                int startIndex = 1;
+                int startIndex = 0;
                 int conteo = 0;
                 loop.Clear();
-                while (startIndex <= listresultado2.Count - 1) 
+                while (startIndex < listresultado2.Count)
                 {
-                    startIndex = startIndex + conteo;
-                    if (startIndex >= listresultado2.Count)
-                        break;
-
                     conteo = EstablecerPared(startIndex);
+                    startIndex = startIndex + conteo;
                 }
+
             }
-            txtResultado.Text = string.Empty;
-            //************************************************************************************
+
             string setColor = EstablecerValoresSecuencia(color, contador);
             if (setColor != string.Empty)
             {
                 SetColor(setColor);
+                contador++;
                 txtResultado.Focus();
                 return;
             }
-           //************************************************************************************
+
+            //***********************************************************************************
             contador++;
-            iniciado = SetInicioPronostico();
-            if (iniciado)
-            {
-                DeterminarPronostico();
-            }
             txtResultado.Focus();
         }
+
 
         private int EstablecerPared(int posicion)
         {
@@ -93,6 +89,7 @@ namespace TercerVector
 
             return conteo;
         }
+
 
         private string  AddResultadoLista()
         {
@@ -194,7 +191,6 @@ namespace TercerVector
             return resultado;
         }
 
-
         private void SetColor (string color)
         {
             if (color =="Negro")
@@ -254,6 +250,7 @@ namespace TercerVector
             anteriorRojo = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
+            txtResultado.Focus();
         }
 
         private void NuevoCiclo_Click(object sender, EventArgs e)
@@ -275,16 +272,16 @@ namespace TercerVector
             bool existe = false;
 
            //****************Verificar Numero de paredes****************************
-            if (loop.Count < 3 )
+            if (loop.Count < 5 )
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 return;
             }
-            else if (loop.Count == 3)
+            else if (loop.Count == 4 )
             {
                 foreach (KeyValuePair<string, int> item in loop)
                 {
-                    if( n > 0)
+                    if( n > 1)
                     {
                         if (item.Value == 1)
                             existe = true;
@@ -306,9 +303,9 @@ namespace TercerVector
 
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n >= 1 && n <= 3)
+                if (n >= 2  && n <= 4)
                 {
-                    mensaje = mensaje + "Color: " + item.Key + "  " + item.Value +  " Posicion: " + n.ToString() + Environment.NewLine;
+                    mensaje = mensaje + "Color: " + item.Key + "  " + item.Value  + Environment.NewLine;
                     if (item.Value == 1)
                         existe = true;
                 }
@@ -326,14 +323,14 @@ namespace TercerVector
             {
                 if (existe)
                 {
-                    if (n >= 1 && n <= 3)
+                    if (n >= 2 && n <= 4)
                     {
                         magico = magico + item.Value ;
                     }
                 }
                 else
                 {
-                    if (n >= 1 && n <= 2)
+                    if (n >= 2 && n <= 3)
                     {
                         magico = magico + item.Value;
                     }
@@ -344,6 +341,7 @@ namespace TercerVector
             mensaje = mensaje + "El numero Magico es: " + magico.ToString();
 
             MessageBox.Show(mensaje, "Informacion del Sistema");
+            txtResultado.Focus();
         }
 
         //*********** Eventos ************************************************************
