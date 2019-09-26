@@ -23,6 +23,7 @@ namespace TercerVector
         List<string> listresultado = new List<string>();
         List<string> listresultado2 = new List<string>();
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
+        private List<KeyValuePair<string, int>> reflex = new List<KeyValuePair<string, int>>();
 
         public Form1()
         {
@@ -31,7 +32,7 @@ namespace TercerVector
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/09/29"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/01"))
                 Application.Exit();
             pronostico.Text = "Esperando Pronostico";
         }
@@ -73,6 +74,7 @@ namespace TercerVector
             if (iniciado)
             {
                 setColor = DeterminarPronostico();
+                SetColor(setColor);
             }
             contador++;
             txtResultado.Focus();
@@ -234,15 +236,129 @@ namespace TercerVector
         private string DeterminarPronostico()
         {
             string colorPronostico = string.Empty;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
+            bool ciclo = SetCicloSemiCiclo();
+            int magico = SetNumeroMagico(ciclo);
+            colorPronostico =  Expuestos();
 
-            }
             return colorPronostico;
         }
 
+        private bool SetCicloSemiCiclo()
+        {
+            bool resultado = false;
+            int n = 0;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 2 && n <= 4)
+                {
+                    if (item.Value == 1)
+                       resultado = true;
+                }
+                n++;
+            }
+            return resultado;
+        }
+
+        private int SetNumeroMagico(bool ciclo)
+        {
+            int n = 0;
+            int resultado = 0;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (ciclo)
+                {
+                    if (n >= 2 && n <= 4)
+                    {
+                        resultado = resultado + item.Value;
+                    }
+                }
+                else
+                {
+                    if (n >= 2 && n <= 3)
+                    {
+                        resultado = resultado + item.Value;
+                    }
+                }
+                n++;
+            }
+            return resultado;
+        }
+
+        private string Expuestos()
+        {
+            string respuesta = string.Empty;
+            int n = 0;
+            int esperadoNegro = 0;
+            int esperadoRojo = 0;
+            int salidoNegro = 0;
+            int salidoRojo = 0;
+            reflex.Clear();
+
+            try
+            {
+                foreach (KeyValuePair<string, int> item in loop)
+                {
+                    if (n <= 1)
+                    {
+                        if (item.Key == "Negro")
+                        {
+                            reflex.Add(new KeyValuePair<string, int>("Rojo", item.Value));
+                            salidoNegro = salidoNegro + item.Value;
+                        }
+                        else if (item.Key == "Rojo")
+                        {
+                            reflex.Add(new KeyValuePair<string, int>("Negro", item.Value));
+                            salidoRojo = salidoRojo + item.Value;
+                        }
+                    }
+                    else if (n >= 2)
+                    {
+                        if (item.Key == "Negro")
+                        {
+                            esperadoNegro = esperadoNegro + item.Value;
+                        }
+                        else if (item.Key == "Rojo")
+                        {
+                            esperadoRojo = esperadoRojo + item.Value;
+                        }
+                    }
+                    n++;
+                }
+            }
+            catch { return string.Empty; }
+
+            if (esperadoNegro > esperadoRojo)
+                respuesta = "Negro";
+            else if (esperadoRojo > esperadoNegro)
+                respuesta = "Rojo";
+
+            if (salidoNegro >= esperadoNegro)
+                respuesta = "Rojo";
+            else if (salidoRojo >= esperadoRojo)
+                respuesta = "Negro";
+
+            if (respuesta == string.Empty)
+                respuesta = RamdonColor();
+
+            return respuesta;
+        }
+
+        private string RamdonColor()
+        {
+            string color = string.Empty;
+            Random sabor = new Random(DateTime.UtcNow.Millisecond);
+            int numero = sabor.Next(1, 3);
+            if (numero % 2 == 0)
+                color = "Negro";
+            else
+                color = "Rojo";
+
+            return color;
+        }
+
+
         //********************************************************************************************
-      
+
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
             listresultado.Clear();
