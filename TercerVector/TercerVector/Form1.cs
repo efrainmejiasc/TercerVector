@@ -68,8 +68,12 @@ namespace TercerVector
                 txtResultado.Focus();
                 return;
             }
-
             //***********************************************************************************
+            iniciado = SetInicioPronostico();
+            if (iniciado)
+            {
+                setColor = DeterminarPronostico();
+            }
             contador++;
             txtResultado.Focus();
         }
@@ -204,11 +208,11 @@ namespace TercerVector
         {
             bool resultado = false;
             int n = 0;
-            if (loop.Count < 3)
+            if (loop.Count < 4)
             {
                 return resultado;
             }
-            else if (loop.Count == 3)
+            else if (loop.Count == 4)
             {
                 foreach (KeyValuePair<string, int> item in loop)
                 {
@@ -220,7 +224,7 @@ namespace TercerVector
                     n++;
                 }
             }
-            else if (loop.Count >= 4)
+            else if (loop.Count >= 5)
             {
                 resultado = true;
             }
@@ -230,6 +234,10 @@ namespace TercerVector
         private string DeterminarPronostico()
         {
             string colorPronostico = string.Empty;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+
+            }
             return colorPronostico;
         }
 
