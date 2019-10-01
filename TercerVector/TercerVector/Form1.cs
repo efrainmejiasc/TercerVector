@@ -23,7 +23,8 @@ namespace TercerVector
         List<string> listresultado = new List<string>();
         List<string> listresultado2 = new List<string>();
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
-        private List<KeyValuePair<string, int>> reflex = new List<KeyValuePair<string, int>>();
+        //private List<KeyValuePair<string, int>> reflex = new List<KeyValuePair<string, int>>();
+        private Vector vector = null;
 
         public Form1()
         {
@@ -32,7 +33,7 @@ namespace TercerVector
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/01"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/07"))
                 Application.Exit();
             pronostico.Text = "Esperando Pronostico";
         }
@@ -47,17 +48,13 @@ namespace TercerVector
             //**********************************************************************************
             SetListBoxView();
             //**********************************************************************************
-            if (listresultado2.Count > 2)
+            int startIndex = 0;
+            int conteo = 0;
+            loop.Clear();
+            while (startIndex < listresultado2.Count)
             {
-                int startIndex = 0;
-                int conteo = 0;
-                loop.Clear();
-                while (startIndex < listresultado2.Count)
-                {
-                    conteo = EstablecerPared(startIndex);
-                    startIndex = startIndex + conteo;
-                }
-
+                conteo = EstablecerPared(startIndex);
+                startIndex = startIndex + conteo;
             }
             //**********************************************************************************
             txtResultado.Text = string.Empty;
@@ -70,12 +67,8 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
-            iniciado = SetInicioPronostico();
-            if (iniciado)
-            {
-                setColor = DeterminarPronostico();
-                SetColor(setColor);
-            }
+            vector = Continuidad();
+
             contador++;
             txtResultado.Focus();
         }
@@ -206,161 +199,103 @@ namespace TercerVector
                 pronostico.BackColor = Color.Red;
         }
 
-        private bool SetInicioPronostico()
+        private Vector Continuidad()
         {
-            bool resultado = false;
-            int n = 0;
+            bool cicloSemiCiclo = false;
             if (loop.Count < 4)
-            {
-                return resultado;
-            }
-            else if (loop.Count == 4)
-            {
-                foreach (KeyValuePair<string, int> item in loop)
-                {
-                    if (n > 0)
-                    {
-                        if (item.Value == 1)
-                            return resultado;
-                    }
-                    n++;
-                }
-            }
-            else if (loop.Count >= 5)
-            {
-                resultado = true;
-            }
-            return resultado;
-        }
+                return null;
 
-        private string DeterminarPronostico()
-        {
-            string colorPronostico = string.Empty;
-            bool ciclo = SetCicloSemiCiclo();
-            int magico = SetNumeroMagico(ciclo);
-            colorPronostico =  Expuestos();
+            if (vector == null)
+            {
+                cicloSemiCiclo = SetCicloSemiCiclo();
+            }
 
-            return colorPronostico;
+            return vector;
         }
 
         private bool SetCicloSemiCiclo()
         {
+            vector = new Vector();
             bool resultado = false;
+            if (loop.Count == 4)
+            {
+                EstablecerPosicionDosTres();
+            }
+            else if (loop.Count >= 5)
+            {
+                bool existeCiclo = ExisteCiclo();
+                if (!existeCiclo)
+                    EstablecerPosicionDosTres();
+                else if (existeCiclo)
+                    EstablecerPosicionDosTresCuatro();
+            }
+            return resultado;
+        }
+
+
+        private void EstablecerPosicionDosTres()
+        {
+            int n = 0;
+            vector.Iniciado = true;
+            vector.CicloSemiciclo = false;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 2)
+                {
+                    vector.Magico = vector.Magico + item.Value;
+                    if (item.Key == "Negro")
+                        vector.NumeroEsperadoNegro = item.Value;
+                    else if (item.Key == "Rojo")
+                        vector.NumeroEsperadoRojo = item.Value;
+                    n++;
+                }
+            }
+        }
+
+        private void EstablecerPosicionDosTresCuatro()
+        {
             int n = 0;
             foreach (KeyValuePair<string, int> item in loop)
             {
                 if (n >= 2 && n <= 4)
                 {
-                    if (item.Value == 1)
-                       resultado = true;
+                    vector.Magico = vector.Magico + item.Value;
+                    if (item.Key == "Negro")
+                        vector.NumeroEsperadoNegro = vector.NumeroEsperadoNegro + item.Value;
+                    else if (item.Key == "Rojo")
+                        vector.NumeroEsperadoRojo = vector.NumeroEsperadoRojo + item.Value;
+                    n++;
                 }
                 n++;
             }
-            return resultado;
         }
 
-        private int SetNumeroMagico(bool ciclo)
+        private bool ExisteCiclo()
         {
             int n = 0;
-            int resultado = 0;
+            bool resultado = false;
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (ciclo)
+                if (n >= 2 && n <= 4)
                 {
-                    if (n >= 2 && n <= 4)
-                    {
-                        resultado = resultado + item.Value;
-                    }
-                }
-                else
-                {
-                    if (n >= 2 && n <= 3)
-                    {
-                        resultado = resultado + item.Value;
-                    }
-                }
-                n++;
-            }
-            return resultado;
-        }
-
-        private string Expuestos()
-        {
-            string respuesta = string.Empty;
-            int n = 0;
-            int esperadoNegro = 0;
-            int esperadoRojo = 0;
-            int salidoNegro = 0;
-            int salidoRojo = 0;
-            reflex.Clear();
-
-            try
-            {
-                foreach (KeyValuePair<string, int> item in loop)
-                {
-                    if (n <= 1)
-                    {
-                        if (item.Key == "Negro")
-                        {
-                            reflex.Add(new KeyValuePair<string, int>("Rojo", item.Value));
-                            salidoNegro = salidoNegro + item.Value;
-                        }
-                        else if (item.Key == "Rojo")
-                        {
-                            reflex.Add(new KeyValuePair<string, int>("Negro", item.Value));
-                            salidoRojo = salidoRojo + item.Value;
-                        }
-                    }
-                    else if (n >= 2)
-                    {
-                        if (item.Key == "Negro")
-                        {
-                            esperadoNegro = esperadoNegro + item.Value;
-                        }
-                        else if (item.Key == "Rojo")
-                        {
-                            esperadoRojo = esperadoRojo + item.Value;
-                        }
-                    }
+                    if (item.Value == 1)
+                        resultado = true;
                     n++;
                 }
             }
-            catch { return string.Empty; }
-
-            if (esperadoNegro > esperadoRojo)
-                respuesta = "Negro";
-            else if (esperadoRojo > esperadoNegro)
-                respuesta = "Rojo";
-
-            if (salidoNegro >= esperadoNegro)
-                respuesta = "Rojo";
-            else if (salidoRojo >= esperadoRojo)
-                respuesta = "Negro";
-
-            if (respuesta == string.Empty)
-                respuesta = RamdonColor();
-
-            return respuesta;
+            return resultado;
         }
 
-        private string RamdonColor()
-        {
-            string color = string.Empty;
-            Random sabor = new Random(DateTime.UtcNow.Millisecond);
-            int numero = sabor.Next(1, 3);
-            if (numero % 2 == 0)
-                color = "Negro";
-            else
-                color = "Rojo";
 
-            return color;
-        }
 
 
         //********************************************************************************************
 
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
+            //reflex.Clear();
+            vector = new Vector();
+            loop.Clear();
             listresultado.Clear();
             listresultado2.Clear();
             listBox1.Items.Clear();
@@ -397,28 +332,12 @@ namespace TercerVector
             bool existe = false;
 
            //****************Verificar Numero de paredes****************************
-            if (loop.Count < 5 )
+            if (loop.Count < 4)
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 return;
             }
-            else if (loop.Count == 4 )
-            {
-                foreach (KeyValuePair<string, int> item in loop)
-                {
-                    if( n > 1)
-                    {
-                        if (item.Value == 1)
-                            existe = true;
-                    }
-                    n++;
-                }
-                if (existe)
-                {
-                    MessageBox.Show("Agrega mas paredes", "Informacion del Sistema");
-                    return;
-                }
-            }
+        
             //****************************************************
 
             n = 0;

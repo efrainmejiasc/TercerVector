@@ -190,6 +190,7 @@
             // pronostico
             // 
             this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
+            this.pronostico.Controls.Add(this.button1);
             this.pronostico.Controls.Add(this.panel2);
             this.pronostico.Controls.Add(this.panel1);
             this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -248,12 +249,13 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button1.Location = new System.Drawing.Point(344, -1);
+            this.button1.Location = new System.Drawing.Point(6, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 31);
             this.button1.TabIndex = 12;
             this.button1.Text = "Nuevo Ciclo";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
@@ -262,7 +264,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaGreen;
             this.ClientSize = new System.Drawing.Size(337, 610);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPronostico);
             this.Controls.Add(this.GuardarRuta);
             this.Controls.Add(this.pictureBox1);
