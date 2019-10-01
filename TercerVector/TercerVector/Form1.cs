@@ -13,7 +13,7 @@ namespace TercerVector
     public partial class Form1 : Form
     {
         private int contador = 0;
-        private bool iniciado = false;
+        private bool inicioEstablecido = false;
         private int contConsecutivoNegro = 0;
         private int contConsecutivoRojo = 0;
         private bool anteriorNegro = false ;
@@ -67,10 +67,12 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
-            if (vector.Magico == 0)
-            Continuidad();
+            if (inicioEstablecido == false)
+                EstablecerVector();
+            else if (inicioEstablecido == true)
+                TrazaVector(color);
 
-            contador++;
+                contador++;
             txtResultado.Focus();
         }
 
@@ -200,7 +202,7 @@ namespace TercerVector
                 pronostico.BackColor = Color.Red;
         }
 
-        private Vector Continuidad()
+        private Vector EstablecerVector()
         {
             if (loop.Count < 4)
                 return null;
@@ -208,6 +210,7 @@ namespace TercerVector
             if (vector == null)
                SetCicloSemiCiclo();
 
+            inicioEstablecido = true;
             return vector;
         }
 
@@ -228,7 +231,6 @@ namespace TercerVector
             }
         }
 
-
         private void EstablecerPosicionDosTres()
         {
             int n = 0;
@@ -236,15 +238,23 @@ namespace TercerVector
             vector.CicloSemiciclo = false;
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n >= 2)
+                if (n == 0)
+                {
+                    vector.NumeroResultado = item.Value;
+                    if (item.Key == "Negro")
+                        vector.NumeroResultadoNegro = item.Value;
+                    else if (item.Key == "Rojo")
+                        vector.NumeroResultadoRojo = item.Value;
+                }
+                else if (n >= 2)
                 {
                     vector.Magico = vector.Magico + item.Value;
                     if (item.Key == "Negro")
                         vector.NumeroEsperadoNegro = item.Value;
                     else if (item.Key == "Rojo")
                         vector.NumeroEsperadoRojo = item.Value;
-                    n++;
                 }
+                n++;
             }
         }
 
@@ -255,14 +265,21 @@ namespace TercerVector
             vector.CicloSemiciclo = true;
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n >= 2 && n <= 4)
+                if (n == 0)
+                {
+                    vector.NumeroResultado = item.Value;
+                    if (item.Key == "Negro")
+                        vector.NumeroResultadoNegro = item.Value;
+                    else if (item.Key == "Rojo")
+                        vector.NumeroResultadoRojo = item.Value;
+                }
+                else if (n >= 2 && n <= 4)
                 {
                     vector.Magico = vector.Magico + item.Value;
                     if (item.Key == "Negro")
                         vector.NumeroEsperadoNegro = vector.NumeroEsperadoNegro + item.Value;
                     else if (item.Key == "Rojo")
                         vector.NumeroEsperadoRojo = vector.NumeroEsperadoRojo + item.Value;
-                    n++;
                 }
                 n++;
             }
@@ -284,6 +301,23 @@ namespace TercerVector
             return resultado;
         }
 
+        private void TrazaVector(string color)
+        {
+            vector.NumeroResultado++;
+            if (color == "Negro")
+            {
+                vector.NumeroResultadoNegro++;
+            }
+            else if (color == "Rojo")
+            {
+                vector.NumeroResultadoRojo++;
+            }
+            if (vector.Magico == vector.NumeroResultado)
+            {
+                inicioEstablecido = false;
+            }
+        }
+
 
         //********************************************************************************************
 
@@ -299,7 +333,7 @@ namespace TercerVector
             ListNegro.Items.Clear();
             ListRojo.Items.Clear();
             contador = 0;
-            iniciado = false;
+            inicioEstablecido = false;
             contConsecutivoNegro = 0;
             contConsecutivoRojo = 0;
             anteriorNegro = false;

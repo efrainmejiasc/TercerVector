@@ -16,6 +16,10 @@ namespace TercerVector
 
         public int NumeroResultado { get; set; }
 
+        public int NumeroResultadoNegro { get; set; }
+
+        public int NumeroResultadoRojo { get; set; }
+
         public bool Iniciado { get; set; }
 
         public bool CicloSemiciclo { get; set; }
