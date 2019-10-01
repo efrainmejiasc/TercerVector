@@ -67,7 +67,7 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
-            vector = Continuidad();
+            Continuidad();
 
             contador++;
             txtResultado.Focus();
@@ -201,22 +201,18 @@ namespace TercerVector
 
         private Vector Continuidad()
         {
-            bool cicloSemiCiclo = false;
             if (loop.Count < 4)
                 return null;
 
             if (vector == null)
-            {
-                cicloSemiCiclo = SetCicloSemiCiclo();
-            }
+               SetCicloSemiCiclo();
 
             return vector;
         }
 
-        private bool SetCicloSemiCiclo()
+        private void SetCicloSemiCiclo()
         {
             vector = new Vector();
-            bool resultado = false;
             if (loop.Count == 4)
             {
                 EstablecerPosicionDosTres();
@@ -229,7 +225,6 @@ namespace TercerVector
                 else if (existeCiclo)
                     EstablecerPosicionDosTresCuatro();
             }
-            return resultado;
         }
 
 
@@ -255,6 +250,8 @@ namespace TercerVector
         private void EstablecerPosicionDosTresCuatro()
         {
             int n = 0;
+            vector.Iniciado = true;
+            vector.CicloSemiciclo = true;
             foreach (KeyValuePair<string, int> item in loop)
             {
                 if (n >= 2 && n <= 4)
@@ -285,8 +282,6 @@ namespace TercerVector
             }
             return resultado;
         }
-
-
 
 
         //********************************************************************************************
