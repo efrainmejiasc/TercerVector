@@ -24,7 +24,7 @@ namespace TercerVector
         List<string> listresultado2 = new List<string>();
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
         //private List<KeyValuePair<string, int>> reflex = new List<KeyValuePair<string, int>>();
-        private Vector vector = null;
+        private Vector vector;
 
         public Form1()
         {
@@ -67,6 +67,7 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
+            if (vector.Magico == 0)
             Continuidad();
 
             contador++;
