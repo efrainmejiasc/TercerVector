@@ -312,7 +312,7 @@ namespace TercerVector
             {
                 vector.NumeroResultadoRojo++;
             }
-            if (vector.Magico == vector.NumeroResultado)
+            if (vector.NumeroResultado == vector.Magico)
             {
                 inicioEstablecido = false;
             }
