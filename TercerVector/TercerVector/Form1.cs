@@ -243,9 +243,9 @@ namespace TercerVector
                 {
                     vector.NumeroResultado = item.Value;
                     if (item.Key == "Negro")
-                        vector.NumeroResultadoNegro = item.Value;
+                        vector.NumeroResultadoNegro = vector.NumeroResultadoNegro + item.Value;
                     else if (item.Key == "Rojo")
-                        vector.NumeroResultadoRojo = item.Value;
+                        vector.NumeroResultadoRojo = vector.NumeroResultadoRojo + item.Value;
                 }
                 else if (n >= 2 && n <= 3)
                 {
@@ -422,8 +422,8 @@ namespace TercerVector
 
             //*************************************************
             mensaje = mensaje + "Numeros replicados: " + vector.NumeroResultado.ToString() + "/" + vector.Magico + Environment.NewLine;
-            mensaje = mensaje + "Negros Esperado: " + vector.NumeroEsperadoNegro.ToString() + vector.Magico + Environment.NewLine;
-            mensaje = mensaje + "Rojos Esperado: " + vector.NumeroEsperadoRojo.ToString() + vector.Magico + Environment.NewLine;
+            mensaje = mensaje + "Negros Esperado: " + vector.NumeroEsperadoNegro.ToString()  + Environment.NewLine;
+            mensaje = mensaje + "Rojos Esperado: " + vector.NumeroEsperadoRojo.ToString() + Environment.NewLine;
             //************************************************/
 
 
