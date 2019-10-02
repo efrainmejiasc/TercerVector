@@ -231,6 +231,7 @@ namespace TercerVector
             }
         }
 
+
         private void EstablecerPosicionDosTres()
         {
             int n = 0;
@@ -246,9 +247,8 @@ namespace TercerVector
                     else if (item.Key == "Rojo")
                         vector.NumeroResultadoRojo = item.Value;
                 }
-                else if (n >= 2)
+                else if (n >= 2 && n <= 3)
                 {
-                    vector.Magico = vector.Magico + item.Value;
                     if (item.Key == "Negro")
                         vector.NumeroEsperadoNegro = item.Value;
                     else if (item.Key == "Rojo")
@@ -256,6 +256,7 @@ namespace TercerVector
                 }
                 n++;
             }
+            vector.Magico = SetNumeroMagico();
         }
 
         private void EstablecerPosicionDosTresCuatro()
@@ -275,7 +276,6 @@ namespace TercerVector
                 }
                 else if (n >= 2 && n <= 4)
                 {
-                    vector.Magico = vector.Magico + item.Value;
                     if (item.Key == "Negro")
                         vector.NumeroEsperadoNegro = vector.NumeroEsperadoNegro + item.Value;
                     else if (item.Key == "Rojo")
@@ -283,6 +283,22 @@ namespace TercerVector
                 }
                 n++;
             }
+            vector.Magico = SetNumeroMagico();
+        }
+
+        private int SetNumeroMagico()
+        {
+            int n = 0;
+            int magico = 0;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 2 && n <= 3)
+                {
+                    magico = magico + item.Value;
+                }
+                n++;
+            }
+            return magico;
         }
 
         private bool ExisteCiclo()
@@ -365,6 +381,7 @@ namespace TercerVector
             if (loop.Count < 4)
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
+                txtResultado.Focus();
                 return;
             }
         
@@ -395,24 +412,20 @@ namespace TercerVector
 
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (existe)
+                if (n >= 2 && n <= 3)
                 {
-                    if (n >= 2 && n <= 4)
-                    {
-                        magico = magico + item.Value ;
-                    }
+                    magico = magico + item.Value;
                 }
-                else
-                {
-                    if (n >= 2 && n <= 3)
-                    {
-                        magico = magico + item.Value;
-                    }
-                }
-             
                 n++;
             }
-            mensaje = mensaje + "El numero Magico es: " + magico.ToString();
+            mensaje = mensaje + "El numero Magico es: " + magico.ToString() + Environment.NewLine;
+
+            //*************************************************
+            mensaje = mensaje + "Numeros replicados: " + vector.NumeroResultado.ToString() + "/" + vector.Magico + Environment.NewLine;
+            mensaje = mensaje + "Negros Esperado: " + vector.NumeroEsperadoNegro.ToString() + vector.Magico + Environment.NewLine;
+            mensaje = mensaje + "Rojos Esperado: " + vector.NumeroEsperadoRojo.ToString() + vector.Magico + Environment.NewLine;
+            //************************************************/
+
 
             MessageBox.Show(mensaje, "Informacion del Sistema");
             txtResultado.Focus();
