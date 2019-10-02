@@ -424,6 +424,8 @@ namespace TercerVector
             mensaje = mensaje + "Numeros replicados: " + vector.NumeroResultado.ToString() + "/" + vector.Magico + Environment.NewLine;
             mensaje = mensaje + "Negros Esperado: " + vector.NumeroEsperadoNegro.ToString()  + Environment.NewLine;
             mensaje = mensaje + "Rojos Esperado: " + vector.NumeroEsperadoRojo.ToString() + Environment.NewLine;
+            mensaje = mensaje + "Negros Resultados: " + vector.NumeroResultadoNegro.ToString() + Environment.NewLine;
+            mensaje = mensaje + "Rojos Resultados: " + vector.NumeroResultadoRojo.ToString() + Environment.NewLine;
             //************************************************/
 
 
