@@ -18,13 +18,14 @@ namespace TercerVector
         private int contConsecutivoRojo = 0;
         private bool anteriorNegro = false ;
         private bool anteriorRojo = false;
+        private string paredActiva = string.Empty;
         private ListBox listBox1 = new ListBox();
         private ListBox listBox2 = new ListBox();
         List<string> listresultado = new List<string>();
         List<string> listresultado2 = new List<string>();
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
-        //private List<KeyValuePair<string, int>> reflex = new List<KeyValuePair<string, int>>();
-        private Vector vector;
+        private Vector vector = new Vector();
+
 
         public Form1()
         {
@@ -68,11 +69,16 @@ namespace TercerVector
             }
             //***********************************************************************************
             if (inicioEstablecido == false)
+            {
                 EstablecerVector();
+            }
             else if (inicioEstablecido == true)
+            {
+                vector = vector;
                 TrazaVector(color);
-
-                contador++;
+                RetornaColorPronostico();
+            }
+            contador++;
             txtResultado.Focus();
         }
 
@@ -207,16 +213,15 @@ namespace TercerVector
             if (loop.Count < 4)
                 return null;
 
-            if (vector == null)
-               SetCicloSemiCiclo();
-
-            inicioEstablecido = true;
+            if (vector.Magico == 0)
+                SetCicloSemiCiclo();
+ 
             return vector;
         }
 
         private void SetCicloSemiCiclo()
         {
-            vector = new Vector();
+            inicioEstablecido = true;
             if (loop.Count == 4)
             {
                 EstablecerPosicionDosTres();
@@ -235,7 +240,6 @@ namespace TercerVector
         private void EstablecerPosicionDosTres()
         {
             int n = 0;
-            vector.Iniciado = true;
             vector.CicloSemiciclo = false;
             foreach (KeyValuePair<string, int> item in loop)
             {
@@ -262,7 +266,6 @@ namespace TercerVector
         private void EstablecerPosicionDosTresCuatro()
         {
             int n = 0;
-            vector.Iniciado = true;
             vector.CicloSemiciclo = true;
             foreach (KeyValuePair<string, int> item in loop)
             {
@@ -331,8 +334,69 @@ namespace TercerVector
             if (vector.NumeroResultado == vector.Magico)
             {
                 inicioEstablecido = false;
+                vector = new Vector();
+                paredActiva = string.Empty;
             }
         }
+
+   
+        private Color RetornaColorPronostico()
+        {
+            Color color = new Color();
+            string sabor = string.Empty;
+            if (vector.NumeroResultado == 1)
+            {
+                sabor = RetornaColorPared(2);
+                color = RetornaColorContrario(sabor);
+                paredActiva = sabor;
+            }
+            else if (vector.NumeroResultado > 1)
+            {
+                if (paredActiva == "Negro")
+                {
+                    if (vector.NumeroResultadoNegro < vector.NumeroEsperadoNegro)
+                    {
+                        color = Color.Black;
+                    }
+                    else if (vector.NumeroResultadoNegro == vector.NumeroEsperadoNegro)
+                    {
+                        color = Color.Red;
+                        paredActiva = "Rojo";
+                    }
+                }
+                else if (paredActiva == "Rojo")
+                {
+                    if (vector.NumeroResultadoRojo < vector.NumeroEsperadoRojo)
+                    {
+                        color = Color.Red;
+                    }
+                    else if (vector.NumeroResultadoNegro == vector.NumeroEsperadoNegro)
+                    {
+                        color = Color.Black;
+                        paredActiva = "Negro";
+                    }
+
+                }
+            }
+            return color;
+        }
+
+        private string RetornaColorPared(int indice)
+        {
+            return loop[indice].Key;
+        }
+
+        private Color RetornaColorContrario(string sabor)
+        {
+            Color color = new Color();
+            if (sabor == "Negro")
+                color = Color.Red;
+            if (sabor == "Rojo")
+                color = Color.Black;
+
+            return color;
+        }
+
 
 
         //********************************************************************************************
@@ -340,6 +404,7 @@ namespace TercerVector
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
             //reflex.Clear();
+            paredActiva = string.Empty;
             vector = new Vector();
             loop.Clear();
             listresultado.Clear();

@@ -22,9 +22,6 @@ namespace TercerVector
 
         public int NumeroResultadoRojo { get; set; }
 
-        //Iniciado o no iniciado el ciclo
-        public bool Iniciado { get; set; }
-
         // Establece si es un ciclo o semi-ciclo 
         public bool CicloSemiciclo { get; set; }
     }
