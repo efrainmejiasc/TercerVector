@@ -70,13 +70,12 @@ namespace TercerVector
             //***********************************************************************************
             if (inicioEstablecido == false)
             {
-                EstablecerVector();
+                //EstablecerVector();
             }
             else if (inicioEstablecido == true)
             {
-                vector = vector;
-                TrazaVector(color);
-                RetornaColorPronostico();
+                //TrazaVector(color);
+                //RetornaColorPronostico();
             }
             contador++;
             txtResultado.Focus();
@@ -208,196 +207,7 @@ namespace TercerVector
                 pronostico.BackColor = Color.Red;
         }
 
-        private Vector EstablecerVector()
-        {
-            if (loop.Count < 4)
-                return null;
-
-            if (vector.Magico == 0)
-                SetCicloSemiCiclo();
- 
-            return vector;
-        }
-
-        private void SetCicloSemiCiclo()
-        {
-            inicioEstablecido = true;
-            if (loop.Count == 4)
-            {
-                EstablecerPosicionDosTres();
-            }
-            else if (loop.Count >= 5)
-            {
-                bool existeCiclo = ExisteCiclo();
-                if (!existeCiclo)
-                    EstablecerPosicionDosTres();
-                else if (existeCiclo)
-                    EstablecerPosicionDosTresCuatro();
-            }
-        }
-
-
-        private void EstablecerPosicionDosTres()
-        {
-            int n = 0;
-            vector.CicloSemiciclo = false;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                if (n == 0)
-                {
-                    vector.NumeroResultado = item.Value;
-                    if (item.Key == "Negro")
-                        vector.NumeroResultadoNegro = vector.NumeroResultadoNegro + item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.NumeroResultadoRojo = vector.NumeroResultadoRojo + item.Value;
-                }
-                else if (n >= 2 && n <= 3)
-                {
-                    if (item.Key == "Negro")
-                        vector.NumeroEsperadoNegro = item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.NumeroEsperadoRojo = item.Value;
-                }
-                n++;
-            }
-            vector.Magico = SetNumeroMagico();
-        }
-
-        private void EstablecerPosicionDosTresCuatro()
-        {
-            int n = 0;
-            vector.CicloSemiciclo = true;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                if (n == 0)
-                {
-                    vector.NumeroResultado = item.Value;
-                    if (item.Key == "Negro")
-                        vector.NumeroResultadoNegro = item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.NumeroResultadoRojo = item.Value;
-                }
-                else if (n >= 2 && n <= 4)
-                {
-                    if (item.Key == "Negro")
-                        vector.NumeroEsperadoNegro = vector.NumeroEsperadoNegro + item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.NumeroEsperadoRojo = vector.NumeroEsperadoRojo + item.Value;
-                }
-                n++;
-            }
-            vector.Magico = SetNumeroMagico();
-        }
-
-        private int SetNumeroMagico()
-        {
-            int n = 0;
-            int magico = 0;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                if (n >= 2 && n <= 3)
-                {
-                    magico = magico + item.Value;
-                }
-                n++;
-            }
-            return magico;
-        }
-
-        private bool ExisteCiclo()
-        {
-            int n = 0;
-            bool resultado = false;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                if (n >= 2 && n <= 4)
-                {
-                    if (item.Value == 1)
-                        resultado = true;
-                    n++;
-                }
-            }
-            return resultado;
-        }
-
-        private void TrazaVector(string color)
-        {
-            vector.NumeroResultado++;
-            if (color == "Negro")
-            {
-                vector.NumeroResultadoNegro++;
-            }
-            else if (color == "Rojo")
-            {
-                vector.NumeroResultadoRojo++;
-            }
-            if (vector.NumeroResultado == vector.Magico)
-            {
-                inicioEstablecido = false;
-                vector = new Vector();
-                paredActiva = string.Empty;
-            }
-        }
-
-   
-        private Color RetornaColorPronostico()
-        {
-            Color color = new Color();
-            string sabor = string.Empty;
-            if (vector.NumeroResultado == 1)
-            {
-                sabor = RetornaColorPared(2);
-                color = RetornaColorContrario(sabor);
-                paredActiva = sabor;
-            }
-            else if (vector.NumeroResultado > 1)
-            {
-                if (paredActiva == "Negro")
-                {
-                    if (vector.NumeroResultadoNegro < vector.NumeroEsperadoNegro)
-                    {
-                        color = Color.Black;
-                    }
-                    else if (vector.NumeroResultadoNegro == vector.NumeroEsperadoNegro)
-                    {
-                        color = Color.Red;
-                        paredActiva = "Rojo";
-                    }
-                }
-                else if (paredActiva == "Rojo")
-                {
-                    if (vector.NumeroResultadoRojo < vector.NumeroEsperadoRojo)
-                    {
-                        color = Color.Red;
-                    }
-                    else if (vector.NumeroResultadoNegro == vector.NumeroEsperadoNegro)
-                    {
-                        color = Color.Black;
-                        paredActiva = "Negro";
-                    }
-
-                }
-            }
-            return color;
-        }
-
-        private string RetornaColorPared(int indice)
-        {
-            return loop[indice].Key;
-        }
-
-        private Color RetornaColorContrario(string sabor)
-        {
-            Color color = new Color();
-            if (sabor == "Negro")
-                color = Color.Red;
-            if (sabor == "Rojo")
-                color = Color.Black;
-
-            return color;
-        }
-
-
+    
 
         //********************************************************************************************
 
@@ -485,7 +295,7 @@ namespace TercerVector
             }
             mensaje = mensaje + "El numero Magico es: " + magico.ToString() + Environment.NewLine;
 
-            //*************************************************
+           /*  //*************************************************
             mensaje = mensaje + "Numeros replicados: " + vector.NumeroResultado.ToString() + "/" + vector.Magico + Environment.NewLine;
             mensaje = mensaje + "Negros Esperado: " + vector.NumeroEsperadoNegro.ToString()  + Environment.NewLine;
             mensaje = mensaje + "Rojos Esperado: " + vector.NumeroEsperadoRojo.ToString() + Environment.NewLine;
