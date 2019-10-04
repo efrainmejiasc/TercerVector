@@ -12,20 +12,8 @@ namespace TercerVector
 {
     public partial class Form1 : Form
     {
-        private int contador = 0;
-        private bool inicioEstablecido = false;
-        private int contConsecutivoNegro = 0;
-        private int contConsecutivoRojo = 0;
-        private bool anteriorNegro = false ;
-        private bool anteriorRojo = false;
-        private string paredActiva = string.Empty;
-        private ListBox listBox1 = new ListBox();
-        private ListBox listBox2 = new ListBox();
-        List<string> listresultado = new List<string>();
-        List<string> listresultado2 = new List<string>();
-        private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
-        private Vector vector = new Vector();
 
+        private EngineData Valor = EngineData.Instance();
 
         public Form1()
         {
@@ -51,33 +39,33 @@ namespace TercerVector
             //**********************************************************************************
             int startIndex = 0;
             int conteo = 0;
-            loop.Clear();
-            while (startIndex < listresultado2.Count)
+            Valor.loop.Clear();
+            while (startIndex < Valor.listresultado2.Count)
             {
                 conteo = EstablecerPared(startIndex);
                 startIndex = startIndex + conteo;
             }
             //**********************************************************************************
             txtResultado.Text = string.Empty;
-            string setColor = EstablecerValoresSecuencia(color, contador);
+            string setColor = EstablecerValoresSecuencia(color, Valor.contador);
             if (setColor != string.Empty)
             {
                 SetColor(setColor);
-                contador++;
+                Valor.contador++;
                 txtResultado.Focus();
                 return;
             }
             //***********************************************************************************
-            if (inicioEstablecido == false)
+            if (Valor.inicioEstablecido == false)
             {
                 //EstablecerVector();
             }
-            else if (inicioEstablecido == true)
+            else if (Valor.inicioEstablecido == true)
             {
                 //TrazaVector(color);
                 //RetornaColorPronostico();
             }
-            contador++;
+            Valor.contador++;
             txtResultado.Focus();
         }
 
@@ -85,15 +73,15 @@ namespace TercerVector
         private int EstablecerPared(int posicion)
         {
             int conteo = 0;
-            string color = listresultado2[posicion];
-            for (int i = posicion; i <= listresultado2.Count - 1; i++)
+            string color = Valor.listresultado2[posicion];
+            for (int i = posicion; i <= Valor.listresultado2.Count - 1; i++)
             {
-                if (listresultado2[i] == color)
+                if (Valor.listresultado2[i] == color)
                     conteo++;
                 else
                     break;
             }
-            loop.Add(new KeyValuePair<string, int>(color, conteo));
+            Valor.loop.Add(new KeyValuePair<string, int>(color, conteo));
 
             return conteo;
         }
@@ -108,16 +96,16 @@ namespace TercerVector
             if (EngineData.Negro.Contains(resultado))
             {
                 color = "Negro";
-                listBox1.Items.Add(resultado);
-                listBox2.Items.Add(string.Empty);
-                listresultado.Insert(contador,color);
+                Valor.listBox1.Items.Add(resultado);
+                Valor.listBox2.Items.Add(string.Empty);
+                Valor.listresultado.Insert(Valor.contador,color);
             }
             else if (EngineData.Rojo.Contains(resultado))
             {
                 color = "Rojo";
-                listBox2.Items.Add(resultado);
-                listBox1.Items.Add(string.Empty);
-                listresultado.Insert(contador, color);
+                Valor.listBox2.Items.Add(resultado);
+                Valor.listBox1.Items.Add(string.Empty);
+                Valor.listresultado.Insert(Valor.contador, color);
             }
             return color;
         }
@@ -127,16 +115,16 @@ namespace TercerVector
         {
             ListNegro.Items.Clear();
             ListRojo.Items.Clear();
-            listresultado2.Clear();
+            Valor.listresultado2.Clear();
 
-            for (int i = listBox1.Items.Count - 1; i >= 0; i--)
-                ListNegro.Items.Add(listBox1.Items[i]);
+            for (int i = Valor.listBox1.Items.Count - 1; i >= 0; i--)
+                ListNegro.Items.Add(Valor.listBox1.Items[i]);
 
-            for (int j = listBox2.Items.Count - 1; j >= 0; j--)
-                ListRojo.Items.Add(listBox2.Items[j]);
+            for (int j = Valor.listBox2.Items.Count - 1; j >= 0; j--)
+                ListRojo.Items.Add(Valor.listBox2.Items[j]);
 
-            for (int k = listresultado.Count - 1; k >= 0; k--)
-                listresultado2.Add(listresultado[k]);
+            for (int k = Valor.listresultado.Count - 1; k >= 0; k--)
+                Valor.listresultado2.Add(Valor.listresultado[k]);
         }
 
 
@@ -147,53 +135,53 @@ namespace TercerVector
             {
                 if (color == "Negro")
                 {
-                    contConsecutivoRojo = 0;
-                    contConsecutivoNegro = 1;
-                    anteriorNegro = true;
-                    anteriorRojo = false;
+                    Valor.contConsecutivoRojo = 0;
+                    Valor.contConsecutivoNegro = 1;
+                    Valor.anteriorNegro = true;
+                    Valor.anteriorRojo = false;
                 }
                 else if (color == "Rojo")
                 {
-                    contConsecutivoNegro = 0;
-                    contConsecutivoRojo = 1;
-                    anteriorNegro = false;
-                    anteriorRojo = true;
+                    Valor.contConsecutivoNegro = 0;
+                    Valor.contConsecutivoRojo = 1;
+                    Valor.anteriorNegro = false;
+                    Valor.anteriorRojo = true;
                 }
                 return resultado;
             }
 
             if (color == "Negro")
             {
-                contConsecutivoRojo = 0;
-                anteriorRojo = false;
-                anteriorNegro = true;
-                if (anteriorNegro)
+                Valor.contConsecutivoRojo = 0;
+                Valor.anteriorRojo = false;
+                Valor.anteriorNegro = true;
+                if (Valor.anteriorNegro)
                 {
-                    contConsecutivoNegro++;
+                    Valor.contConsecutivoNegro++;
                 }
-                else if (!anteriorNegro)
+                else if (!Valor.anteriorNegro)
                 {
-                    contConsecutivoNegro = 0;
+                    Valor.contConsecutivoNegro = 0;
                 }
             }
             else if (color == "Rojo")
             {
-                contConsecutivoNegro = 0;
-                anteriorNegro = false;
-                anteriorRojo = true;
-                if (anteriorRojo)
+                Valor.contConsecutivoNegro = 0;
+                Valor.anteriorNegro = false;
+                Valor.anteriorRojo = true;
+                if (Valor.anteriorRojo)
                 {
-                    contConsecutivoRojo++;
+                    Valor.contConsecutivoRojo++;
                 }
-                else if (!anteriorRojo)
+                else if (!Valor.anteriorRojo)
                 {
-                    contConsecutivoRojo = 0;
+                    Valor.contConsecutivoRojo = 0;
                 }
             }
 
-            if (contConsecutivoNegro > 3)
+            if (Valor.contConsecutivoNegro > 3)
                 resultado = "Negro";
-            else if (contConsecutivoRojo > 3)
+            else if (Valor.contConsecutivoRojo > 3)
                 resultado = "Rojo";
 
             return resultado;
@@ -214,21 +202,19 @@ namespace TercerVector
         private void EliminarResultado_Click(object sender, EventArgs e)
         {
             //reflex.Clear();
-            paredActiva = string.Empty;
-            vector = new Vector();
-            loop.Clear();
-            listresultado.Clear();
-            listresultado2.Clear();
-            listBox1.Items.Clear();
-            listBox2.Items.Clear();
-            ListNegro.Items.Clear();
-            ListRojo.Items.Clear();
-            contador = 0;
-            inicioEstablecido = false;
-            contConsecutivoNegro = 0;
-            contConsecutivoRojo = 0;
-            anteriorNegro = false;
-            anteriorRojo = false;
+            Valor.paredActiva = string.Empty;
+            Valor.vector = va
+            Valor.loop.Clear();
+            Valor.listresultado.Clear();
+            Valor.listresultado2.Clear();
+            Valor.listBox1.Items.Clear();
+            Valor.listBox2.Items.Clear();
+            Valor.contador = 0;
+            Valor.inicioEstablecido = false;
+            Valor.contConsecutivoNegro = 0;
+            Valor.contConsecutivoRojo = 0;
+            Valor.anteriorNegro = false;
+            Valor.anteriorRojo = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
             txtResultado.Focus();
@@ -253,7 +239,7 @@ namespace TercerVector
             bool existe = false;
 
            //****************Verificar Numero de paredes****************************
-            if (loop.Count < 4)
+            if (Valor.loop.Count < 4)
             {
                 MessageBox.Show( "Agrega mas paredes" , "Informacion del Sistema");
                 txtResultado.Focus();
@@ -267,7 +253,7 @@ namespace TercerVector
             string mensaje = string.Empty;
             int magico = 0;
 
-            foreach (KeyValuePair<string, int> item in loop)
+            foreach (KeyValuePair<string, int> item in Valor.loop)
             {
                 if (n >= 2  && n <= 4)
                 {
@@ -285,7 +271,7 @@ namespace TercerVector
             else
                 mensaje = mensaje + "No existe unidad se tomara el semi-ciclo" + Environment.NewLine;
 
-            foreach (KeyValuePair<string, int> item in loop)
+            foreach (KeyValuePair<string, int> item in Valor.loop)
             {
                 if (n >= 2 && n <= 3)
                 {
