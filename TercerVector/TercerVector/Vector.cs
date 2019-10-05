@@ -9,30 +9,18 @@ namespace TercerVector
    public  class Vector
    {
         // Representan  los numeros que salieron en la ruleta para establecer el ciclo
-        public int MagicoCiclo { get; set; }
+        public int Magico { get; set; }
 
-        public int MagicoSemiCiclo { get; set; }
+        public int NumeroEsperadoNegro { get; set; }
 
-        public int PostRojoCiclo { get; set; }
-
-        public int PostRojoSemiciclo { get; set; }
-
-        public int PostNegroCiclo { get; set; }
-
-        public int PostNegroSemiciclo { get; set; }
+        public int NumeroEsperadoRojo { get; set; }
 
         // Representan  los numeros que salieron en la ruleta para replicar el ciclo
-        public int GetCiclo { get; set; }
+        public int NumeroResultado { get; set; }
 
-        public int GetSemiCiclo  { get; set; }
+        public int NumeroResultadoNegro { get; set; }
 
-        public int GetCicloNegro { get; set; }
-
-        public int GetSemiCicloNegro { get; set; }
-
-        public int GetCicloRojo { get; set; }
-
-        public int GetSemiCicloRojo { get; set; }
+        public int NumeroResultadoRojo { get; set; }
 
         // Establece si es un ciclo o semi-ciclo 
         public bool CicloSemiciclo { get; set; }

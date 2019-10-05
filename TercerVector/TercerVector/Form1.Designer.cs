@@ -33,20 +33,11 @@
             this.ListRojo = new System.Windows.Forms.ListBox();
             this.txtResultado = new System.Windows.Forms.TextBox();
             this.AddNumber = new System.Windows.Forms.Button();
-            this.checkNegro = new System.Windows.Forms.CheckBox();
-            this.checkRojo = new System.Windows.Forms.CheckBox();
             this.NuevoCiclo = new System.Windows.Forms.Button();
             this.EliminarResultado = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.pronostico = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.GuardarRuta = new System.Windows.Forms.Button();
-            this.txtPronostico = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.pronostico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,33 +96,6 @@
             this.AddNumber.UseVisualStyleBackColor = false;
             this.AddNumber.Click += new System.EventHandler(this.AddNumber_Click);
             // 
-            // checkNegro
-            // 
-            this.checkNegro.AutoSize = true;
-            this.checkNegro.BackColor = System.Drawing.Color.Black;
-            this.checkNegro.ForeColor = System.Drawing.Color.White;
-            this.checkNegro.Location = new System.Drawing.Point(7, 3);
-            this.checkNegro.Name = "checkNegro";
-            this.checkNegro.Size = new System.Drawing.Size(99, 19);
-            this.checkNegro.TabIndex = 0;
-            this.checkNegro.Text = "Cero Negro";
-            this.checkNegro.UseVisualStyleBackColor = false;
-            this.checkNegro.Visible = false;
-            this.checkNegro.CheckedChanged += new System.EventHandler(this.checkNegro_CheckedChanged);
-            // 
-            // checkRojo
-            // 
-            this.checkRojo.AutoSize = true;
-            this.checkRojo.BackColor = System.Drawing.Color.Red;
-            this.checkRojo.ForeColor = System.Drawing.Color.White;
-            this.checkRojo.Location = new System.Drawing.Point(6, 3);
-            this.checkRojo.Name = "checkRojo";
-            this.checkRojo.Size = new System.Drawing.Size(90, 19);
-            this.checkRojo.TabIndex = 0;
-            this.checkRojo.Text = "Cero Rojo";
-            this.checkRojo.UseVisualStyleBackColor = false;
-            this.checkRojo.CheckedChanged += new System.EventHandler(this.checkRojo_CheckedChanged);
-            // 
             // NuevoCiclo
             // 
             this.NuevoCiclo.BackColor = System.Drawing.Color.GreenYellow;
@@ -167,32 +131,9 @@
             this.EliminarResultado.UseVisualStyleBackColor = false;
             this.EliminarResultado.Click += new System.EventHandler(this.EliminarResultado_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.checkNegro);
-            this.panel1.Location = new System.Drawing.Point(55, 79);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(90, 25);
-            this.panel1.TabIndex = 2;
-            this.panel1.Visible = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Red;
-            this.panel2.Controls.Add(this.checkRojo);
-            this.panel2.Location = new System.Drawing.Point(145, 79);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(90, 25);
-            this.panel2.TabIndex = 3;
-            this.panel2.Visible = false;
-            // 
             // pronostico
             // 
             this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
-            this.pronostico.Controls.Add(this.button1);
-            this.pronostico.Controls.Add(this.panel2);
-            this.pronostico.Controls.Add(this.panel1);
             this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pronostico.ForeColor = System.Drawing.Color.GreenYellow;
             this.pronostico.Location = new System.Drawing.Point(4, 500);
@@ -229,42 +170,12 @@
             this.GuardarRuta.UseVisualStyleBackColor = false;
             this.GuardarRuta.Click += new System.EventHandler(this.GuardarRuta_Click);
             // 
-            // txtPronostico
-            // 
-            this.txtPronostico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtPronostico.Location = new System.Drawing.Point(0, 562);
-            this.txtPronostico.MaxLength = 50;
-            this.txtPronostico.Name = "txtPronostico";
-            this.txtPronostico.Size = new System.Drawing.Size(337, 20);
-            this.txtPronostico.TabIndex = 11;
-            this.txtPronostico.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPronostico.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.GreenYellow;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button1.Location = new System.Drawing.Point(6, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 31);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Nuevo Ciclo";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaGreen;
             this.ClientSize = new System.Drawing.Size(337, 610);
-            this.Controls.Add(this.txtPronostico);
             this.Controls.Add(this.GuardarRuta);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pronostico);
@@ -279,11 +190,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "3er Vector";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.pronostico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -296,17 +202,11 @@
         private System.Windows.Forms.ListBox ListRojo;
         private System.Windows.Forms.TextBox txtResultado;
         private System.Windows.Forms.Button AddNumber;
-        private System.Windows.Forms.CheckBox checkNegro;
-        private System.Windows.Forms.CheckBox checkRojo;
         private System.Windows.Forms.Button NuevoCiclo;
         private System.Windows.Forms.Button EliminarResultado;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox pronostico;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button GuardarRuta;
-        private System.Windows.Forms.TextBox txtPronostico;
-        private System.Windows.Forms.Button button1;
     }
 }
 
