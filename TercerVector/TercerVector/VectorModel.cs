@@ -12,21 +12,36 @@ namespace TercerVector
         public int MagicoCiclo { get; set; }
 
         public int MagicoSemiCiclo { get; set; }
+        //*****************************************************
 
-        public int PostRojoCiclo { get; set; }
+        public int CantidadNegroSemiCiclo { get; set; }
 
-        public int PostRojoSemiciclo { get; set; }
+        public int CantidadRojoSemiCiclo { get; set; }
 
-        public int PostNegroCiclo { get; set; }
+        public int CantidadNegroCiclo { get; set; }
 
-        public int PostNegroSemiciclo { get; set; }
+        public int CantidadRojoCiclo { get; set; }
+
 
         // Representan  los numeros que salieron en la ruleta para replicar el ciclo
-        public int GetCantidad { get; set; }
+        public int CantidadReplica { get; set; }
 
-        public int GetCantidadNegro { get; set; }
+        public int CantidadNegroReplica { get; set; }
 
-        public int GetCantidadRojo { get; set; }
+        public int CantidadRojoReplica { get; set; }
+       //****************************************************
+
+        public int CantidadReplicaSemiCiclo { get; set; }
+
+        public int CantidadNegroReplicaSemiCiclo { get; set; }
+
+        public int CantidadRojoReplicaSemiCiclo { get; set; }
+
+        public int CantidadReplicaCiclo { get; set; }
+
+        public int CantidadNegroReplicaCiclo { get; set; }
+
+        public int CantidadRojoReplicaCiclo { get; set; }
 
 
         // Establece si existe ciclo

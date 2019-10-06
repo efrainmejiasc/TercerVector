@@ -62,12 +62,14 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
-            if (Valor.inicioEstablecido == false)
+            if (Valor.inicioEstablecido == false && loop.Count >= 4)
             {
-                Funcion.EstablecerVector(loop,Vector);
+                this.Vector = new VectorModel();
+                this.Vector= Funcion.Set3erVector(loop,this.Vector);
             }
             else if (Valor.inicioEstablecido == true)
             {
+               this.Vector = Funcion.TrazaVector(color,this.Vector);
             }
             Valor.contador++;
             txtResultado.Focus();
@@ -75,7 +77,23 @@ namespace TercerVector
 
         private void Limpiar_Click(object sender, EventArgs e)
         {
-           
+            this.Vector = new VectorModel();
+            loop.Clear();
+            listresultado.Clear();
+            listresultado2.Clear();
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            ListNegro.Items.Clear();
+            ListRojo.Items.Clear();
+            Valor.contador = 0;
+            Valor.inicioEstablecido = false;
+            Valor.contConsecutivoNegro = 0;
+            Valor.contConsecutivoRojo = 0;
+            Valor.anteriorNegro = false;
+            Valor.anteriorRojo = false;
+            //****************************************************
+            pronostico.BackColor = Color.SeaGreen;
+            txtResultado.Focus();
         }
 
         private void Condiciones_Click(object sender, EventArgs e)

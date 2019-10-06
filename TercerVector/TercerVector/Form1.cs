@@ -74,7 +74,6 @@ namespace TercerVector
             }
             else if (inicioEstablecido == true)
             {
-                vector = vector;
                 TrazaVector(color);
                 RetornaColorPronostico();
             }

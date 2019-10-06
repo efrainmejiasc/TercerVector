@@ -139,84 +139,78 @@ namespace TercerVector
 
         //Establecer Vector -> 
         #region EstablecerCicloSemiCiclo 
-        public VectorModel EstablecerVector(List<KeyValuePair<string, int>> loop, VectorModel vector)
+ 
+        public VectorModel Set3erVector (List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-            if (loop.Count < 4)
-                return null;
+            Valor.inicioEstablecido = true;
+            vector = SetPosicionCero(loop,vector);
+            vector.ExisteCiclo = ExisteCiclo(loop);
+            if (vector.ExisteCiclo)
+            {
+                vector = SetPosicionDosTres(loop, vector);
+                vector = SetPosicionUnoDosTres(loop, vector);
+            }
+            else if (!vector.ExisteCiclo)
+            {
+                vector=SetPosicionDosTres(loop, vector);
+            }
+            return vector;
+        }
 
-            if (vector.MagicoSemiCiclo == 0)
-                SetCicloSemiCiclo(loop,vector);
+        private VectorModel SetPosicionCero (List<KeyValuePair<string, int>> loop,VectorModel vector)
+        {
+            vector.CantidadReplica = loop[0].Value;
+            if (loop[0].Key == "Negro")
+                vector.CantidadNegroReplica = vector.CantidadNegroReplica + loop[0].Value;
+            else if (loop[0].Key == "Rojo")
+                vector.CantidadRojoReplica = vector.CantidadRojoReplica + loop[0].Value;
 
             return vector;
         }
 
-        public void SetCicloSemiCiclo(List<KeyValuePair<string, int>> loop, VectorModel vector)
-        {
-            Valor.inicioEstablecido = true;
-            if (loop.Count == 4)
-            {
-                EstablecerPosicionDosTres(loop , vector);
-            }
-            else if (loop.Count >= 5)
-            {
-                bool existeCiclo = ExisteCiclo(loop);
-                if (!existeCiclo)
-                    EstablecerPosicionDosTres(loop, vector);
-                else if (existeCiclo)
-                    EstablecerPosicionDosTresCuatro(loop, vector);
-            }
-        }
-
-
-        public void EstablecerPosicionDosTres(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        private VectorModel SetPosicionUnoDosTres(List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
             int n = 0;
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n == 0)
-                {
-                    vector.GetCantidad = item.Value;
-                    if (item.Key == "Negro")
-                        vector.GetCantidadNegro = vector.GetCantidadNegro + item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.GetCantidadRojo = vector.GetCantidadRojo + item.Value;
-                }
-                else if (n >= 2 && n <= 3)
+                if (n >= 1 && n <= 3)
                 {
                     if (item.Key == "Negro")
-                        vector.PostNegroSemiciclo = item.Value;
+                    {
+                        vector.CantidadNegroCiclo = vector.CantidadNegroCiclo + item.Value;
+                    }     
                     else if (item.Key == "Rojo")
-                        vector.PostRojoSemiciclo = item.Value;
+                    {
+                        vector.CantidadRojoCiclo = vector.CantidadRojoCiclo + item.Value;
+                    }    
                 }
                 n++;
             }
-            vector.MagicoSemiCiclo = vector.PostNegroSemiciclo + vector.PostRojoSemiciclo;
+
+            vector.MagicoCiclo = vector.CantidadNegroCiclo + vector.CantidadRojoCiclo;
+            return vector;
         }
 
-        private void EstablecerPosicionDosTresCuatro(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        private VectorModel SetPosicionDosTres(List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-           /* int n = 0;
-            vector.CicloSemiciclo = true;
+            int n = 0;
             foreach (KeyValuePair<string, int> item in loop)
             {
-                if (n == 0)
-                {
-                    vector.NumeroResultado = item.Value;
-                    if (item.Key == "Negro")
-                        vector.NumeroResultadoNegro = item.Value;
-                    else if (item.Key == "Rojo")
-                        vector.NumeroResultadoRojo = item.Value;
-                }
-                else if (n >= 2 && n <= 4)
+                if (n >= 2 && n <= 3)
                 {
                     if (item.Key == "Negro")
-                        vector.NumeroEsperadoNegro = vector.NumeroEsperadoNegro + item.Value;
+                    {
+                        vector.CantidadNegroSemiCiclo = vector.CantidadNegroSemiCiclo + item.Value;
+                    }
                     else if (item.Key == "Rojo")
-                        vector.NumeroEsperadoRojo = vector.NumeroEsperadoRojo + item.Value;
+                    {
+                        vector.CantidadRojoSemiCiclo = vector.CantidadRojoSemiCiclo + item.Value;
+                    }
                 }
                 n++;
             }
-            vector.Magico = SetNumeroMagico();*/
+            vector.MagicoSemiCiclo = vector.CantidadNegroSemiCiclo + vector.CantidadRojoSemiCiclo;
+            return vector;
         }
 
         private bool ExisteCiclo(List<KeyValuePair<string, int>> loop)
@@ -229,12 +223,29 @@ namespace TercerVector
                 {
                     if (item.Value == 1)
                         resultado = true;
-                    n++;
                 }
+                n++;
             }
             return resultado;
         }
         #endregion
 
+        //Traza vector
+        #region TrazaVector
+
+        public VectorModel TrazaVector(string color, VectorModel vector)
+        {
+            if (vector.ExisteCiclo)
+            {
+
+            }
+            else if (!vector.ExisteCiclo)
+            {
+            }
+
+            return vector;
+        }
+
+        #endregion
     }
 }
