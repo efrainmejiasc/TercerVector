@@ -28,7 +28,7 @@ namespace TercerVector
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/07"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/14"))
                 Application.Exit();
             pronostico.Text = "Esperando Pronostico";
         }
@@ -66,11 +66,16 @@ namespace TercerVector
             {
                 this.Vector = new VectorModel();
                 this.Vector= Funcion.Set3erVector(loop,this.Vector);
+                Funcion.SetColor(Funcion.SetParedActiva(loop,0), this.pronostico);
+                Valor.contador++;
+                txtResultado.Focus();
+                return;
             }
             else if (Valor.inicioEstablecido == true)
             {
-               this.Vector = Funcion.TrazaVector(color,this.Vector);
+               this.Vector = Funcion.Traza3erVector(color,this.Vector,this.loop);
             }
+            //***********************************************************************************
             Valor.contador++;
             txtResultado.Focus();
         }

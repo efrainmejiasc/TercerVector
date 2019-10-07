@@ -67,7 +67,7 @@ namespace TercerVector
                 txtResultado.Focus();
                 return;
             }
-            //***********************************************************************************
+            //**********************************************************************************
             if (inicioEstablecido == false)
             {
                 EstablecerVector();
@@ -77,6 +77,7 @@ namespace TercerVector
                 TrazaVector(color);
                 RetornaColorPronostico();
             }
+            //**********************************************************************************
             contador++;
             txtResultado.Focus();
         }

@@ -233,17 +233,25 @@ namespace TercerVector
         //Traza vector
         #region TrazaVector
 
-        public VectorModel TrazaVector(string color, VectorModel vector)
+        public VectorModel Traza3erVector(string color, VectorModel vector , List<KeyValuePair<string, int>> loop)
         {
-            if (vector.ExisteCiclo)
-            {
-
-            }
-            else if (!vector.ExisteCiclo)
-            {
-            }
+            SetParedActiva(loop, 0);
 
             return vector;
+        }
+
+        public string SetParedActiva(List<KeyValuePair<string, int>> loop,int indice = 0)
+        {
+            if(loop[indice].Key == "Negro")
+            {
+                Valor.paredActiva = "Negro";
+            }
+            else if (loop[indice].Key == "Rojo")
+            {
+                Valor.paredActiva = "Rojo";
+            }
+
+            return Valor.paredActiva;
         }
 
         #endregion

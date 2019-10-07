@@ -36,7 +36,7 @@ namespace TercerVector
 
         public bool anteriorRojo { get; set; }
 
-        public string paredActiva = string.Empty;
+        public string paredActiva  { get; set; }
 
     }
 }
