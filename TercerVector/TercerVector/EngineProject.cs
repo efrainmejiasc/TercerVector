@@ -142,7 +142,7 @@ namespace TercerVector
  
         public VectorModel Set3erVector (List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-            MessageBox.Show("Inicio de Ciclo");
+           // MessageBox.Show("Inicio de Ciclo");
             Valor.inicioEstablecido = true;
             vector = SetPosicionCero(loop,vector);
             vector.ExisteCiclo = ExisteCiclo(loop);
@@ -232,7 +232,7 @@ namespace TercerVector
             //***************************************************
             if (vector.CantidadReplica == vector.Magico)
             {
-                MessageBox.Show("Finaliza el  Ciclo");
+               // MessageBox.Show("Finaliza el  Ciclo");
                 Valor.inicioEstablecido = false;
                 return GetUltimoPronostico();
             }
