@@ -148,7 +148,7 @@ namespace TercerVector
             if (vector.ExisteCiclo)
             {
                 vector = SetPosicionDosTres(loop, vector);
-                vector = SetPosicionUnoDosTres(loop, vector);
+                vector = SetPosicionUno(loop, vector);
             }
             else if (!vector.ExisteCiclo)
             {
@@ -168,26 +168,14 @@ namespace TercerVector
             return vector;
         }
 
-        private VectorModel SetPosicionUnoDosTres(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        private VectorModel SetPosicionUno (List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-            int n = 0;
-            foreach (KeyValuePair<string, int> item in loop)
-            {
-                if (n >= 1 && n <= 3)
-                {
-                    if (item.Key == "Negro")
-                    {
-                        vector.CantidadNegroCiclo = vector.CantidadNegroCiclo + item.Value;
-                    }     
-                    else if (item.Key == "Rojo")
-                    {
-                        vector.CantidadRojoCiclo = vector.CantidadRojoCiclo + item.Value;
-                    }    
-                }
-                n++;
-            }
+            vector.MagicoCiclo = loop[1].Value;
+            if (loop[0].Key == "Negro")
+                vector.CantidadNegroCiclo = loop[1].Value;
+            else if (loop[0].Key == "Rojo")
+                vector.CantidadRojoCiclo = loop[1].Value;
 
-            vector.MagicoCiclo = vector.CantidadNegroCiclo + vector.CantidadRojoCiclo;
             return vector;
         }
 
@@ -228,14 +216,17 @@ namespace TercerVector
             }
             return resultado;
         }
+
         #endregion
 
         //Traza vector
         #region TrazaVector
 
-        public VectorModel Traza3erVector(string color, VectorModel vector , List<KeyValuePair<string, int>> loop)
+        public VectorModel Traza3erVector(string color , VectorModel vector , List<KeyValuePair<string, int>> loop)
         {
-            SetParedActiva(loop, 0);
+            vector.CantidadReplica++;
+
+
 
             return vector;
         }
@@ -252,6 +243,17 @@ namespace TercerVector
             }
 
             return Valor.paredActiva;
+        }
+
+        private VectorModel SetReplicado (VectorModel vector, List<KeyValuePair<string, int>> loop)
+        {
+            vector.CantidadReplica = loop[0].Value;
+            if (loop[0].Key == "Negro")
+                vector.CantidadNegroReplica = vector.CantidadNegroReplica + loop[0].Value;
+            else if (loop[0].Key == "Rojo")
+                vector.CantidadRojoReplica = vector.CantidadRojoReplica + loop[0].Value;
+
+            return vector;
         }
 
         #endregion
