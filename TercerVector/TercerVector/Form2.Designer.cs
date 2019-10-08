@@ -70,9 +70,9 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(142, 126);
+            this.pictureBox1.Location = new System.Drawing.Point(142, 104);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 480);
+            this.pictureBox1.Size = new System.Drawing.Size(233, 502);
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
@@ -85,12 +85,13 @@
             this.Condiciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Condiciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Condiciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.Condiciones.Location = new System.Drawing.Point(142, 96);
+            this.Condiciones.Location = new System.Drawing.Point(142, 197);
             this.Condiciones.Name = "Condiciones";
             this.Condiciones.Size = new System.Drawing.Size(233, 31);
             this.Condiciones.TabIndex = 15;
             this.Condiciones.Text = "Ver Condiciones";
             this.Condiciones.UseVisualStyleBackColor = false;
+            this.Condiciones.Visible = false;
             this.Condiciones.Click += new System.EventHandler(this.Condiciones_Click);
             // 
             // Limpiar

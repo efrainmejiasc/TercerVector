@@ -9,6 +9,8 @@ namespace TercerVector
     public class VectorModel
     {
         // Representan  los numeros que salieron en la ruleta para establecer el ciclo
+        public int Magico { get; set; }
+
         public int MagicoCiclo { get; set; }
 
         public int MagicoSemiCiclo { get; set; }

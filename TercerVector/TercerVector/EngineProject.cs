@@ -142,6 +142,7 @@ namespace TercerVector
  
         public VectorModel Set3erVector (List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
+            MessageBox.Show("Inicio de Ciclo");
             Valor.inicioEstablecido = true;
             vector = SetPosicionCero(loop,vector);
             vector.ExisteCiclo = ExisteCiclo(loop);
@@ -149,10 +150,12 @@ namespace TercerVector
             {
                 vector = SetPosicionDosTres(loop, vector);
                 vector = SetPosicionUno(loop, vector);
+                vector.Magico = vector.MagicoCiclo + vector.MagicoSemiCiclo;
             }
             else if (!vector.ExisteCiclo)
             {
                 vector=SetPosicionDosTres(loop, vector);
+                vector.Magico = vector.MagicoSemiCiclo;
             }
             return vector;
         }
@@ -222,13 +225,117 @@ namespace TercerVector
         //Traza vector
         #region TrazaVector
 
-        public VectorModel Traza3erVector(string color , VectorModel vector , List<KeyValuePair<string, int>> loop)
+        public string Traza3erVector(string color , VectorModel vector , List<KeyValuePair<string, int>> loop)
         {
+            string sabor = string.Empty;
             vector.CantidadReplica++;
+            //***************************************************
+            if (vector.CantidadReplica == vector.Magico)
+            {
+                MessageBox.Show("Finaliza el  Ciclo");
+                Valor.inicioEstablecido = false;
+                return GetUltimoPronostico();
+            }
+            //***************************************************
 
+            if (vector.ExisteCiclo)
+            {
+                if (vector.CantidadReplica <= vector.MagicoSemiCiclo)
+                {
+                    if (color == "Negro")
+                    {
+                        vector.CantidadNegroReplicaSemiCiclo++;
+                        Valor.paredActiva = color;
+                        return GetPronosticoSemiCicloNegro(color, vector);
+                    }
+                    else if (color == "Rojo")
+                    {
+                        vector.CantidadRojoReplicaSemiCiclo++;
+                        Valor.paredActiva = color;
+                        return GetPronosticoSemiCicloRojo(color, vector);
+                    }
+                }
 
+                if (vector.CantidadReplica < vector.Magico)
+                {
+                    if (color == "Negro")
+                    {
+                        vector.CantidadNegroReplicaCiclo++;
+                    
+                    }
+                    else if (color == "Rojo")
+                    {
+                        vector.CantidadRojoReplicaCiclo++;
+                     
+                    }
+                }
+            }
+            else if (!vector.ExisteCiclo)
+            {
+                if (vector.CantidadReplica < vector.MagicoSemiCiclo)
+                {
+                    if (color == "Negro")
+                    {
+                        vector.CantidadNegroReplicaSemiCiclo++;
+                        return GetPronosticoCiclo(color);
+                    }
+                    else if (color == "Rojo")
+                    {
+                        vector.CantidadRojoReplicaSemiCiclo++;
+                        return GetPronosticoCiclo(color);
+                    }
+                }
+            }
 
-            return vector;
+            return sabor;
+        }
+
+        private string  GetUltimoPronostico ()
+        {
+            Valor.inicioEstablecido = false;
+            return Valor.paredActiva;
+        }
+
+        private string GetPronosticoSemiCicloNegro(string color , VectorModel vector)
+        {
+            string sabor = String.Empty;
+            if (Valor.paredActiva == color )
+            {
+                sabor = "Negro";
+            }
+            else if (Valor.paredActiva != color)
+            {
+                sabor = "Rojo";
+            }
+                return sabor;
+        }
+
+        private string GetPronosticoSemiCicloRojo(string color, VectorModel vector)
+        {
+            string sabor = String.Empty;
+            if (Valor.paredActiva == color)
+            {
+                sabor = "Rojo";
+            }
+            else if (Valor.paredActiva != color)
+            {
+                sabor = "Negro";
+            }
+            return sabor;
+        }
+
+        private string GetPronosticoCiclo(string color)
+        {
+            string sabor = String.Empty;
+            if (Valor.paredActiva == "Rojo")
+            {
+                sabor = "Negro";
+            }
+            else if (Valor.paredActiva == "Negro")
+            {
+                sabor = "Rojo";
+            }
+            return sabor;
         }
 
         public string SetParedActiva(List<KeyValuePair<string, int>> loop,int indice = 0)
@@ -245,16 +352,6 @@ namespace TercerVector
             return Valor.paredActiva;
         }
 
-        private VectorModel SetReplicado (VectorModel vector, List<KeyValuePair<string, int>> loop)
-        {
-            vector.CantidadReplica = loop[0].Value;
-            if (loop[0].Key == "Negro")
-                vector.CantidadNegroReplica = vector.CantidadNegroReplica + loop[0].Value;
-            else if (loop[0].Key == "Rojo")
-                vector.CantidadRojoReplica = vector.CantidadRojoReplica + loop[0].Value;
-
-            return vector;
-        }
 
         #endregion
     }

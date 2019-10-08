@@ -73,7 +73,7 @@ namespace TercerVector
             }
             else if (Valor.inicioEstablecido == true)
             {
-               this.Vector = Funcion.Traza3erVector(color,this.Vector,this.loop);
+                Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
             }
             //***********************************************************************************
             Valor.contador++;
