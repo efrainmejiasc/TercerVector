@@ -263,8 +263,12 @@ namespace TercerVector
             //***************************************************
             if (vector.CantidadReplica == vector.Magico)
             {
-                // MessageBox.Show("Finaliza el  Ciclo");
                 Valor.inicioEstablecido = false;
+                return GetUltimoPronostico();
+            }
+            //***************************************************
+            if (vector.CantidadReplica == vector.MagicoSemiCiclo)
+            {
                 return GetUltimoPronostico();
             }
             //***************************************************
@@ -324,6 +328,11 @@ namespace TercerVector
         private string GetUltimoPronostico()
         {
             Valor.inicioEstablecido = false;
+            if (Valor.paredActiva == "Negro")
+                Valor.paredActiva = "Rojo";
+            else if (Valor.paredActiva == "Rojo")
+                Valor.paredActiva = "Negro";
+
             return Valor.paredActiva;
         }
 
