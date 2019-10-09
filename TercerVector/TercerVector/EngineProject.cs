@@ -163,6 +163,8 @@ namespace TercerVector
                 pronostico.BackColor = Color.Black;
             else if (color == "Rojo")
                 pronostico.BackColor = Color.Red;
+
+            pronostico.Text = "Jugar";
         }
 
 

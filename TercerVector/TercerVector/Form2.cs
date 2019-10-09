@@ -131,6 +131,7 @@ namespace TercerVector
                 e.Handled = false;
             }
             this.pronostico.BackColor = Color.SeaGreen;
+            this.pronostico.Text = "Esperando Pronostico";
         }
 
         private void txtResultado_Leave(object sender, EventArgs e)
