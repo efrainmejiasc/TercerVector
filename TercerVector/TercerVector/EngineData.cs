@@ -28,6 +28,8 @@ namespace TercerVector
 
         public bool inicioEstablecido { get; set; }
 
+        public bool iter { get; set; }
+
         public int contConsecutivoRojo { get; set; }
 
         public int contConsecutivoNegro { get; set; }

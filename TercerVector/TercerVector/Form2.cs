@@ -30,6 +30,7 @@ namespace TercerVector
         {
             if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/14"))
                 Application.Exit();
+            Valor.iter = false;
             pronostico.Text = "Esperando Pronostico";
         }
 
@@ -88,6 +89,8 @@ namespace TercerVector
                 Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
             }
             //***********************************************************************************
+            if (loop.Count == 4)
+                Valor.iter = true;
             Valor.contador++;
             txtResultado.Focus();
         }
@@ -108,6 +111,7 @@ namespace TercerVector
             Valor.contConsecutivoRojo = 0;
             Valor.anteriorNegro = false;
             Valor.anteriorRojo = false;
+            Valor.iter = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
             pronostico.Text = "Esperando Pronostico";

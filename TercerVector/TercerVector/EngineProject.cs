@@ -12,7 +12,7 @@ namespace TercerVector
     {
         private EngineData Valor = EngineData.Instance();
 
-        public string AddResultadoLista(int n , ListBox listBox1 , ListBox  listBox2, List<string> listresultado)
+        public string AddResultadoLista(int n, ListBox listBox1, ListBox listBox2, List<string> listresultado)
         {
             int resultado = Convert.ToInt32(n);
 
@@ -35,7 +35,7 @@ namespace TercerVector
         }
 
 
-        public void SetListBoxView(ListBox ListNegro,ListBox ListRojo , List<string> listresultado2 , ListBox listBox1, ListBox listBox2, List<string> listresultado)
+        public void SetListBoxView(ListBox ListNegro, ListBox ListRojo, List<string> listresultado2, ListBox listBox1, ListBox listBox2, List<string> listresultado)
         {
             ListNegro.Items.Clear();
             ListRojo.Items.Clear();
@@ -157,7 +157,7 @@ namespace TercerVector
             return sabor;
         }
 
-        public void SetColor(string color,GroupBox pronostico)
+        public void SetColor(string color, GroupBox pronostico)
         {
             if (color == "Negro")
                 pronostico.BackColor = Color.Black;
@@ -391,9 +391,6 @@ namespace TercerVector
 
             return Valor.paredActiva;
         }
-
-
-
 
         #endregion
     }
