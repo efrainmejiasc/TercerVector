@@ -62,6 +62,18 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
+            if (loop.Count >= 4)
+            {
+                setColor = Funcion.EstablecerValoresAlternado(loop);
+                if (setColor != string.Empty)
+                {
+                    Funcion.SetColor(setColor, this.pronostico);
+                    Valor.contador++;
+                    txtResultado.Focus();
+                    return;
+                }
+            }
+            //***********************************************************************************
             if (Valor.inicioEstablecido == false && loop.Count >= 4)
             {
                 this.Vector = new VectorModel();
@@ -98,6 +110,7 @@ namespace TercerVector
             Valor.anteriorRojo = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
+            pronostico.Text = "Esperando Pronostico";
             txtResultado.Focus();
         }
 
