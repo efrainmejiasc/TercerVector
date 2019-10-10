@@ -30,6 +30,9 @@ namespace TercerVector
 
         public bool iter { get; set; }
 
+        public int cantidadParedMayor { get; set; }
+        public string colorParedMayor { get; set; }
+
         public int contConsecutivoRojo { get; set; }
 
         public int contConsecutivoNegro { get; set; }

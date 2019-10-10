@@ -63,6 +63,11 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
+            if (loop.Count == 4)
+                Valor.iter = true;
+            else
+                Valor.iter = false;
+            //***********************************************************************************
             if (loop.Count >= 4)
             {
                 setColor = Funcion.EstablecerValoresAlternado(loop);
@@ -89,8 +94,7 @@ namespace TercerVector
                 Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
             }
             //***********************************************************************************
-            if (loop.Count == 4)
-                Valor.iter = true;
+
             Valor.contador++;
             txtResultado.Focus();
         }

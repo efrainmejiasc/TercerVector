@@ -173,47 +173,49 @@ namespace TercerVector
 
         public VectorModel Set3erVector(List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-            // MessageBox.Show("Inicio de Ciclo");
             Valor.inicioEstablecido = true;
             vector = SetPosicionCero(loop, vector);
             vector.ExisteCiclo = ExisteCiclo(loop);
             if (vector.ExisteCiclo)
             {
-                vector = SetPosicionDosTres(loop, vector);
-                vector = SetPosicionUno(loop, vector);
+                vector = SetSemiCiclo(loop, vector);
+                vector = SetCiclo(loop, vector);
                 vector.Magico = vector.MagicoCiclo + vector.MagicoSemiCiclo;
             }
             else if (!vector.ExisteCiclo)
             {
-                vector = SetPosicionDosTres(loop, vector);
+                vector = SetSemiCiclo(loop, vector);
                 vector.Magico = vector.MagicoSemiCiclo;
             }
             return vector;
         }
 
-        private VectorModel SetPosicionCero(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        private VectorModel SetCiclo (List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
-            vector.CantidadReplica = loop[0].Value;
-            if (loop[0].Key == "Negro")
-                vector.CantidadNegroReplica = vector.CantidadNegroReplica + loop[0].Value;
-            else if (loop[0].Key == "Rojo")
-                vector.CantidadRojoReplica = vector.CantidadRojoReplica + loop[0].Value;
+            if (Valor.iter)
+            {
+                vector = SetPosicionIndex(loop, vector, 1);
+            }
+            else if (!Valor.iter)
+            {
+                vector = SetPosicionIndex(loop, vector, 4);
+            }
+            return vector;
+        }
+
+        private VectorModel SetPosicionIndex(List<KeyValuePair<string, int>> loop, VectorModel vector,int index)
+        {
+            vector.MagicoCiclo = loop[index].Value;
+            if (loop[index].Key == "Negro")
+                vector.CantidadNegroCiclo = loop[index].Value;
+            else if (loop[index].Key == "Rojo")
+                vector.CantidadRojoCiclo = loop[index].Value;
 
             return vector;
         }
 
-        private VectorModel SetPosicionUno(List<KeyValuePair<string, int>> loop, VectorModel vector)
-        {
-            vector.MagicoCiclo = loop[1].Value;
-            if (loop[0].Key == "Negro")
-                vector.CantidadNegroCiclo = loop[1].Value;
-            else if (loop[0].Key == "Rojo")
-                vector.CantidadRojoCiclo = loop[1].Value;
 
-            return vector;
-        }
-
-        private VectorModel SetPosicionDosTres(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        private VectorModel SetSemiCiclo(List<KeyValuePair<string, int>> loop, VectorModel vector)
         {
             int n = 0;
             foreach (KeyValuePair<string, int> item in loop)
@@ -235,6 +237,17 @@ namespace TercerVector
             return vector;
         }
 
+        private VectorModel SetPosicionCero(List<KeyValuePair<string, int>> loop, VectorModel vector)
+        {
+            vector.CantidadReplica = loop[0].Value;
+            if (loop[0].Key == "Negro")
+                vector.CantidadNegroReplica = vector.CantidadNegroReplica + loop[0].Value;
+            else if (loop[0].Key == "Rojo")
+                vector.CantidadRojoReplica = vector.CantidadRojoReplica + loop[0].Value;
+
+            return vector;
+        }
+
         private bool ExisteCiclo(List<KeyValuePair<string, int>> loop)
         {
             int n = 0;
@@ -253,7 +266,7 @@ namespace TercerVector
 
         #endregion
 
-        // Traza vector ->
+        // Traza vector -> **********************************************************************************************
         #region TrazaVector
 
         public string Traza3erVector(string color, VectorModel vector, List<KeyValuePair<string, int>> loop)
@@ -264,7 +277,10 @@ namespace TercerVector
             if (vector.CantidadReplica == vector.Magico)
             {
                 Valor.inicioEstablecido = false;
-                return GetUltimoPronostico();
+                Valor.cantidadParedMayor = 0;
+                if (Valor.iter)
+                    Valor.iter = false;
+               return GetUltimoPronostico();
             }
             //***************************************************
             if (vector.CantidadReplica == vector.MagicoSemiCiclo)
@@ -273,109 +289,64 @@ namespace TercerVector
             }
             //***************************************************
 
+            if (Valor.iter && Valor.cantidadParedMayor == 0)
+                GetParedMayor(2,3,loop);
+
             if (vector.ExisteCiclo)
             {
-                if (vector.CantidadReplica <= vector.MagicoSemiCiclo)
+                if (vector.CantidadReplica < vector.MagicoSemiCiclo)
                 {
-                    if (color == "Negro")
+                    if (Valor.cantidadParedMayor < vector.CantidadReplica)
                     {
-                        vector.CantidadNegroReplicaSemiCiclo++;
-                        Valor.paredActiva = color;
-                        return GetPronosticoSemiCicloNegro(color, vector);
+                        return Valor.paredActiva;
                     }
-                    else if (color == "Rojo")
+                    else if (Valor.cantidadParedMayor == vector.CantidadReplica)
                     {
-                        vector.CantidadRojoReplicaSemiCiclo++;
-                        Valor.paredActiva = color;
-                        return GetPronosticoSemiCicloRojo(color, vector);
+                        return GetUltimoPronostico();
                     }
                 }
-
-                if (vector.CantidadReplica < vector.Magico)
+                else if (vector.CantidadReplica < vector.MagicoCiclo)
                 {
-                    if (color == "Negro")
-                    {
-                        vector.CantidadNegroReplicaCiclo++;
-
-                    }
-                    else if (color == "Rojo")
-                    {
-                        vector.CantidadRojoReplicaCiclo++;
-
-                    }
+                    return Valor.paredActiva;
                 }
             }
             else if (!vector.ExisteCiclo)
             {
-                if (vector.CantidadReplica < vector.MagicoSemiCiclo)
+                if (Valor.cantidadParedMayor < vector.CantidadReplica)
                 {
-                    if (color == "Negro")
-                    {
-                        vector.CantidadNegroReplicaSemiCiclo++;
-                        return GetPronosticoCiclo(color);
-                    }
-                    else if (color == "Rojo")
-                    {
-                        vector.CantidadRojoReplicaSemiCiclo++;
-                        return GetPronosticoCiclo(color);
-                    }
+                    return Valor.paredActiva;
+                }
+                else if (Valor.cantidadParedMayor == vector.CantidadReplica)
+                {
+                    return GetUltimoPronostico();
                 }
             }
 
             return sabor;
         }
 
+        private void  GetParedMayor(int startIndex , int endIndex, List<KeyValuePair<string, int>> loop)
+        {
+            if (loop[startIndex].Value >= loop[endIndex].Value)
+            {
+                Valor.cantidadParedMayor = loop[startIndex].Value;
+                Valor.colorParedMayor = loop[startIndex].Key;
+            }
+            else if (loop[endIndex].Value > loop[startIndex].Value)
+            {
+                Valor.cantidadParedMayor = loop[endIndex].Value;
+                Valor.colorParedMayor = loop[endIndex].Key;
+            }
+        }
+
         private string GetUltimoPronostico()
         {
-            Valor.inicioEstablecido = false;
             if (Valor.paredActiva == "Negro")
                 Valor.paredActiva = "Rojo";
             else if (Valor.paredActiva == "Rojo")
                 Valor.paredActiva = "Negro";
 
             return Valor.paredActiva;
-        }
-
-        private string GetPronosticoSemiCicloNegro(string color, VectorModel vector)
-        {
-            string sabor = String.Empty;
-            if (Valor.paredActiva == color)
-            {
-                sabor = "Negro";
-            }
-            else if (Valor.paredActiva != color)
-            {
-                sabor = "Rojo";
-            }
-            return sabor;
-        }
-
-        private string GetPronosticoSemiCicloRojo(string color, VectorModel vector)
-        {
-            string sabor = String.Empty;
-            if (Valor.paredActiva == color)
-            {
-                sabor = "Rojo";
-            }
-            else if (Valor.paredActiva != color)
-            {
-                sabor = "Negro";
-            }
-            return sabor;
-        }
-
-        private string GetPronosticoCiclo(string color)
-        {
-            string sabor = String.Empty;
-            if (Valor.paredActiva == "Rojo")
-            {
-                sabor = "Negro";
-            }
-            else if (Valor.paredActiva == "Negro")
-            {
-                sabor = "Rojo";
-            }
-            return sabor;
         }
 
         public string SetParedActiva(List<KeyValuePair<string, int>> loop, int indice = 0)
