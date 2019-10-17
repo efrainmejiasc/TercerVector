@@ -141,6 +141,7 @@ namespace TercerVector
                 if (item.Value > 1)
                 {
                     resultado = false;
+                    Valor.inicioEstablecido = false;
                     break;
                 }
                 n++;
@@ -289,30 +290,31 @@ namespace TercerVector
             }
             //***************************************************
 
-            if (Valor.iter && Valor.cantidadParedMayor == 0)
+            if (Valor.cantidadParedMayor == 0)
                 GetParedMayor(2,3,loop);
 
             if (vector.ExisteCiclo)
             {
                 if (vector.CantidadReplica < vector.MagicoSemiCiclo)
                 {
-                    if (Valor.cantidadParedMayor < vector.CantidadReplica)
+                    if (vector.CantidadReplica  < Valor.cantidadParedMayor)
                     {
                         return Valor.paredActiva;
                     }
-                    else if (Valor.cantidadParedMayor == vector.CantidadReplica)
+                    else if (vector.CantidadReplica  == Valor.cantidadParedMayor)
                     {
                         return GetUltimoPronostico();
                     }
                 }
-                else if (vector.CantidadReplica < vector.MagicoCiclo)
+                //else if (vector.CantidadReplica < vector.MagicoCiclo)
+                else if (vector.CantidadReplica < vector.Magico)
                 {
                     return Valor.paredActiva;
                 }
             }
             else if (!vector.ExisteCiclo)
             {
-                if (Valor.cantidadParedMayor < vector.CantidadReplica)
+                if (vector.CantidadReplica < Valor.cantidadParedMayor)
                 {
                     return Valor.paredActiva;
                 }

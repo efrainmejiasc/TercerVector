@@ -28,7 +28,7 @@ namespace TercerVector
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/14"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/22"))
                 Application.Exit();
             Valor.iter = false;
             pronostico.Text = "Esperando Pronostico";

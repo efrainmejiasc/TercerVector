@@ -44,7 +44,7 @@
             // 
             this.ListRojo.BackColor = System.Drawing.Color.Red;
             this.ListRojo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListRojo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListRojo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListRojo.ForeColor = System.Drawing.Color.White;
             this.ListRojo.FormattingEnabled = true;
             this.ListRojo.ItemHeight = 16;
@@ -57,7 +57,7 @@
             // 
             this.ListNegro.BackColor = System.Drawing.Color.Black;
             this.ListNegro.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListNegro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListNegro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListNegro.ForeColor = System.Drawing.Color.White;
             this.ListNegro.FormattingEnabled = true;
             this.ListNegro.ItemHeight = 16;
