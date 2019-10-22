@@ -121,9 +121,13 @@ namespace TercerVector
             }
 
             if (Valor.contConsecutivoNegro > 3)
+            {
                 resultado = "Negro";
+            }
             else if (Valor.contConsecutivoRojo > 3)
+            {
                 resultado = "Rojo";
+            }
 
             return resultado;
         }
