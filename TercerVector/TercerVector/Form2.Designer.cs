@@ -44,26 +44,26 @@
             // 
             this.ListRojo.BackColor = System.Drawing.Color.Red;
             this.ListRojo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListRojo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListRojo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListRojo.ForeColor = System.Drawing.Color.White;
             this.ListRojo.FormattingEnabled = true;
-            this.ListRojo.ItemHeight = 16;
+            this.ListRojo.ItemHeight = 29;
             this.ListRojo.Location = new System.Drawing.Point(70, -2);
             this.ListRojo.Name = "ListRojo";
-            this.ListRojo.Size = new System.Drawing.Size(71, 608);
+            this.ListRojo.Size = new System.Drawing.Size(71, 580);
             this.ListRojo.TabIndex = 10;
             // 
             // ListNegro
             // 
             this.ListNegro.BackColor = System.Drawing.Color.Black;
             this.ListNegro.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListNegro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListNegro.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListNegro.ForeColor = System.Drawing.Color.White;
             this.ListNegro.FormattingEnabled = true;
-            this.ListNegro.ItemHeight = 16;
+            this.ListNegro.ItemHeight = 29;
             this.ListNegro.Location = new System.Drawing.Point(-1, -2);
             this.ListNegro.Name = "ListNegro";
-            this.ListNegro.Size = new System.Drawing.Size(71, 608);
+            this.ListNegro.Size = new System.Drawing.Size(71, 580);
             this.ListNegro.TabIndex = 9;
             // 
             // pictureBox1
