@@ -61,6 +61,7 @@ namespace TercerVector
             {
                 Funcion.SetColor(setColor, this.pronostico);
                 Valor.contador++;
+                Valor.secuenciaAnterior = true;
                 txtResultado.Focus();
                 return;
             }
