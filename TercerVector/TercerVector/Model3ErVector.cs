@@ -13,5 +13,7 @@ namespace TercerVector
         public int MagicoCiclo { get; set; }
 
         public int MagicoSemiCiclo { get; set; }
+
+        public bool ExisteCiclo { get; set; }
     }
 }

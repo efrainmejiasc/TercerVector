@@ -178,26 +178,73 @@ namespace TercerVector
         //*******************END PRINCIPAL*************************************************************************************************************************************************
         // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //*******************BEGIN INICIO_JUEGO********************************************************************************************************************************************
-        #region InicioJuego
-
-        public void LoopCountSecuencia(List<KeyValuePair<string, int>> loop)
+        #region INICIOJUEGO
+        public string  LoopCountSecuencia(List<KeyValuePair<string, int>> loop , string color)
         {
-            if (loop.Count == 1)
-            {
-            }
-            else if (loop.Count == 2)
-            {
-            }
-            else if (loop.Count == 3)
-            {
-            }
-            else if (loop.Count == 4)
-            {
-            }
+            string sabor = string.Empty;
+
+            if (loop.Count == 2 || loop.Count ==  3)
+                sabor = color;
+
+            return sabor;
         }
 
         #endregion
         //*******************END INICIO_JUEGO**********************************************************************************************************************************************
+        // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //*******************BEGIN SET3ERVECTOR********************************************************************************************************************************************
+        #region SET3ERVECTOR
+        public Model3ErVector Set3erVector(List<KeyValuePair<string, int>> loop, Model3ErVector Vector)
+        {
+            Valor.inicioEstablecido = true;
+            if (Valor.iteraccion == 0)
+            {
+                Vector.ExisteCiclo = ExisteCicloIteracion0(loop);
+                GetParedMayor(2, 3, loop);
+
+            }
+            else if (Valor.iteraccion > 0)
+            {
+            }
+          
+            return Vector;
+        }
+
+        private bool ExisteCicloIteracion0(List<KeyValuePair<string, int>> loop)
+        {
+            int n = 0;
+            bool resultado = false;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 1 && n <= 3)
+                {
+                    if (item.Value == 1)
+                        resultado = true;
+                }
+                n++;
+            }
+            return resultado;
+        }
+
+        private void GetParedMayor(int startIndex, int endIndex, List<KeyValuePair<string, int>> loop)
+        {
+            if (loop[startIndex].Value >= loop[endIndex].Value)
+            {
+                Valor.cantidadParedMayor = loop[startIndex].Value;
+                Valor.colorParedMayor = loop[startIndex].Key;
+            }
+            else if (loop[endIndex].Value > loop[startIndex].Value)
+            {
+                Valor.cantidadParedMayor = loop[endIndex].Value;
+                Valor.colorParedMayor = loop[endIndex].Key;
+            }
+        }
+
+
+
+        #endregion
+        //*******************END SET3ERVECTOR**********************************************************************************************************************************************
+
 
     }
 }

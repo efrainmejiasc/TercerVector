@@ -32,6 +32,7 @@ namespace TercerVector
                 Application.Exit();
             Valor.iteraccion = 0;
             Valor.secuenciaAnterior = false;
+            Valor.inicioEstablecido = false;
             pronostico.Text = "Esperando Pronostico";
         }
 
@@ -56,7 +57,7 @@ namespace TercerVector
             }
             //**********************************************************************************
             txtResultado.Text = string.Empty;
-            string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador); // Valido que exista valores secuenciales
+            string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador); // Valido que exista valores en secuencia
             if (setColor != string.Empty)
             {
                 Funcion.SetColor(setColor, this.pronostico);
@@ -78,11 +79,26 @@ namespace TercerVector
                 }
             }
             //***********************************************************************************
-            if (Valor.iteraccion == 0 && Valor.secuenciaAnterior)
+            if (loop.Count <= 3 && Valor.secuenciaAnterior) // determino pronostico si  se esta iniciando juego con valores  en secuencia
             {
-               int nn = 0;
+                setColor = Funcion.LoopCountSecuencia(loop, color);
+                Funcion.SetColor(setColor, this.pronostico);
+                Valor.contador++;
+                txtResultado.Focus();
+                return;
             }
             //***********************************************************************************
+            if (Valor.inicioEstablecido == false && loop.Count >= 4)
+            {
+                this.Vector = new Model3ErVector();
+                this.Vector = Funcion.Set3erVector(loop, this.Vector);
+                //Funcion.SetColor(Funcion.SetParedActiva(loop, 0), this.pronostico);
+                Valor.contador++;
+                txtResultado.Focus();
+                MessageBox.Show(Valor.cantidadParedMayor.ToString() + " " + Valor.colorParedMayor.ToString());
+                return;
+            }
+
             Valor.contador++;
             txtResultado.Focus();
         }
