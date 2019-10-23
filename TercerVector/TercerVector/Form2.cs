@@ -19,7 +19,7 @@ namespace TercerVector
         private List<KeyValuePair<string, int>> loop = new List<KeyValuePair<string, int>>();
         private EngineData Valor = EngineData.Instance();
         private EngineProject Funcion = new EngineProject();
-        private VectorModel Vector = new VectorModel();
+        private Model3ErVector Vector = new Model3ErVector();
 
         public Form2()
         {
@@ -30,7 +30,7 @@ namespace TercerVector
         {
             if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/26"))
                 Application.Exit();
-            Valor.iter = false;
+            Valor.iteraccion = 0;
             Valor.secuenciaAnterior = false;
             pronostico.Text = "Esperando Pronostico";
         }
@@ -78,10 +78,10 @@ namespace TercerVector
                 }
             }
             //***********************************************************************************
-            if (loop.Count == 4)
-                Valor.iter = true;
-            else
-                Valor.iter = false;
+            if (Valor.iteraccion == 0 && Valor.secuenciaAnterior)
+            {
+               int nn = 0;
+            }
             //***********************************************************************************
             Valor.contador++;
             txtResultado.Focus();
@@ -89,7 +89,7 @@ namespace TercerVector
 
         private void Limpiar_Click(object sender, EventArgs e)
         {
-            this.Vector = new VectorModel();
+            this.Vector = new Model3ErVector();
             loop.Clear();
             listresultado.Clear();
             listresultado2.Clear();
@@ -103,7 +103,7 @@ namespace TercerVector
             Valor.contConsecutivoRojo = 0;
             Valor.anteriorNegro = false;
             Valor.anteriorRojo = false;
-            Valor.iter = false;
+            Valor.iteraccion  = 0;
             Valor.secuenciaAnterior = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;

@@ -28,7 +28,7 @@ namespace TercerVector
 
         public bool inicioEstablecido { get; set; }
 
-        public bool iter { get; set; }
+        public int iteraccion { get; set; }
 
         public int cantidadParedMayor { get; set; }
         public string colorParedMayor { get; set; }
