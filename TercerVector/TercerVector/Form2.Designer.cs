@@ -38,6 +38,7 @@
             this.txtResultado = new System.Windows.Forms.TextBox();
             this.pronostico = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pronostico.SuspendLayout();
             this.SuspendLayout();
             // 
             // ListRojo
@@ -85,7 +86,7 @@
             this.Condiciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Condiciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Condiciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.Condiciones.Location = new System.Drawing.Point(142, 197);
+            this.Condiciones.Location = new System.Drawing.Point(84, 10);
             this.Condiciones.Name = "Condiciones";
             this.Condiciones.Size = new System.Drawing.Size(233, 31);
             this.Condiciones.TabIndex = 15;
@@ -143,6 +144,7 @@
             // pronostico
             // 
             this.pronostico.BackColor = System.Drawing.Color.SeaGreen;
+            this.pronostico.Controls.Add(this.Condiciones);
             this.pronostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pronostico.ForeColor = System.Drawing.Color.GreenYellow;
             this.pronostico.Location = new System.Drawing.Point(-1, 602);
@@ -159,7 +161,6 @@
             this.BackColor = System.Drawing.Color.SeaGreen;
             this.ClientSize = new System.Drawing.Size(378, 666);
             this.Controls.Add(this.pronostico);
-            this.Controls.Add(this.Condiciones);
             this.Controls.Add(this.Limpiar);
             this.Controls.Add(this.AddNumber);
             this.Controls.Add(this.txtResultado);
@@ -171,6 +172,7 @@
             this.Text = "3er Vector";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pronostico.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

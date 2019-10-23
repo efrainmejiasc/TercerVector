@@ -28,7 +28,7 @@ namespace TercerVector
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/24"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/26"))
                 Application.Exit();
             Valor.iter = false;
             pronostico.Text = "Esperando Pronostico";
@@ -38,7 +38,7 @@ namespace TercerVector
         {
             if (txtResultado.Text == string.Empty)
                 return;
-             //*********************************************************************************
+            //*********************************************************************************
             int n = Convert.ToInt32(txtResultado.Text);
             string color = Funcion.AddResultadoLista(n, this.listBox1, this.listBox2, this.listresultado);
             //**********************************************************************************
@@ -47,9 +47,10 @@ namespace TercerVector
             int startIndex = 0;
             int conteo = 0;
             loop.Clear();
-            while (startIndex < listresultado2.Count)
+            //**********************************************************************************
+            while (startIndex < listresultado2.Count) // Agrego key & value en loop
             {
-                conteo = Funcion.EstablecerPared(startIndex, this.listresultado2,this.loop);
+                conteo = Funcion.EstablecerPared(startIndex, this.listresultado2, this.loop);
                 startIndex = startIndex + conteo;
             }
             //**********************************************************************************
@@ -57,17 +58,12 @@ namespace TercerVector
             string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador);
             if (setColor != string.Empty)
             {
-                Funcion.SetColor(setColor,this.pronostico);
+                Funcion.SetColor(setColor, this.pronostico);
                 Valor.contador++;
                 txtResultado.Focus();
                 return;
             }
-            //***********************************************************************************
-            if (loop.Count == 4)
-                Valor.iter = true;
-            else
-                Valor.iter = false;
-            //***********************************************************************************
+            //**********************************************************************************
             if (loop.Count >= 4)
             {
                 setColor = Funcion.EstablecerValoresAlternado(loop);
@@ -80,21 +76,6 @@ namespace TercerVector
                 }
             }
             //***********************************************************************************
-            if (Valor.inicioEstablecido == false && loop.Count >= 4)
-            {
-                this.Vector = new VectorModel();
-                this.Vector= Funcion.Set3erVector(loop,this.Vector);
-                Funcion.SetColor(Funcion.SetParedActiva(loop,0), this.pronostico);
-                Valor.contador++;
-                txtResultado.Focus();
-                return;
-            }
-            else if (Valor.inicioEstablecido == true)
-            {
-                Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
-            }
-            //***********************************************************************************
-
             Valor.contador++;
             txtResultado.Focus();
         }
@@ -116,6 +97,7 @@ namespace TercerVector
             Valor.anteriorNegro = false;
             Valor.anteriorRojo = false;
             Valor.iter = false;
+            Valor.loopCount = 0;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
             pronostico.Text = "Esperando Pronostico";
