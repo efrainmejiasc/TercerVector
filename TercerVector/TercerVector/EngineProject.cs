@@ -199,9 +199,21 @@ namespace TercerVector
             Valor.inicioEstablecido = true;
             if (Valor.iteraccion == 0)
             {
+                GetParedMayor(2, 3, loop);//Establesco pared con mayor cantidad y color
+                Vector = SetPosicionCero(loop, Vector);
                 Vector.ExisteCiclo = ExisteCicloIteracion0(loop);
-                GetParedMayor(2, 3, loop);
-
+                if (Vector.ExisteCiclo)
+                {
+                    Vector = SetSemiCiclo(loop, Vector);
+                    Vector = SetCiclo(loop, Vector);
+                    Vector.Magico = Vector.MagicoCiclo + Vector.MagicoSemiCiclo;
+                }
+                else if (!Vector.ExisteCiclo)
+                {
+                    Vector = SetSemiCiclo(loop, Vector);
+                    Vector.Magico = Vector.MagicoSemiCiclo;
+                }
+                Valor.iteraccion++;
             }
             else if (Valor.iteraccion > 0)
             {
@@ -240,7 +252,54 @@ namespace TercerVector
             }
         }
 
+        private Model3ErVector SetPosicionCero(List<KeyValuePair<string, int>> loop, Model3ErVector Vector)
+        {
+            Vector.CantidadReplicada =  loop[0].Value;
+            return Vector;
+        }
 
+        private Model3ErVector SetCiclo(List<KeyValuePair<string, int>> loop, Model3ErVector Vector)
+        {
+            if (Valor.iteraccion == 0)
+            {
+                Vector = SetPosicionIndex(loop, Vector, 1);
+            }
+            else if (Valor.iteraccion  > 0)
+            {
+                Vector = SetPosicionIndex(loop, Vector, 4);
+            }
+            return Vector;
+        }
+
+        private Model3ErVector SetPosicionIndex(List<KeyValuePair<string, int>> loop, Model3ErVector vector, int index)
+        {
+            vector.MagicoCiclo = loop[index].Value;
+            return vector;
+        }
+
+        private Model3ErVector SetSemiCiclo(List<KeyValuePair<string, int>> loop, Model3ErVector vector)
+        {
+            int n = 0;
+            int cantidadNegroSemiCiclo = 0;
+            int cantidadRojoSemiCiclo = 0;
+            foreach (KeyValuePair<string, int> item in loop)
+            {
+                if (n >= 2 && n <= 3)
+                {
+                    if (item.Key == "Negro")
+                    {
+                        cantidadNegroSemiCiclo = cantidadNegroSemiCiclo + item.Value;
+                    }
+                    else if (item.Key == "Rojo")
+                    {
+                        cantidadRojoSemiCiclo = cantidadRojoSemiCiclo + item.Value;
+                    }
+                }
+                n++;
+            }
+            vector.MagicoSemiCiclo = cantidadNegroSemiCiclo + cantidadRojoSemiCiclo;
+            return vector;
+        }
 
         #endregion
         //*******************END SET3ERVECTOR**********************************************************************************************************************************************
