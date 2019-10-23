@@ -68,7 +68,7 @@ namespace TercerVector
             return conteo;
         }
 
-        public void LoopCount(List<KeyValuePair<string, int>> loop)
+        public void LoopCountSecuencia(List<KeyValuePair<string, int>> loop)
         {
             if (loop.Count == 1)
             {

@@ -31,6 +31,7 @@ namespace TercerVector
             if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/26"))
                 Application.Exit();
             Valor.iter = false;
+            Valor.secuenciaAnterior = false;
             pronostico.Text = "Esperando Pronostico";
         }
 
@@ -55,7 +56,7 @@ namespace TercerVector
             }
             //**********************************************************************************
             txtResultado.Text = string.Empty;
-            string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador);
+            string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador); // Valido que exista valores secuenciales
             if (setColor != string.Empty)
             {
                 Funcion.SetColor(setColor, this.pronostico);
@@ -66,7 +67,7 @@ namespace TercerVector
             //**********************************************************************************
             if (loop.Count >= 4)
             {
-                setColor = Funcion.EstablecerValoresAlternado(loop);
+                setColor = Funcion.EstablecerValoresAlternado(loop);// Valido que exista valores alternados
                 if (setColor != string.Empty)
                 {
                     Funcion.SetColor(setColor, this.pronostico);
@@ -75,6 +76,11 @@ namespace TercerVector
                     return;
                 }
             }
+            //***********************************************************************************
+            if (loop.Count == 4)
+                Valor.iter = true;
+            else
+                Valor.iter = false;
             //***********************************************************************************
             Valor.contador++;
             txtResultado.Focus();
@@ -97,7 +103,7 @@ namespace TercerVector
             Valor.anteriorNegro = false;
             Valor.anteriorRojo = false;
             Valor.iter = false;
-            Valor.loopCount = 0;
+            Valor.secuenciaAnterior = false;
             //****************************************************
             pronostico.BackColor = Color.SeaGreen;
             pronostico.Text = "Esperando Pronostico";

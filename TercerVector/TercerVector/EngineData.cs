@@ -43,7 +43,7 @@ namespace TercerVector
 
         public string paredActiva  { get; set; }
 
-        public int loopCount { get; set; }
+        public bool secuenciaAnterior { get; set; }
 
     }
 }
