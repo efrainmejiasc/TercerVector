@@ -213,12 +213,22 @@ namespace TercerVector
                     Vector = SetSemiCiclo(loop, Vector);
                     Vector.Magico = Vector.MagicoSemiCiclo;
                 }
-                Valor.iteraccion++;
             }
             else if (Valor.iteraccion > 0)
             {
+                if (Vector.ExisteCiclo)
+                {
+                    Vector = SetSemiCiclo(loop, Vector);
+                    Vector = SetCiclo(loop, Vector);
+                    Vector.Magico = Vector.MagicoCiclo + Vector.MagicoSemiCiclo;
+                }
+                else if (!Vector.ExisteCiclo)
+                {
+                    Vector = SetSemiCiclo(loop, Vector);
+                    Vector.Magico = Vector.MagicoSemiCiclo;
+                }
             }
-          
+            Valor.iteraccion++;
             return Vector;
         }
 
@@ -277,7 +287,7 @@ namespace TercerVector
             return vector;
         }
 
-        private Model3ErVector SetSemiCiclo(List<KeyValuePair<string, int>> loop, Model3ErVector vector)
+        private Model3ErVector SetSemiCiclo(List<KeyValuePair<string, int>> loop, Model3ErVector Vector)
         {
             int n = 0;
             int cantidadNegroSemiCiclo = 0;
@@ -297,13 +307,94 @@ namespace TercerVector
                 }
                 n++;
             }
-            vector.MagicoSemiCiclo = cantidadNegroSemiCiclo + cantidadRojoSemiCiclo;
-            return vector;
+            Vector.MagicoSemiCiclo = cantidadNegroSemiCiclo + cantidadRojoSemiCiclo;
+            return Vector;
         }
 
         #endregion
         //*******************END SET3ERVECTOR**********************************************************************************************************************************************
+        // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //********************BEGIN TRAZA3ERVECTOR********************************************************************************************************************************************
+        #region TRAZA3ERVECTOR
+        public string Traza3erVector(string color, Model3ErVector vector, List<KeyValuePair<string, int>> loop)
+        {
+            string sabor = string.Empty;
+            vector.CantidadReplicada++;
+            //***************************************************
+            if (vector.CantidadReplicada == vector.Magico)
+            {
+                Valor.inicioEstablecido = false;
+                Valor.cantidadParedMayor = 0;
+                return GetUltimoPronostico();
+            }
+            //***************************************************
+            if (vector.CantidadReplicada == vector.MagicoSemiCiclo)
+            {
+                return GetUltimoPronostico();
+            }
+            //***************************************************
 
+            if (Valor.cantidadParedMayor == 0)
+                GetParedMayor(2, 3, loop);
 
+            if (vector.ExisteCiclo)
+            {
+                if (vector.CantidadReplicada < vector.MagicoSemiCiclo)
+                {
+                    if (vector.CantidadReplicada < Valor.cantidadParedMayor)
+                    {
+                        return Valor.paredActiva;
+                    }
+                    else if (vector.CantidadReplicada == Valor.cantidadParedMayor)
+                    {
+                        return GetUltimoPronostico();
+                    }
+                }
+                //else if (vector.CantidadReplicada < vector.MagicoCiclo)
+                else if (vector.CantidadReplicada < vector.Magico)
+                {
+                    return Valor.paredActiva;
+                }
+            }
+            else if (!vector.ExisteCiclo)
+            {
+                if (vector.CantidadReplicada < Valor.cantidadParedMayor)
+                {
+                    return Valor.paredActiva;
+                }
+                else if (Valor.cantidadParedMayor == vector.CantidadReplicada)
+                {
+                    return GetUltimoPronostico();
+                }
+            }
+
+            return sabor;
+        }
+
+        private string GetUltimoPronostico()
+        {
+            if (Valor.paredActiva == "Negro")
+                Valor.paredActiva = "Rojo";
+            else if (Valor.paredActiva == "Rojo")
+                Valor.paredActiva = "Negro";
+
+            return Valor.paredActiva;
+        }
+
+        public string SetParedActiva(List<KeyValuePair<string, int>> loop, int indice = 0)
+        {
+            if (loop[indice].Key == "Negro")
+            {
+                Valor.paredActiva = "Negro";
+            }
+            else if (loop[indice].Key == "Rojo")
+            {
+                Valor.paredActiva = "Rojo";
+            }
+
+            return Valor.paredActiva;
+        }
+
+        #endregion
     }
 }

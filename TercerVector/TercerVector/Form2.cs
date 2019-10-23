@@ -92,11 +92,14 @@ namespace TercerVector
             {
                 this.Vector = new Model3ErVector();
                 this.Vector = Funcion.Set3erVector(loop, this.Vector);
-                //Funcion.SetColor(Funcion.SetParedActiva(loop, 0), this.pronostico);
+                Funcion.SetColor(Funcion.SetParedActiva(loop, 0), this.pronostico);
                 Valor.contador++;
                 txtResultado.Focus();
-                MessageBox.Show(Valor.cantidadParedMayor.ToString() + " " + Valor.colorParedMayor.ToString());
                 return;
+            }
+            else if (Valor.inicioEstablecido == true)
+            {
+                Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
             }
 
             Valor.contador++;
