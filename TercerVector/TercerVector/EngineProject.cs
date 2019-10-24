@@ -147,6 +147,7 @@ namespace TercerVector
                 if (item.Value > 1)
                 {
                     resultado = false;
+                    if(loop.Count <= 3)
                     Valor.inicioEstablecido = false;
                     break;
                 }
@@ -170,8 +171,22 @@ namespace TercerVector
                 pronostico.BackColor = Color.Black;
             else if (color == "Rojo")
                 pronostico.BackColor = Color.Red;
+            else
+                pronostico.BackColor = GetColorActivo();
 
             pronostico.Text = "Jugar";
+        }
+
+
+        private Color GetColorActivo()
+        {
+            Color sabor = new Color();
+            MessageBox.Show("devolvio color vacio");
+            if (Valor.paredActiva == "Negro")
+                sabor = Color.Black;
+            else if (Valor.paredActiva == "Rojo")
+                sabor = Color.Red;
+            return sabor;
         }
 
         #endregion
@@ -316,53 +331,53 @@ namespace TercerVector
         // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //********************BEGIN TRAZA3ERVECTOR********************************************************************************************************************************************
         #region TRAZA3ERVECTOR
-        public string Traza3erVector(string color, Model3ErVector vector, List<KeyValuePair<string, int>> loop)
+        public string Traza3erVector(string color, Model3ErVector Vector, List<KeyValuePair<string, int>> loop)
         {
             string sabor = string.Empty;
-            vector.CantidadReplicada++;
+            Vector.CantidadReplicada++;
             //***************************************************
-            if (vector.CantidadReplicada == vector.Magico)
+            if (Vector.CantidadReplicada == Vector.Magico)
             {
                 Valor.inicioEstablecido = false;
                 Valor.cantidadParedMayor = 0;
                 return GetUltimoPronostico();
             }
             //***************************************************
-            if (vector.CantidadReplicada == vector.MagicoSemiCiclo)
+            if (Vector.CantidadReplicada == Vector.MagicoSemiCiclo)
             {
                 return GetUltimoPronostico();
             }
             //***************************************************
 
-            if (Valor.cantidadParedMayor == 0)
-                GetParedMayor(2, 3, loop);
+            //if (Valor.cantidadParedMayor == 0)
+                //GetParedMayor(2, 3, loop);
 
-            if (vector.ExisteCiclo)
+            if (Vector.ExisteCiclo)
             {
-                if (vector.CantidadReplicada < vector.MagicoSemiCiclo)
+                if (Vector.CantidadReplicada < Vector.MagicoSemiCiclo)
                 {
-                    if (vector.CantidadReplicada < Valor.cantidadParedMayor)
+                    if (Vector.CantidadReplicada < Valor.cantidadParedMayor)
                     {
                         return Valor.paredActiva;
                     }
-                    else if (vector.CantidadReplicada == Valor.cantidadParedMayor)
+                    else if (Vector.CantidadReplicada == Valor.cantidadParedMayor)
                     {
                         return GetUltimoPronostico();
                     }
                 }
-                //else if (vector.CantidadReplicada < vector.MagicoCiclo)
-                else if (vector.CantidadReplicada < vector.Magico)
+                //else if (Vector.CantidadReplicada < Vector.MagicoCiclo)
+                else if (Vector.CantidadReplicada < Vector.Magico)
                 {
                     return Valor.paredActiva;
                 }
             }
-            else if (!vector.ExisteCiclo)
+            else if (!Vector.ExisteCiclo)
             {
-                if (vector.CantidadReplicada < Valor.cantidadParedMayor)
+                if (Vector.CantidadReplicada < Valor.cantidadParedMayor)
                 {
                     return Valor.paredActiva;
                 }
-                else if (Valor.cantidadParedMayor == vector.CantidadReplicada)
+                else if (Valor.cantidadParedMayor == Vector.CantidadReplicada)
                 {
                     return GetUltimoPronostico();
                 }
@@ -390,6 +405,20 @@ namespace TercerVector
             else if (loop[indice].Key == "Rojo")
             {
                 Valor.paredActiva = "Rojo";
+            }
+
+            return Valor.paredActiva;
+        }
+
+        public string SetParedActiva(string color)
+        {
+            if (color == "Negro")
+            {
+                Valor.paredActiva = "Rojo";
+            }
+            else if (color == "Rojo")
+            {
+                Valor.paredActiva = "Negro";
             }
 
             return Valor.paredActiva;

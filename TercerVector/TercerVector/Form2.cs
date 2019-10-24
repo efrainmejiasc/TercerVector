@@ -79,7 +79,7 @@ namespace TercerVector
                 }
             }
             //***********************************************************************************
-            if (loop.Count <= 3 && Valor.secuenciaAnterior) // determino pronostico si  se esta iniciando juego con valores  en secuencia
+            if (loop.Count <= 3 && Valor.secuenciaAnterior) // Determino pronostico si  se esta iniciando juego con valores  en secuencia
             {
                 setColor = Funcion.LoopCountSecuencia(loop, color);
                 Funcion.SetColor(setColor, this.pronostico);
@@ -88,7 +88,7 @@ namespace TercerVector
                 return;
             }
             //***********************************************************************************
-            if (Valor.inicioEstablecido == false && loop.Count >= 4)
+            if (Valor.inicioEstablecido == false && loop.Count >= 4) // Establesco el ciclo y semiciclo a replicar
             {
                 this.Vector = new Model3ErVector();
                 this.Vector = Funcion.Set3erVector(loop, this.Vector);
@@ -97,7 +97,7 @@ namespace TercerVector
                 txtResultado.Focus();
                 return;
             }
-            else if (Valor.inicioEstablecido == true)
+            else if (Valor.inicioEstablecido == true) // Replico el ciclo y semiciclo establecido
             {
                 Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
             }
