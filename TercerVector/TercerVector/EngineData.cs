@@ -46,6 +46,7 @@ namespace TercerVector
         public bool secuenciaAnterior { get; set; }
 
         public string colorPronostico { get; set; }
+        public bool ultimaReplica { get; set; }
 
     }
 }

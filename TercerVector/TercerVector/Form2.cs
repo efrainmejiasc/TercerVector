@@ -28,11 +28,13 @@ namespace TercerVector
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/26"))
+            if (DateTime.Now.Date >= Convert.ToDateTime("2019/10/29"))
                 Application.Exit();
             Valor.iteraccion = 0;
             Valor.secuenciaAnterior = false;
             Valor.inicioEstablecido = false;
+            Valor.ultimaReplica = false;
+            Valor.colorPronostico = string.Empty;
             pronostico.Text = "Esperando Pronostico";
         }
 
@@ -60,7 +62,7 @@ namespace TercerVector
             string setColor = Funcion.EstablecerValoresSecuencia(color, Valor.contador); // Valido que exista valores en secuencia
             if (setColor != string.Empty)
             {
-                Funcion.SetColor(setColor, this.pronostico);
+                Funcion.SetColor(setColor, this.pronostico , "SECUENCIA");
                 Valor.contador++;
                 Valor.secuenciaAnterior = true;
                 txtResultado.Focus();
@@ -72,7 +74,7 @@ namespace TercerVector
                 setColor = Funcion.EstablecerValoresAlternado(loop);// Valido que exista valores alternados
                 if (setColor != string.Empty)
                 {
-                    Funcion.SetColor(setColor, this.pronostico);
+                    Funcion.SetColor(setColor, this.pronostico,"ALTERNADO");
                     Valor.contador++;
                     txtResultado.Focus();
                     return;
@@ -82,24 +84,34 @@ namespace TercerVector
             if (loop.Count <= 3 && Valor.secuenciaAnterior) // Determino pronostico si  se esta iniciando juego con valores  en secuencia
             {
                 setColor = Funcion.LoopCountSecuencia(loop, color);
-                Funcion.SetColor(setColor, this.pronostico);
-                Valor.contador++;
+                Funcion.SetColor(setColor, this.pronostico,"JUEGO CON SECUENCIA");
+                Valor.contador++; 
                 txtResultado.Focus();
                 return;
+            }
+            else if (loop.Count >= 4 && Valor.secuenciaAnterior)
+            {
+                Valor.secuenciaAnterior = false;
+                Valor.inicioEstablecido = false;
             }
             //***********************************************************************************
             if (Valor.inicioEstablecido == false && loop.Count >= 4) // Establesco el ciclo y semiciclo a replicar
             {
                 this.Vector = new Model3ErVector();
-                this.Vector = Funcion.Set3erVector(loop, this.Vector);
-                Funcion.SetColor(Funcion.SetParedActiva(loop, 0), this.pronostico);
+
+                if (!Valor.ultimaReplica)
+                         this.Vector = Funcion.Set3erVector(loop, this.Vector);
+                else if (Valor.ultimaReplica)
+                         this.Vector = Funcion.Set3erVector2(loop, this.Vector);
+
+                Funcion.SetColor(Funcion.SetParedActiva(loop, 0), this.pronostico,"ESTABLECIDO false");
                 Valor.contador++;
                 txtResultado.Focus();
                 return;
             }
             else if (Valor.inicioEstablecido == true) // Replico el ciclo y semiciclo establecido
             {
-                Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico);
+                Funcion.SetColor(Funcion.Traza3erVector(color, this.Vector, this.loop), this.pronostico,"ESTABLECIDO true");
             }
 
             Valor.contador++;
@@ -124,7 +136,10 @@ namespace TercerVector
             Valor.anteriorRojo = false;
             Valor.iteraccion  = 0;
             Valor.secuenciaAnterior = false;
+            Valor.ultimaReplica = false;
+            Valor.colorPronostico = string.Empty;
             //****************************************************
+            txtResultado.Text = string.Empty;
             pronostico.BackColor = Color.SeaGreen;
             pronostico.Text = "Esperando Pronostico";
             txtResultado.Focus();

@@ -165,23 +165,25 @@ namespace TercerVector
             return sabor;
         }
 
-        public void SetColor(string color, GroupBox pronostico)
+        public void SetColor(string color, GroupBox pronostico , string from)
         {
+            Color sabor = new Color();
             if (color == "Negro")
-                pronostico.BackColor = Color.Black;
+                sabor = Color.Black;
             else if (color == "Rojo")
-                pronostico.BackColor = Color.Red;
+                sabor = Color.Red;
             else
-                pronostico.BackColor = GetColorActivo();
+                sabor = GetColorActivo(from);
 
+            pronostico.BackColor = sabor;
             pronostico.Text = "Jugar";
         }
 
 
-        private Color GetColorActivo()
+        private Color GetColorActivo(string from )
         {
             Color sabor = new Color();
-            MessageBox.Show("devolvio color vacio");
+            MessageBox.Show("devolvio color vacio " + from);
             if (Valor.paredActiva == "Negro")
                 sabor = Color.Black;
             else if (Valor.paredActiva == "Rojo")
@@ -242,6 +244,30 @@ namespace TercerVector
                     Vector = SetSemiCiclo(loop, Vector);
                     Vector.Magico = Vector.MagicoSemiCiclo;
                 }
+            }
+            Valor.iteraccion++;
+            return Vector;
+        }
+
+        public Model3ErVector Set3erVector2(List<KeyValuePair<string, int>> loop, Model3ErVector Vector)
+        {
+            Valor.ultimaReplica = true;
+            Valor.colorPronostico = string.Empty;
+
+            Valor.inicioEstablecido = true;
+            GetParedMayor(2, 3, loop);//Establesco pared con mayor cantidad y color
+            Vector = SetPosicionCero(loop, Vector);
+            Vector.ExisteCiclo = ExisteCicloIteracion0(loop);
+            if (Vector.ExisteCiclo)
+            {
+                Vector = SetSemiCiclo(loop, Vector);
+                Vector = SetCiclo(loop, Vector);
+                Vector.Magico = Vector.MagicoCiclo + Vector.MagicoSemiCiclo;
+            }
+            else if (!Vector.ExisteCiclo)
+            {
+                Vector = SetSemiCiclo(loop, Vector);
+                Vector.Magico = Vector.MagicoSemiCiclo;
             }
             Valor.iteraccion++;
             return Vector;
@@ -340,6 +366,7 @@ namespace TercerVector
             {
                 Valor.inicioEstablecido = false;
                 Valor.cantidadParedMayor = 0;
+                Valor.ultimaReplica = true;
                 return GetUltimoPronostico();
             }
             //***************************************************
@@ -349,8 +376,8 @@ namespace TercerVector
             }
             //***************************************************
 
-            //if (Valor.cantidadParedMayor == 0)
-                //GetParedMayor(2, 3, loop);
+           // if (Valor.cantidadParedMayor == 0)
+               // GetParedMayor(2, 3, loop);
 
             if (Vector.ExisteCiclo)
             {
@@ -392,6 +419,9 @@ namespace TercerVector
                 Valor.paredActiva = "Rojo";
             else if (Valor.paredActiva == "Rojo")
                 Valor.paredActiva = "Negro";
+
+            if (Valor.ultimaReplica)
+                Valor.colorPronostico = Valor.paredActiva;
 
             return Valor.paredActiva;
         }
